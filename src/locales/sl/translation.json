@@ -189,7 +189,7 @@
   },
   "validator": {
     "rank": "Rang",
-    "escrow": "Vrednost depoja",
+    "escrow": "Vrednost",
     "commission": "Provizija",
     "status": "Stanje",
     "statusActive": "Dejaven",
