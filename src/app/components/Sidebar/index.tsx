@@ -134,6 +134,7 @@ const SidebarFooter = (props: SidebarFooterProps) => {
           hoverIndicator={false}
           dropProps={{ align: { bottom: 'bottom', left: 'left' } }}
           items={[
+            { label: 'Slovenščina', onClick: () => setLanguage('sl') },
             { label: 'Français', onClick: () => setLanguage('fr') },
             { label: 'English', onClick: () => setLanguage('en') },
           ]}
