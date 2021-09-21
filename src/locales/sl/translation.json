@@ -32,7 +32,7 @@
       "open": "Odpri denarnico"
     },
     "privateKey": {
-      "header": "Vpišite zasebni ključ",
+      "header": "Vnesite zasebni ključ",
       "instruction": "Vnesite vaš zasebni ključ, zakodiran v načinu base-64.",
       "error": "Neveljaven zasebni ključ",
       "enterPrivateKeyHere": "Zasebni ključ vnesite tu"
@@ -46,7 +46,7 @@
   "createWallet": {
     "newMnemonic": "Ustvari nov mnemonik",
     "thisIsYourPhrase": "To je vaš mnemonik",
-    "instruction": "Ključne besede <1>v pravilnem vrstnem redu</1> shranite na varno mesto, saj jih boste potrebovali vsakič, ko boste želeli odpreti denarnico.",
+    "instruction": "Ključne besede mnemonika <1>v pravilnem vrstnem redu</1> shranite na varno mesto, saj jih boste potrebovali vsakič, ko boste želeli odpreti denarnico.",
     "doNotShare": "Nikoli ne delite ključnih besed, saj lahko z njimi kdor koli dostopa do vaše denarnice in kovancev.",
     "confirmSaved": "Ključne besede sem shranil",
     "confirmMnemonic": {
@@ -74,12 +74,12 @@
         }
       },
       "addEscrow": {
-        "received": "Prejeto <0></0> delegiranih sredstev v depo",
-        "sent": "Delegiranih <0></0> validatorjem"
+        "received": "Prejeto <0></0> sredstev v delegiranje",
+        "sent": "Delegiranih <0></0> overiteljem"
       },
       "reclaimEscrow": {
         "received": "<0></0> prejetih od delegatorja",
-        "sent": "Vrnjenih <0></0> od validatorja"
+        "sent": "Vrnjenih <0></0> s strani overitelja"
       }
     },
     "sendTransaction": {
@@ -109,7 +109,7 @@
     "from": "Od",
     "to": "Za",
     "delegator": "Delegator",
-    "validator": "Validator",
+    "validator": "Overitelj",
     "cancel": "Prekliči"
   },
   "errors": {
@@ -171,7 +171,7 @@
       "to": "Za",
       "amount": "Znesek",
       "balance": "Stanje",
-      "fee": "Provizija",
+      "fee": "Taksa",
       "gas": "Gas",
       "genesisHash": "Zgoščena vrednost začetnega bloka",
       "validator": "Validator",
@@ -192,10 +192,10 @@
     "escrow": "Vrednost depoja",
     "commission": "Provizija",
     "status": "Stanje",
-    "statusActive": "Aktiven",
-    "statusInactive": "Neaktiven",
+    "statusActive": "Dejaven",
+    "statusInactive": "Nedejaven",
     "name": "Ime",
-    "fee": "Provizija",
+    "fee": "Taksa",
     "commissionBounds": {
       "current": "<0>{{lowerBound}}% - {{upperBound}}%</0> ob trenutni epohi {{epoch}}",
       "future": "{{lowerBound}}% - {{upperBound}}% z začetkom pri epohi {{epoch}}",
