@@ -85,7 +85,7 @@
     "sendTransaction": {
       "recipient": "Prejemnik",
       "enterAddress": "Vnesite naslov",
-      "success": "Transakcija uspešno izvedena. V največ eni minuti se bo na vašem računu pokazalo dobroimetje.",
+      "success": "Transakcija uspešno izvršena. Novo stanje na vašem računu bo prikazano v nekaj trenutkih.",
       "send": "Pošlji"
     },
     "loading": "Nalaganje računa",
@@ -119,7 +119,7 @@
     "invalidNonce": "Neveljavno unikatno število (številka transakcije)",
     "duplicateTransaction": "Podvojena transakcija",
     "invalidAddress": "Neveljaven naslov",
-    "insufficientBalance": "Prenizko stanje",
+    "insufficientBalance": "Stanje na računu prenizko",
     "noOpenWallet": "",
     "usbTransportError": "Napaka na USB: {{message}}",
     "ledgerAppVersionNotSupported": "Prejeto: \"Različica Ledger App ni podprta\", to je morebiti slučajna napaka, poskusite znova. V primeru ponovne napake nadgradite aplikacijo Oasis za Ledger.",
@@ -138,7 +138,7 @@
         "mnemonic": "Mnemonik",
         "privateKey": "Zasebni ključ"
       },
-      "switchOtherWallet": "Preklopi na drugo denarnico",
+      "switchOtherWallet": "Izberi drugo denarnico",
       "close": "Zapri"
     },
     "networks": {
@@ -165,7 +165,7 @@
     "abort": "Prekini",
     "confirm": "Potrdi",
     "preview": {
-      "warning": "Transakcijo skrbno preglejte in jo potrdite. Po potrditvi transakcije ne bo mogoče več preklicati.",
+      "warning": "Transakcijo skrbno preglejte in jo potrdite. Po potrditvi je ne bo mogoče več preklicati.",
       "type": "Tip",
       "from": "Od",
       "to": "Za",
@@ -178,8 +178,8 @@
       "shares": "Deleži"
     },
     "types": {
-      "addEscrow": "Delegiranje vaše kovance validatorjem in pobirajte provizijo",
-      "reclaimEscrow": "Vračilo delegiranih kovancev od validatorja",
+      "addEscrow": "Delegiranje vaših kovancev overiteljem",
+      "reclaimEscrow": "Vračilo delegiranih kovancev na vaš račun",
       "transfer": "Prenos kovancev z vašega na tuj račun"
     }
   },
@@ -189,7 +189,7 @@
   },
   "validator": {
     "rank": "Rang",
-    "escrow": "Vrednost",
+    "escrow": "Znesek v hrambi",
     "commission": "Provizija",
     "status": "Stanje",
     "statusActive": "Dejaven",
@@ -213,12 +213,12 @@
     "debondingEpoch": "Epoha razveze"
   },
   "fatalError": {
-    "instruction": "Pojavila se je usodna napaka in Denarnica Oasis se mora zapreti. Prosimo, da skopirate napako spodaj na naš <0>račun github</0>. Lahko poskusite s ponovnim nalaganjem te strani in preverite, ali se napaka ponovi. Ob zapiranju strani se bodo vse vaše denarnice zaprle.",
+    "instruction": "Pojavila se je usodna napaka in Oasis Wallet se mora zapreti. Prosimo, da skopirate in posredujete spodnjo napako na naš <0>github račun</0>. Poleg tega poskusite ponovno naložiti stran in preverite, če se napaka ponovi. Ob zapiranju strani se bodo vaše denarnice zaprle.",
     "heading": "Pojavila se je usodna napaka",
     "copy": "Skopiraj napako v odložišče",
     "copied": "Napaka skopirana v odložišče"
   },
   "footer": {
-    "github": "Denarnica Oasis je popolnoma <0>odprtokodna</0>. Odzivi in poročila o težavah so dobrodošla!"
+    "github": "Oasis Wallet je popolnoma <0>odprtokoden</0>. Odzivi in poročila o težavah so dobrodošla!"
   }
 }
