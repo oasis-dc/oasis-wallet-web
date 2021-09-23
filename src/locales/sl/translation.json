@@ -7,13 +7,13 @@
   },
   "home": {
     "existing": {
-      "header": "Odpri obstoječo denarnico",
+      "header": "Odpri denarnico",
       "description": "Odprite obstoječo denarnico s pomočjo Ledgerja, zasebnega ključa ali mnemonika.",
       "button": "Odpri denarnico"
     },
     "create": {
-      "header": "Ustvari novo denarnico",
-      "description": "Ustvarite novo denarnico za sprejemanje, pošiljanje in menjavo kovancev ROSE",
+      "header": "Ustvari denarnico",
+      "description": "Ustvarite novo denarnico za sprejemanje, pošiljanje in menjavo kovancev ROSE.",
       "button": "Ustvari denarnico"
     }
   },
