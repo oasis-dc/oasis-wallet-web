@@ -8,7 +8,7 @@
   "home": {
     "existing": {
       "header": "Odpri obstoječo denarnico",
-	"description": "Odprite obstoječo denarnico s pomočjo Ledgerja, zasebnega ključa ali mnemonika.",
+      "description": "Odprite obstoječo denarnico s pomočjo Ledgerja, zasebnega ključa ali mnemonika.",
       "button": "Odpri denarnico"
     },
     "create": {
@@ -130,7 +130,7 @@
   },
   "toolbar": {
     "search": {
-      "placeholder": "Išči naslov"
+      "placeholder": "Poišči naslov"
     },
     "wallets": {
       "type": {
