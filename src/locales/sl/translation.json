@@ -94,14 +94,14 @@
     },
     "subnavigation": {
       "transactions": "Transakcije",
-      "activeDelegations_0": "Active delegations ({{count}})",
-      "activeDelegations_1": "Active delegations ({{count}})",
-      "activeDelegations_2": "Active delegations ({{count}})",
-      "activeDelegations_3": "Active delegations ({{count}})",
-      "debondingDelegations_0": "Debonding delegations ({{count}})",
-      "debondingDelegations_1": "Debonding delegations ({{count}})",
-      "debondingDelegations_2": "Debonding delegations ({{count}})",
-      "debondingDelegations_3": "Debonding delegations ({{count}})"
+      "activeDelegations_0": "Aktivne delegacije ({{count}})",
+      "activeDelegations_1": "Aktivne delegacije ({{count}})",
+      "activeDelegations_2": "Aktivne delegacije ({{count}})",
+      "activeDelegations_3": "Aktivne delegacije ({{count}})",
+      "debondingDelegations_0": "Delegacije v razvezi ({{count}})",
+      "debondingDelegations_1": "Delegacije v razvezi ({{count}})",
+      "debondingDelegations_2": "Delegacije v razvezi ({{count}})",
+      "debondingDelegations_3": "Delegacije v razvezi ({{count}})"
     },
     "reclaimEscrow": {
       "reclaim": "Vrni"
@@ -225,6 +225,6 @@
   },
   "footer": {
     "github": "Oasis Wallet je popolnoma <0>odprtokoden</0>. Odzivi in poročila o težavah so dobrodošla!",
-    "terms": "<0>Terms and Conditions</0>"
+    "terms": "<0>Pogoji uporabe</0>"
   }
 }
