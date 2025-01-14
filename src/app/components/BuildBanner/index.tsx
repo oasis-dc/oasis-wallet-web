@@ -25,11 +25,11 @@ export const BuildBanner = () => {
 
   if (window.location.origin === deploys.staging) {
     return (
-      <StickyBanner>
-        <AlertBox status="warning" center icon={<Alert size="20px" color="currentColor" />}>
+      <StickyBanner data-testid="build-banner">
+        <AlertBox status="warning" justify="center" icon={<Alert size="20px" />}>
           {t(
             'banner.buildStaging',
-            'Please note this is the staging deployment of Oasis Wallet. ONLY USE IT FOR TESTING.',
+            'Please note this is the staging deployment of ROSE Wallet. ONLY USE IT FOR TESTING.',
           )}
         </AlertBox>
       </StickyBanner>
@@ -37,11 +37,11 @@ export const BuildBanner = () => {
   }
 
   return (
-    <StickyBanner>
-      <AlertBox status="warning" center icon={<Alert size="20px" color="currentColor" />}>
+    <StickyBanner data-testid="build-banner">
+      <AlertBox status="warning" justify="center" icon={<Alert size="20px" />}>
         {t(
           'banner.buildPreview',
-          'Please note this is an experimental build of Oasis Wallet and your secrets are not safe. ONLY USE IT FOR TESTING.',
+          'Please note this is an experimental build of ROSE Wallet and your secrets are not safe. ONLY USE IT FOR TESTING.',
         )}
       </AlertBox>
     </StickyBanner>

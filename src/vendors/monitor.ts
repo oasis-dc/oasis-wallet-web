@@ -2,7 +2,7 @@ import * as oasis from '@oasisprotocol/client'
 import { StakingDebondingDelegationInfo, StakingDelegationInfo } from '@oasisprotocol/client/dist/types'
 import { Account } from 'app/state/account/types'
 import { DebondingDelegation, Delegation, Validator } from 'app/state/staking/types'
-import { Transaction, TransactionType } from 'app/state/transaction/types'
+import { Transaction, TransactionStatus, TransactionType } from 'app/state/transaction/types'
 import {
   AccountsApi,
   AccountsRow,
@@ -38,11 +38,12 @@ export function getMonitorAPIs(url: string | 'https://monitor.oasis.dev') {
     return parseValidatorsList(validators)
   }
 
-  async function getTransactionsList(params: { accountId: string; limit: number }): Promise<Transaction[]> {
+  async function getTransactionsList(params: { accountId: string; limit: number }) {
     const transactions = await operations.getTransactionsList({
       accountId: params.accountId,
       limit: params.limit,
     })
+
     return parseTransactionsList(transactions)
   }
 
@@ -64,7 +65,14 @@ export function getMonitorAPIs(url: string | 'https://monitor.oasis.dev') {
     }
   }
 
-  return { accounts, blocks, getAccount, getAllValidators, getTransactionsList, getDelegations }
+  return {
+    accounts,
+    blocks,
+    getAccount,
+    getAllValidators,
+    getTransactionsList,
+    getDelegations,
+  }
 }
 
 export function parseAccount(account: AccountsRow): Account {
@@ -79,6 +87,7 @@ export function parseAccount(account: AccountsRow): Account {
       BigInt(account.delegations_balance) +
       BigInt(account.debonding_delegations_balance)
     ).toString(),
+    nonce: BigInt(account.nonce ?? 0).toString(),
   }
 }
 
@@ -92,7 +101,6 @@ export function parseValidatorsList(validators: ValidatorRow[]): Validator[] {
         const parsed: Validator = {
           address: v.account_id,
           name: v.account_name,
-          nodeAddress: v.node_id,
           escrow: BigInt(v.escrow_balance).toString(),
           current_rate: computeCurrentRate(v.current_epoch!, v.commission_schedule?.rates ?? []),
           status: v.status,
@@ -156,13 +164,14 @@ export function parseTransactionsList(transactionsList: OperationsRow[]): Transa
       from: t.from,
       hash: t.hash!,
       level: t.level,
-      status: t.status,
+      status: t.status ? TransactionStatus.Successful : TransactionStatus.Failed,
       timestamp: t.timestamp == null ? undefined : t.timestamp * 1000,
       to: t.to,
-      type: transactionMethodMap[t.type!],
+      type: transactionMethodMap[t.type!] ?? t.type,
       runtimeName: undefined,
       runtimeId: undefined,
       round: undefined,
+      nonce: undefined,
     }
     return parsed
   })

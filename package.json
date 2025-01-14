@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/lukaw3d/parcel-bundler-json-schemas/main/package_schema.json",
-  "name": "@oasisprotocol/oasis-wallet",
-  "version": "1.9.1",
+  "name": "@oasisprotocol/rose-wallet",
+  "version": "2.1.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/oasisprotocol/oasis-wallet-web.git"
+    "url": "https://github.com/oasisprotocol/wallet.git"
   },
   "scripts": {
     "build": "node ./internals/scripts/build-web.js",
@@ -21,7 +21,6 @@
     "checkTs": "tsc --noEmit",
     "lint": "eslint --ext js,ts,tsx ./",
     "lint:fix": "yarn run lint --fix",
-    "lint:css": "stylelint src/**/*.css",
     "lint-git": "node ./internals/scripts/gitlint.js",
     "lint-docs": "markdownlint --ignore '**/node_modules/**' '**/*.md'",
     "lint-changelog": "markdownlint --config .changelog/.markdownlint.yml .changelog/",
@@ -30,8 +29,8 @@
     "extract-messages": "rm src/locales/en/translation.json && i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js && node ./internals/scripts/normalize-translations.js ./src/locales/*/translation.json",
     "fix-grommet-icons-types": "node ./internals/scripts/fix-grommet-icons-types.js",
     "print-extension-dev-csp": "node ./internals/scripts/print-extension-dev-csp.js",
-    "android": "yarn build && yarn cap run android -l --external",
-    "ios": "yarn build && yarn cap run ios -l --external"
+    "android": "yarn build && yarn cap sync android && yarn cap run android -l --external",
+    "ios": "yarn build && yarn cap sync ios && yarn cap run ios -l --external"
   },
   "browserslist": {
     "production": [
@@ -58,26 +57,26 @@
     "report-dir": "cypress-coverage"
   },
   "dependencies": {
-    "@capacitor-community/bluetooth-le": "3.0.0",
-    "@capacitor/android": "5.0.4",
-    "@capacitor/core": "5.0.4",
-    "@capacitor/ios": "5.0.4",
-    "@ethereumjs/util": "9.0.0",
-    "@ledgerhq/hw-transport-webusb": "6.28.1",
+    "@capacitor-community/bluetooth-le": "6.0.0",
+    "@capacitor/android": "6.0.0",
+    "@capacitor/app": "6.0.0",
+    "@capacitor/core": "6.0.0",
+    "@capacitor/ios": "6.0.0",
+    "@capawesome/capacitor-app-update": "6.0.0",
+    "@ethereumjs/util": "9.0.3",
+    "@ledgerhq/hw-transport-webusb": "6.28.5",
     "@metamask/browser-passworder": "=3.0.0",
     "@metamask/jazzicon": "2.0.0",
-    "@oasisprotocol/client": "0.1.1-alpha.2",
-    "@oasisprotocol/client-rt": "0.2.1-alpha.2",
-    "@oasisprotocol/ionic-ledger-hw-transport-ble": "1.0.1-beta",
+    "@oasisprotocol/client": "1.1.0",
+    "@oasisprotocol/client-rt": "1.1.0",
+    "@oasisprotocol/ionic-ledger-hw-transport-ble": "6.0.0",
     "@oasisprotocol/ledger": "1.0.0",
     "@reduxjs/toolkit": "1.9.7",
-    "base64-arraybuffer": "1.0.2",
-    "bech32": "2.0.0",
     "bignumber.js": "9.1.2",
     "bip39": "3.1.0",
     "body-scroll-lock": "4.0.0-beta.0",
     "copy-to-clipboard": "3.3.3",
-    "grommet": "2.34.1",
+    "grommet": "2.36.1",
     "grommet-icons": "4.12.0",
     "i18next": "23.6.0",
     "i18next-browser-languagedetector": "7.1.0",
@@ -101,7 +100,7 @@
     "webextension-polyfill": "0.10.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "5.0.4",
+    "@capacitor/cli": "6.0.0",
     "@cypress/code-coverage": "3.12.15",
     "@parcel/config-webextension": "2.10.3",
     "@parcel/packager-raw-url": "2.10.3",
@@ -153,8 +152,6 @@
     "serve-handler": "6.1.5",
     "stream-browserify": "3.0.0",
     "string_decoder": "1.3.0",
-    "stylelint": "15.11.0",
-    "stylelint-config-recommended": "13.0.0",
     "ts-jest": "29.1.1",
     "typescript": "5.2.2",
     "util": "0.12.5",

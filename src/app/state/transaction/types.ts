@@ -8,18 +8,22 @@ export enum TransactionType {
   StakingAmendCommissionSchedule = 'staking.AmendCommissionSchedule',
   StakingAllow = 'staking.Allow',
   StakingWithdraw = 'staking.Withdraw',
+  StakingBurn = 'staking.Burn',
   RoothashExecutorCommit = 'roothash.ExecutorCommit',
   RoothashExecutorProposerTimeout = 'roothash.ExecutorProposerTimeout',
+  RoothashSubmitMsg = 'roothash.SubmitMsg',
   RegistryDeregisterEntity = 'registry.DeregisterEntity',
   RegistryRegisterEntity = 'registry.RegisterEntity',
   RegistryRegisterNode = 'registry.RegisterNode',
   RegistryRegisterRuntime = 'registry.RegisterRuntime',
+  RegistryUnfreezeNode = 'registry.UnfreezeNode',
   GovernanceCastVote = 'governance.CastVote',
   GovernanceSubmitProposal = 'governance.SubmitProposal',
   BeaconPvssCommit = 'beacon.PVSSCommit',
   BeaconPvssReveal = 'beacon.PVSSReveal',
   BeaconVrfProve = 'beacon.VRFProve',
   ConsensusMeta = 'consensus.Meta',
+  VaultCreate = 'vault.Create',
 
   // ParaTime
   ConsensusDeposit = 'consensus.Deposit',
@@ -29,16 +33,23 @@ export enum TransactionType {
   ConsensusAccount = 'consensus.Account',
 }
 
+export enum TransactionStatus {
+  Failed,
+  Successful,
+  Pending,
+}
+
 export interface Transaction {
   amount: StringifiedBigInt | undefined
   fee: StringifiedBigInt | undefined
   from: string | undefined
   hash: string
   level: number | undefined
-  status: boolean | undefined
+  status: TransactionStatus | undefined
   timestamp: number | undefined
   to: string | undefined
   type: TransactionType
+  nonce: StringifiedBigInt | undefined
   // These are undefined on consensus transaction
   // Only appear on ParaTime transaction
   runtimeName: string | undefined

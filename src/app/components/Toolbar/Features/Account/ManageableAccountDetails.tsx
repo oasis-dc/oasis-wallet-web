@@ -125,7 +125,7 @@ export const ManageableAccountDetails = ({
                 </FormField>
                 <Box>
                   <AddressBox address={wallet.address} border />
-                  <Text size="small" margin={'small'}>
+                  <Text size="small" margin={{ top: 'small' }}>
                     <DerivationFormatter pathDisplay={wallet.pathDisplay} type={wallet.type} />
                   </Text>
                 </Box>
@@ -184,7 +184,7 @@ export const ManageableAccountDetails = ({
                   <Text>
                     {t(
                       'toolbar.settings.exportPrivateKey.hint2',
-                      'Once the private key is lost, it cannot be retrieved. Please make sure to Backup the private key and keep it in a safe place.',
+                      'If the private key is lost, it cannot be retrieved. Please make sure to backup the private key and keep it in a safe place.',
                     )}
                   </Text>
                   <RevealOverlayButton

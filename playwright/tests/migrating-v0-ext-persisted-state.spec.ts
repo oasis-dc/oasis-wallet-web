@@ -26,7 +26,7 @@ test('Migrate from V0 extension persisted state to valid RootState', async ({
   await test.step('start migration', async () => {
     await addPersistedStorageV0(page, extensionManifestURL)
     await page.goto(`${extensionPopupURL}/`)
-    await page.getByPlaceholder('Enter your password here').fill(password)
+    await page.getByPlaceholder('Enter your password', { exact: true }).fill(password)
     await page.keyboard.press('Enter')
   })
 
@@ -39,7 +39,7 @@ test('Migrate from V0 extension persisted state to valid RootState', async ({
       ),
     ).toBeVisible()
     await page.getByText('I’ve safely stored my mnemonic').check()
-    await page.getByRole('button', { name: /Next/ }).click()
+    await page.getByRole('button', { name: /Next/ }).click({ timeout: 8000 })
 
     // await expect(page).toHaveScreenshot({ fullPage: true })
     await page.getByRole('button', { name: /Tap to show/ }).click()
@@ -49,7 +49,7 @@ test('Migrate from V0 extension persisted state to valid RootState', async ({
       ),
     ).toBeVisible()
     await page.getByText('I’ve safely stored my private keys').check()
-    await page.getByRole('button', { name: /Open the new version of the wallet/ }).click()
+    await page.getByRole('button', { name: /Open the new version of the wallet/ }).click({ timeout: 8000 })
   })
 
   await test.step('should result in valid RootState', async () => {
@@ -65,7 +65,7 @@ test('Migrate from V0 extension persisted state to valid RootState', async ({
       ...walletExtensionV0UnlockedState,
 
       // TODO: fix mockApi inside extension tests to get consistent responses
-      // https://github.com/oasisprotocol/oasis-wallet-web/issues/1770
+      // https://github.com/oasisprotocol/wallet/issues/1770
       account: expect.any(Object),
       network: expect.any(Object),
       staking: expect.any(Object),

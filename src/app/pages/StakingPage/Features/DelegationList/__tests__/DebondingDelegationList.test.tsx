@@ -7,13 +7,17 @@ import { Provider } from 'react-redux'
 import { DebondingDelegationList } from '../DebondingDelegationList'
 import { configureAppStore } from 'store/configureStore'
 import { stakingActions } from 'app/state/staking'
+import { NetworkState } from '../../../../../../app/state/network/types'
 import { ThemeProvider } from '../../../../../../styles/theme/ThemeProvider'
+import { MemoryRouter } from 'react-router-dom'
 
 const renderComponent = (store: any) =>
   render(
     <Provider store={store}>
       <ThemeProvider>
-        <DebondingDelegationList />
+        <MemoryRouter>
+          <DebondingDelegationList />
+        </MemoryRouter>
       </ThemeProvider>
     </Provider>,
   )
@@ -22,11 +26,16 @@ describe('<DebondingDelegationList  />', () => {
   let store: ReturnType<typeof configureAppStore>
 
   beforeEach(() => {
-    store = configureAppStore()
+    store = configureAppStore({
+      network: {
+        ticker: 'TEST',
+        epoch: 4,
+      } as NetworkState,
+    })
   })
 
   it('should match snapshot', () => {
-    const component = renderComponent(store)
+    renderComponent(store)
     act(() => {
       store.dispatch(
         stakingActions.updateDelegations({
@@ -43,7 +52,6 @@ describe('<DebondingDelegationList  />', () => {
                 rank: 1,
                 status: 'active',
                 name: 'test-validator',
-                nodeAddress: 'oasis1qq7pgk9v8l3hu2aenjtflezy5vajc2cz3y4d96rj',
                 escrow: 1000n.toString(),
               },
             },
@@ -52,7 +60,7 @@ describe('<DebondingDelegationList  />', () => {
       )
     })
 
-    expect(component.baseElement).toMatchSnapshot()
+    expect(screen.getByTestId('debonding-delegations')).toMatchSnapshot()
   })
 
   it('should expand and display the delegation on click', async () => {
@@ -73,7 +81,6 @@ describe('<DebondingDelegationList  />', () => {
                 rank: 1,
                 status: 'active',
                 name: 'test-validator1',
-                nodeAddress: 'oasis1qq7pgk9v8l3hu2aenjtflezy5vajc2cz3y4d96rj',
                 escrow: 1000n.toString(),
               },
             },

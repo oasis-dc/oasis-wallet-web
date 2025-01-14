@@ -23,6 +23,7 @@ import { themeActions } from '../../../styles/theme/slice'
 import { RevealOverlayButton } from '../RevealOverlayButton'
 import { PrivateKeyFormatter } from '../PrivateKeyFormatter'
 import { PasswordWrongError } from '../../../types/errors'
+import { CountdownButton } from '../CountdownButton'
 
 export function MigrateV0StateForm() {
   const { t, i18n } = useTranslation()
@@ -89,17 +90,17 @@ export function MigrateV0StateForm() {
           messages={{ required: t('migrateV0Extension.requiredField', 'This field is required') }}
           {...preventSavingInputsToUserData}
         >
-          <Paragraph>
+          <Paragraph fill>
             <label htmlFor="password">
               {t(
                 'persist.loginToProfile.description',
-                'Log into your existing user profile on this computer to access the wallets you already added.',
+                'Enter your password to access your existing wallets on this device.',
               )}
             </label>
           </Paragraph>
 
           <PasswordField
-            placeholder={t('persist.loginToProfile.enterPasswordHere', 'Enter your password here')}
+            placeholder={t('persist.loginToProfile.enterPasswordHere', 'Enter your password')}
             name="password"
             inputElementId="password"
             autoFocus
@@ -121,7 +122,7 @@ export function MigrateV0StateForm() {
           messages={{ required: t('migrateV0Extension.requiredField', 'This field is required') }}
           {...preventSavingInputsToUserData}
         >
-          <Paragraph>
+          <Paragraph fill>
             {t(
               'migrateV0Extension.backupMnemonic.description',
               'The new version of the wallet extension will no longer store your mnemonic. This phrase is the only way to restore your account if you have lost access. You now have a final chance to backup your mnemonic.',
@@ -155,14 +156,14 @@ export function MigrateV0StateForm() {
             />
           </FormField>
           {migratingV0State.invalidPrivateKeys.length > 0 ? (
-            <Button
+            <CountdownButton
               type="submit"
               label={t('migrateV0Extension.nextStep', 'Next')}
               fill="horizontal"
               primary
             />
           ) : (
-            <Button
+            <CountdownButton
               type="submit"
               label={t('migrateV0Extension.finishMigration', 'Open the new version of the wallet')}
               fill="horizontal"
@@ -188,7 +189,7 @@ export function MigrateV0StateForm() {
               '1 of your private keys has typos and won’t be stored by the new wallet extension. Please make sure to copy it and store it elsewhere before proceeding, so you can correct it later.',
             ) && null}
           </>
-          <Paragraph>
+          <Paragraph fill>
             {t(
               'migrateV0Extension.backupInvalidPrivateKeys.description',
               '{{count}} of your private keys have typos and won’t be stored by the new wallet extension. Please make sure to copy them and store them elsewhere before proceeding, so you can correct them later.',
@@ -224,7 +225,7 @@ export function MigrateV0StateForm() {
               )}
             />
           </FormField>
-          <Button
+          <CountdownButton
             type="submit"
             label={t('migrateV0Extension.finishMigration', 'Open the new version of the wallet')}
             fill="horizontal"

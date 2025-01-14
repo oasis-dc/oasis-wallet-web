@@ -30,6 +30,7 @@ type Props =
     }
   | {
       type: 'debonding'
+      currentEpoch?: number
       delegations: DebondingDelegation[]
     }
 
@@ -92,6 +93,8 @@ export const DelegationList = memo((props: Props) => {
       name: t('validator.name', 'Name'),
       id: 'name',
       selector: 'name',
+      maxWidth: '40ex',
+      minWidth: '15ex',
       cell: datum =>
         datum.validator?.name ?? (
           <Text data-tag="allowRowEvents">
@@ -111,7 +114,12 @@ export const DelegationList = memo((props: Props) => {
           : t('delegations.reclaimedAmount', 'Amount to reclaim'),
       id: 'amount',
       selector: 'amount',
-      cell: datum => datum.amount && <AmountFormatter amount={datum.amount} />,
+      width: '28ex',
+      right: true,
+      cell: datum =>
+        datum.amount && (
+          <AmountFormatter amount={datum.amount} maximumFractionDigits={2} minimumFractionDigits={2} />
+        ),
       sortable: true,
       sortFunction: (row1, row2) => Number(BigInt(row1.amount) - BigInt(row2.amount)),
     },
@@ -120,6 +128,8 @@ export const DelegationList = memo((props: Props) => {
       id: 'fee',
       selector: 'fee',
       width: '100px',
+      right: true,
+      hide: 'sm',
       cell: datum =>
         datum.validator?.current_rate !== undefined
           ? `${formatCommissionPercent(datum.validator.current_rate)}%`
@@ -132,7 +142,13 @@ export const DelegationList = memo((props: Props) => {
       id: 'debondingTimeEnd',
       selector: 'epoch',
       sortable: true,
-      cell: datum => <TimeToEpoch epoch={(datum as DebondingDelegation).epoch} />,
+      cell: datum => {
+        if ('currentEpoch' in props) {
+          return (
+            <TimeToEpoch currentEpoch={props.currentEpoch} epoch={(datum as DebondingDelegation).epoch} />
+          )
+        }
+      },
     },
   }
 
@@ -146,6 +162,14 @@ export const DelegationList = memo((props: Props) => {
   return (
     <TypeSafeDataTable
       noHeader={true}
+      noDataComponent={
+        type === 'active'
+          ? t(
+              'account.emptyActiveDelegationsList',
+              'There are currently no active delegations for this account.',
+            )
+          : t('account.emptyDebondingDelegationsList', 'There are no debonding delegations for this account.')
+      }
       columns={columns}
       data={delegations}
       defaultSortField={defaultSortField}
@@ -155,7 +179,12 @@ export const DelegationList = memo((props: Props) => {
       expandableRowsHideExpander
       expandableRows={true}
       expandableRowsComponent={
-        <DelegationItem data={{} as any} validatorDetails={validatorDetails} canReclaim={canReclaim} />
+        <DelegationItem
+          data={{} as any}
+          validatorDetails={validatorDetails}
+          canReclaim={canReclaim}
+          type={type}
+        />
       }
       expandableRowExpanded={row => row.validatorAddress === selectedAddress}
       sortIcon={<Down />}

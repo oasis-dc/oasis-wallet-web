@@ -53,6 +53,11 @@ describe('<AccountPage  />', () => {
         transactions: [],
         accountError: undefined,
         transactionsError: undefined,
+        pendingTransactions: {
+          local: [],
+          testnet: [],
+          mainnet: [],
+        },
       },
       staking: {
         delegations: [{ amount: 1111n.toString() }],
@@ -85,13 +90,11 @@ describe('<AccountPage  />', () => {
       }),
     )
     const page = renderPage(store, ['/account/oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk'])
-    expect(page.container).toHaveTextContent('Oasis Scan API appears to be down')
+    expect(page.container).toHaveTextContent(/API appears to be down/)
     const balance = await screen.findByTestId('account-balance-total')
     expect(balance).toHaveTextContent('-')
     const balanceSummary = await screen.findByTestId('account-balance-summary')
     expect(balanceSummary.textContent).toMatchSnapshot()
-    const tabs = await screen.findByRole('navigation')
-    expect(tabs.textContent).toMatchSnapshot()
   })
 
   it('should sum total balance without losing precision', async () => {
@@ -120,7 +123,7 @@ describe('<AccountPage  />', () => {
       } as PersistState,
     })
     renderPage(store, ['/account/oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk'])
-    expect(screen.getByText('oasis1 qz0k 5q8v jqvu 4s4n wxyj 406y lnfl kc4v rcjg huwk')).toBeInTheDocument()
+    expect(screen.getByText('oasis1qz...jghuwk')).toBeInTheDocument()
     expect(screen.getByTestId('editable-address-edit-button')).toBeInTheDocument()
   })
 

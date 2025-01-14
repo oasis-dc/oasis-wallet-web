@@ -1,14 +1,12 @@
-import { bech32 } from 'bech32'
-import { quantity, staking, types } from '@oasisprotocol/client'
-import { decode as base64decode, encode as base64encode } from 'base64-arraybuffer'
+import { misc, quantity, staking, types } from '@oasisprotocol/client'
 import BigNumber from 'bignumber.js'
 import { StringifiedBigInt } from 'types/StringifiedBigInt'
 import { consensusDecimals, type ParaTimeConfig } from '../../config'
 
 export const uint2hex = (uint: Uint8Array) => Buffer.from(uint).toString('hex')
 export const hex2uint = (hex: string) => new Uint8Array(Buffer.from(hex, 'hex'))
-export const base64ToUint = (value: string) => new Uint8Array(base64decode(value))
-export const uintToBase64 = (value: Uint8Array) => base64encode(value)
+export const base64ToUint = (value: string) => misc.fromBase64(value)
+export const uintToBase64 = (value: Uint8Array) => misc.toBase64(value)
 
 export const shortPublicKey = async (publicKey: Uint8Array) => {
   return await staking.addressFromPublicKey(publicKey)
@@ -27,11 +25,8 @@ export const uint2bigintString = (uint: Uint8Array): StringifiedBigInt => quanti
 export const stringBigint2uint = (number: StringifiedBigInt) => quantity.fromBigInt(BigInt(number))
 
 export const isValidAddress = (addr: string) => {
-  if (!addr.match(/^oasis1/)) {
-    return false
-  }
   try {
-    bech32.decode(addr)
+    staking.addressFromBech32(addr)
     return true
   } catch (e) {
     return false
@@ -123,4 +118,9 @@ export const getDefaultFeeAmount = (isDepositing: boolean, paraTimeConfig: ParaT
 
 export function parseConsensusToLayerBaseUnit(feeAmount: string, decimals: number): BigNumber {
   return new BigNumber(feeAmount).shiftedBy(decimals).shiftedBy(-consensusDecimals)
+}
+
+export function removeTrailingZeros(value: string, zeros: number): string {
+  const bigValue = new BigNumber(value)
+  return bigValue.dividedBy(new BigNumber(10).pow(zeros)).toFixed()
 }

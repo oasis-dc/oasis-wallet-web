@@ -8,8 +8,8 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   flex: 0 0 auto;
   width: 24px;
   height: 24px;
-  fill: #666666;
-  stroke: #666666;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
 .c6 g {
@@ -21,14 +21,16 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   stroke-width: 0;
 }
 
-.c6 *[stroke*='#'],.c6 *[STROKE*='#'] {
+.c6 *[stroke*='#'],
+.c6 *[STROKE*='#'] {
   stroke: inherit;
   fill: none;
 }
 
 .c6 *[fill-rule],
 .c6 *[FILL-RULE],
-.c6 *[fill*='#'],.c6 *[FILL*='#'] {
+.c6 *[fill*='#'],
+.c6 *[FILL*='#'] {
   fill: inherit;
   stroke: none;
 }
@@ -38,10 +40,10 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: #0092f6;
-  stroke: #0092f6;
+  width: 20px;
+  height: 20px;
+  fill: #0500e2;
+  stroke: #0500e2;
 }
 
 .c15 g {
@@ -53,22 +55,24 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   stroke-width: 0;
 }
 
-.c15 *[stroke*='#'],.c15 *[STROKE*='#'] {
+.c15 *[stroke*='#'],
+.c15 *[STROKE*='#'] {
   stroke: inherit;
   fill: none;
 }
 
 .c15 *[fill-rule],
 .c15 *[FILL-RULE],
-.c15 *[fill*='#'],.c15 *[FILL*='#'] {
+.c15 *[fill*='#'],
+.c15 *[FILL*='#'] {
   fill: inherit;
   stroke: none;
 }
 
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -172,8 +176,8 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   margin-right: 12px;
   margin-top: 6px;
   margin-bottom: 6px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .c7 {
@@ -196,7 +200,7 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
 
 .c7:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c7:focus > circle,
@@ -207,7 +211,7 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
 .c7:focus > polyline,
 .c7:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c7:focus::-moz-focus-inner {
@@ -219,9 +223,12 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c7:focus:not(:focus-visible) > circle,.c7:focus:not(:focus-visible) > ellipse,
-.c7:focus:not(:focus-visible) > line,.c7:focus:not(:focus-visible) > path,
-.c7:focus:not(:focus-visible) > polygon,.c7:focus:not(:focus-visible) > polyline,
+.c7:focus:not(:focus-visible) > circle,
+.c7:focus:not(:focus-visible) > ellipse,
+.c7:focus:not(:focus-visible) > line,
+.c7:focus:not(:focus-visible) > path,
+.c7:focus:not(:focus-visible) > polygon,
+.c7:focus:not(:focus-visible) > polyline,
 .c7:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -240,11 +247,15 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
   background: transparent;
   color: inherit;
   width: 100%;
-  padding: 11px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-weight: 600;
   margin: 0;
   border: 1px solid rgba(0,0,0,0.33);
   border-radius: 4px;
+  border: none;
   outline: none;
   border: none;
 }
@@ -273,6 +284,22 @@ exports[`<ThemeSelect  /> should match snapshot 1`] = `
 .c12:-moz-placeholder,
 .c12::-moz-placeholder {
   opacity: 1;
+}
+
+.c12::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.c12::-moz-placeholder {
+  font-size: 14px;
+}
+
+.c12:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.c12::placeholder {
+  font-size: 14px;
 }
 
 .c11 {

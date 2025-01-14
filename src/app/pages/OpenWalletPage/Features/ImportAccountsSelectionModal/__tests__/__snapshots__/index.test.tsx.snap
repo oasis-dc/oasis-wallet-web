@@ -3,8 +3,8 @@
 exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -156,24 +156,24 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 }
 
 .c10 {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: normal;
 }
 
 .c7 {
   margin-top: 0px;
-  font-size: 34px;
-  line-height: 40px;
-  max-width: 816px;
+  font-size: 26px;
+  line-height: 32px;
+  max-width: none;
   font-weight: 600;
   overflow-wrap: break-word;
 }
 
 .c1 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -239,6 +239,10 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   position: absolute;
 }
 
+.c4:focus {
+  outline: none;
+}
+
 .c13 {
   display: inline-block;
   box-sizing: border-box;
@@ -250,7 +254,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 18px;
   color: #16213E;
   padding: 4px 20px;
@@ -269,7 +273,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 
 .c13:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c13:focus > circle,
@@ -280,7 +284,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 .c13:focus > polyline,
 .c13:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c13:focus::-moz-focus-inner {
@@ -292,9 +296,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c13:focus:not(:focus-visible) > circle,.c13:focus:not(:focus-visible) > ellipse,
-.c13:focus:not(:focus-visible) > line,.c13:focus:not(:focus-visible) > path,
-.c13:focus:not(:focus-visible) > polygon,.c13:focus:not(:focus-visible) > polyline,
+.c13:focus:not(:focus-visible) > circle,
+.c13:focus:not(:focus-visible) > ellipse,
+.c13:focus:not(:focus-visible) > line,
+.c13:focus:not(:focus-visible) > path,
+.c13:focus:not(:focus-visible) > polygon,
+.c13:focus:not(:focus-visible) > polyline,
 .c13:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -315,7 +322,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 18px;
   color: #16213E;
   padding: 4px 20px;
@@ -331,12 +338,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 }
 
 .c15:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c15:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c15:focus > circle,
@@ -347,7 +354,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 .c15:focus > polyline,
 .c15:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c15:focus::-moz-focus-inner {
@@ -359,9 +366,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c15:focus:not(:focus-visible) > circle,.c15:focus:not(:focus-visible) > ellipse,
-.c15:focus:not(:focus-visible) > line,.c15:focus:not(:focus-visible) > path,
-.c15:focus:not(:focus-visible) > polygon,.c15:focus:not(:focus-visible) > polyline,
+.c15:focus:not(:focus-visible) > circle,
+.c15:focus:not(:focus-visible) > ellipse,
+.c15:focus:not(:focus-visible) > line,
+.c15:focus:not(:focus-visible) > path,
+.c15:focus:not(:focus-visible) > polygon,
+.c15:focus:not(:focus-visible) > polyline,
 .c15:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -382,12 +392,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
   transition-property: color,background-color,border-color,box-shadow;
   -webkit-transition-duration: 0.1s;
@@ -398,12 +408,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 }
 
 .c17:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c17:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c17:focus > circle,
@@ -414,7 +424,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 .c17:focus > polyline,
 .c17:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c17:focus::-moz-focus-inner {
@@ -426,9 +436,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c17:focus:not(:focus-visible) > circle,.c17:focus:not(:focus-visible) > ellipse,
-.c17:focus:not(:focus-visible) > line,.c17:focus:not(:focus-visible) > path,
-.c17:focus:not(:focus-visible) > polygon,.c17:focus:not(:focus-visible) > polyline,
+.c17:focus:not(:focus-visible) > circle,
+.c17:focus:not(:focus-visible) > ellipse,
+.c17:focus:not(:focus-visible) > line,
+.c17:focus:not(:focus-visible) > path,
+.c17:focus:not(:focus-visible) > polygon,
+.c17:focus:not(:focus-visible) > polyline,
 .c17:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -449,13 +462,13 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #0500e2;
   color: #F8F8F8;
   border-radius: 4px;
   opacity: 0.3;
@@ -471,7 +484,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 
 .c19:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c19:focus > circle,
@@ -482,7 +495,7 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 .c19:focus > polyline,
 .c19:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c19:focus::-moz-focus-inner {
@@ -494,9 +507,12 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c19:focus:not(:focus-visible) > circle,.c19:focus:not(:focus-visible) > ellipse,
-.c19:focus:not(:focus-visible) > line,.c19:focus:not(:focus-visible) > path,
-.c19:focus:not(:focus-visible) > polygon,.c19:focus:not(:focus-visible) > polyline,
+.c19:focus:not(:focus-visible) > circle,
+.c19:focus:not(:focus-visible) > ellipse,
+.c19:focus:not(:focus-visible) > line,
+.c19:focus:not(:focus-visible) > path,
+.c19:focus:not(:focus-visible) > polygon,
+.c19:focus:not(:focus-visible) > polyline,
 .c19:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -570,9 +586,9 @@ exports[`<ImportAccountsSelectionModal  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c7 {
-    font-size: 26px;
-    line-height: 32px;
-    max-width: 624px;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: none;
   }
 }
 

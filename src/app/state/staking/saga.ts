@@ -5,11 +5,11 @@ import { addressToPublicKey, publicKeyToAddress } from 'app/lib/helpers'
 import { NetworkType } from 'app/state/network/types'
 import { call, put, select, takeLatest } from 'typed-redux-saga'
 import { WalletError, WalletErrors } from 'types/errors'
-import { parseValidatorsList } from 'vendors/oasisscan'
+import { parseValidatorsList } from 'vendors/nexus'
 
 import { stakingActions } from '.'
-import { getExplorerAPIs, getOasisNic } from '../network/saga'
-import { selectEpoch, selectSelectedNetwork } from '../network/selectors'
+import { getEpoch, getExplorerAPIs, getOasisNic } from '../network/saga'
+import { selectSelectedNetwork } from '../network/selectors'
 import { selectValidators, selectValidatorsNetwork } from './selectors'
 import { CommissionBound, DebondingDelegation, Delegation, Validators } from './types'
 
@@ -124,17 +124,17 @@ function* getFallbackValidators(network: NetworkType, errorApi: Error) {
   }
 
   // Fall back to dump_validators with refreshed validators' status from RPC
-  const activeNodes: { [nodeAddress: string]: true } = {}
+  const activeNodes: { [address: string]: true } = {}
   for (const rpcValidator of rpcActiveValidators) {
-    const nodeAddress = yield* call(publicKeyToAddress, rpcValidator.id)
-    activeNodes[nodeAddress] = true
+    const address = yield* call(publicKeyToAddress, rpcValidator.entity_id)
+    activeNodes[address] = true
   }
   fallbackValidators = {
     ...fallbackValidators,
     list: fallbackValidators.list.map(v => {
       return {
         ...v,
-        status: activeNodes[v.nodeAddress] ? ('active' as const) : ('inactive' as const),
+        status: activeNodes[v.address] ? ('active' as const) : ('inactive' as const),
       }
     }),
   }
@@ -149,14 +149,14 @@ export function now() {
 }
 
 export async function getMainnetDumpValidators() {
-  return await import('vendors/oasisscan/dump_validators.json')
+  return await import('vendors/nexus/dump_validators.json')
 }
 
 export function* getValidatorDetails({ payload: address }: PayloadAction<string>) {
   const nic = yield* call(getOasisNic)
   const publicKey = yield* call(addressToPublicKey, address)
   const account = yield* call([nic, nic.stakingAccount], { owner: publicKey, height: 0 })
-  const currentEpoch = yield* select(selectEpoch)
+  const currentEpoch = yield* call(getEpoch)
 
   let rawBounds = account.escrow?.commission_schedule?.bounds
   if (!rawBounds) {
