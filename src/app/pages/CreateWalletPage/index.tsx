@@ -13,7 +13,7 @@ import { Box } from 'grommet/es6/components/Box'
 import { Button } from 'grommet/es6/components/Button'
 import { CheckBox } from 'grommet/es6/components/CheckBox'
 import { Grid } from 'grommet/es6/components/Grid'
-import { Layer } from 'grommet/es6/components/Layer'
+import { ThemeContext } from 'grommet/es6/contexts/ThemeContext'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
 import { Text } from 'grommet/es6/components/Text'
 import { Refresh } from 'grommet-icons/es6/icons/Refresh'
@@ -62,7 +62,7 @@ export function CreateWalletPage(props: CreateWalletProps) {
   }, [dispatch])
 
   //@TODO Remove when firefox supports backdropFilter (used inside MnemonicValidation)
-  // https://github.com/oasisprotocol/oasis-wallet-web/issues/287
+  // https://github.com/oasisprotocol/wallet/issues/287
   const blurMnemonicInFirefox = showConfirmation ? { filter: 'blur(5px)' } : {}
 
   return (
@@ -73,14 +73,7 @@ export function CreateWalletPage(props: CreateWalletProps) {
         </AlertBox>
       )}
       {showConfirmation && (
-        <Layer
-          plain
-          full
-          style={{ backdropFilter: 'blur(5px)' }}
-          // Needed to prevent keyboard accessibility issues with layer inside
-          // layer: https://github.com/oasisprotocol/oasis-wallet-web/issues/863
-          modal={false}
-        >
+        <ThemeContext.Extend value={{ layer: { overlay: { backdropFilter: 'blur(5px)' } } }}>
           <ResponsiveLayer
             style={{
               width: { small: '100vw', medium: '90vw', large: '1500px' }[size],
@@ -95,7 +88,7 @@ export function CreateWalletPage(props: CreateWalletProps) {
               abortHandler={() => setConfirmation(false)}
             ></MnemonicValidation>
           </ResponsiveLayer>
-        </Layer>
+        </ThemeContext.Extend>
       )}
       {showAccountsSelectionModal && (
         <ImportAccountsSelectionModal
@@ -111,6 +104,8 @@ export function CreateWalletPage(props: CreateWalletProps) {
           <Box margin="xsmall" pad="small" background="background-contrast" style={{ wordSpacing: '14px' }}>
             <NoTranslate>
               <strong data-testid="generated-mnemonic">{mnemonic.join(' ')}</strong>
+              {/* Chrome workaround: Prevent copying extra newlines after user triple clicks mnemonic to copy */}
+              <span style={{ userSelect: 'none' }}></span>
             </NoTranslate>
             <Box direction="row" justify="start" margin={{ top: 'medium' }}>
               <Button
@@ -129,19 +124,19 @@ export function CreateWalletPage(props: CreateWalletProps) {
               <Trans
                 i18nKey="createWallet.instruction"
                 t={t}
-                defaults="Save your keyphrase <strong>in the right order</strong> in a secure location, you will need it to open your wallet."
+                defaults="Save your mnemonic <strong>in the right order</strong> in a secure location, you will need it to open your wallet."
               ></Trans>
             </Text>
           </Box>
           <AlertBox status="warning">
             {t(
               'createWallet.doNotShare',
-              'Never share your keyphrase, anyone with your keyphrase can access your wallet and your tokens.',
+              'Never share your mnemonic, anyone with your mnemonic can access your wallet and your tokens.',
             )}
           </AlertBox>
           <Box pad={{ vertical: 'medium' }}>
             <CheckBox
-              label={t('createWallet.confirmSaved', 'I saved my keyphrase')}
+              label={t('createWallet.confirmSaved', 'I saved my mnemonic')}
               disabled={mnemonic.length <= 0}
               checked={checked}
               onChange={event => setChecked(event.target.checked)}

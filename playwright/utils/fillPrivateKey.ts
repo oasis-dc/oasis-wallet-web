@@ -6,24 +6,23 @@ export async function fillPrivateKeyWithoutPassword(
   params: {
     privateKey?: string
     privateKeyAddress?: string
-    persistenceCheckboxDisabled: boolean
-    persistenceCheckboxChecked: boolean
+    persistenceCheckboxDisabled: false | 'disabled-checked' | 'disabled-unchecked'
     ticker?: string
   },
 ) {
   await test.step('fillPrivateKeyWithoutPassword', async () => {
     await expect(page).toHaveURL(new RegExp('/open-wallet/private-key'))
 
-    const persistence = await page.getByText('Store private keys locally, protected by a password')
-    if (params.persistenceCheckboxDisabled) {
+    const persistence = await page.getByText('Create a profile')
+    if (params.persistenceCheckboxDisabled === 'disabled-checked') {
       await expect(persistence).toBeDisabled()
+      await expect(persistence).toBeChecked()
+    } else if (params.persistenceCheckboxDisabled === 'disabled-unchecked') {
+      await expect(persistence).toBeDisabled()
+      await expect(persistence).not.toBeChecked()
     } else {
       await expect(persistence).toBeEnabled()
-    }
-    if (params.persistenceCheckboxChecked) {
-      await expect(persistence).toBeChecked()
-    } else {
-      await expect(persistence).not.toBeChecked()
+      await persistence.uncheck()
     }
 
     await page.getByPlaceholder('Enter your private key here').fill(params.privateKey ?? privateKey)
@@ -37,19 +36,29 @@ export async function fillPrivateKeyWithoutPassword(
 
 export async function fillPrivateKeyAndPassword(
   page: Page,
-  params: { privateKey?: string; privateKeyAddress?: string; ticker?: string } = {},
+  params: {
+    privateKey?: string
+    privateKeyAddress?: string
+    ticker?: string
+    persistenceCheckboxDisabled?: false | 'disabled-checked'
+  } = {},
 ) {
   await test.step('fillPrivateKeyAndPassword', async () => {
     await expect(page).toHaveURL(new RegExp('/open-wallet/private-key'))
 
-    const persistence = await page.getByText('Store private keys locally, protected by a password')
-    await expect(persistence).toBeEnabled()
-    await expect(persistence).not.toBeChecked()
-    await persistence.check()
+    const persistence = await page.getByText('Create a profile')
+    if (params.persistenceCheckboxDisabled === 'disabled-checked') {
+      await expect(persistence).toBeDisabled()
+      await expect(persistence).toBeChecked()
+    } else {
+      await expect(persistence).toBeEnabled()
+      await persistence.check()
+    }
 
     await page.getByPlaceholder('Enter your private key here').fill(params.privateKey ?? privateKey)
-    await page.getByPlaceholder('Enter your password here').fill(password)
-    await page.getByPlaceholder('Re-enter your password').fill(password)
+    await page.getByPlaceholder('Enter your password', { exact: true }).fill(password)
+    await page.getByPlaceholder('Confirm your password').fill(password)
+    await page.getByText('I understand this password and profile do not substitute my mnemonic.').check()
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(new RegExp(`/account/${params.privateKeyAddress ?? privateKeyAddress}`))
     await expect(page.getByText('Loading account')).toBeVisible()

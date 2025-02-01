@@ -46,8 +46,7 @@
       },
       "noTransactionFound": "İşlem bulunamadı",
       "noWalletIsOpen": "{{ticker}} token göndermek, almak, stake etmek ve takas etmek için <HomeLink> cüzdanınızı açın </HomeLink>",
-      "notYourAccount": "Bu sizin hesabınız değil.",
-      "yourAccount": "Bu sizin hesabınız"
+      "notYourAccount": "Bu sizin hesabınız değil."
     },
     "transaction": {
       "addEscrow": {
@@ -99,8 +98,8 @@
     "oasisscan": "Oasis Arama API"
   },
   "banner": {
-    "buildPreview": "Lütfen bunun Oasis Wallet'ın deneysel bir yapısı olduğunu ve sırlarınızın güvende olmadığını unutmayın. SADECE TEST AMAÇLI KULLANIN.",
-    "buildStaging": "Lütfen bunun Oasis Wallet'ın hazırlık dağıtımı olduğunu unutmayın. SADECE TEST AMAÇLI KULLANIN."
+    "buildPreview": "Lütfen bunun ROSE Wallet'ın deneysel bir yapısı olduğunu ve sırlarınızın güvende olmadığını unutmayın. SADECE TEST AMAÇLI KULLANIN.",
+    "buildStaging": "Lütfen bunun ROSE Wallet'ın hazırlık dağıtımı olduğunu unutmayın. SADECE TEST AMAÇLI KULLANIN."
   },
   "common": {
     "amount": "Miktar",
@@ -136,7 +135,7 @@
   "deleteForm": {
     "confirm": "Evet, Sil",
     "confirmationKeyword": "Sil",
-    "hint": "'{{confirmationKeyword}}' yazın"
+    "hint": "<strong>{{confirmationKeyword}}</strong> yazın"
   },
   "errors": {
     "LedgerDerivedDifferentAccount": "Bu hesap şu anda bağlı olan Ledger'a ait değil.",
@@ -231,11 +230,13 @@
     "addAccounts": "Hesap ekle",
     "closeWallet": "Cüzdanı kapat",
     "fiatOnramp": "Satın Al",
+    "fiatOnramp-mobile": "Satın Al",
     "home": "Ana Sayfa",
     "lockProfile": "Profili kilitle.",
     "openMenu": "Menü",
     "paraTimes": "ParaTimelar",
     "stake": "Stake",
+    "stake-mobile": "Stake",
     "unlockProfile": "Profilin kilidini aç.",
     "wallet": "Cüzdan"
   },
@@ -445,7 +446,7 @@
       "contacts": "Kontaklar",
       "delete": {
         "description": "Aşağıdaki hesabı silmek istediğinizden emin misiniz?",
-        "inputHelp": "Bu eylem geri alınamaz. Devam etmek için lütfen aşağıya {{confirmationKeyword}} girin.",
+        "inputHelp": "Bu eylem geri alınamaz. Devam etmek için lütfen aşağıya <strong>{{confirmationKeyword}}</strong> girin.",
         "title": "Hesabı sil",
         "tooltip": "Her zaman en az bir hesabınızın olması gerekir."
       },
@@ -465,13 +466,7 @@
       "settings": "Ayarlar"
     },
     "wallets": {
-      "select": "Seç",
-      "type": {
-        "bluetoothLedger": "BLE Ledger",
-        "mnemonic": "Anahtar kelime",
-        "privateKey": "Özel anahtar",
-        "usbLedger": "USB Ledger"
-      }
+      "select": "Seç"
     }
   },
   "transaction": {

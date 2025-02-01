@@ -3,13 +3,14 @@ import { persistActions } from 'app/state/persist'
 import { selectSkipUnlockingOnInit } from 'app/state/persist/selectors'
 import { config } from 'config'
 import { RECEIVE_INIT_STATE } from 'redux-state-sync'
-import { all, call, put, select, takeLatest } from 'typed-redux-saga'
+import { call, put, select, takeLatest } from 'typed-redux-saga'
 import { backend, backendApi } from 'vendors/backend'
 
 import { networkActions } from '.'
 import { SyncedRootState } from '../persist/types'
-import { selectSelectedNetwork } from './selectors'
+import { selectChainContext, selectEpoch, selectSelectedNetwork } from './selectors'
 import { NetworkType } from './types'
+import { WalletError, WalletErrors } from 'types/errors'
 
 /**
  * Return a nic client for the specified network,
@@ -32,6 +33,41 @@ export function* getExplorerAPIs() {
   return backendApi(url)
 }
 
+export function* getChainContext() {
+  const chainContext = yield* select(selectChainContext)
+  if (chainContext) {
+    return chainContext
+  }
+
+  try {
+    const selectedNetwork = yield* select(selectSelectedNetwork)
+    const nic = yield* call(getOasisNic, selectedNetwork)
+    const fetchedChainContext = yield* call([nic, nic.consensusGetChainContext])
+    yield* put(networkActions.setChainContext(fetchedChainContext))
+    return fetchedChainContext
+  } catch (error) {
+    throw new WalletError(WalletErrors.UnknownGrpcError, 'Could not fetch data')
+  }
+}
+
+export function* getEpoch() {
+  const epoch = yield* select(selectEpoch)
+  if (epoch) {
+    return epoch
+  }
+
+  try {
+    const selectedNetwork = yield* select(selectSelectedNetwork)
+    const nic = yield* call(getOasisNic, selectedNetwork)
+    const fetchedEpoch = yield* call([nic, nic.beaconGetEpoch], oasis.consensus.HEIGHT_LATEST)
+    const fetchedEpochNumber = Number(fetchedEpoch)
+    yield* put(networkActions.setEpoch(fetchedEpochNumber))
+    return fetchedEpochNumber
+  } catch (error) {
+    throw new WalletError(WalletErrors.UnknownGrpcError, 'Could not fetch data')
+  }
+}
+
 export function* selectNetwork({
   network,
   isInitializing,
@@ -39,15 +75,8 @@ export function* selectNetwork({
   network: NetworkType
   isInitializing: boolean
 }) {
-  const nic = yield* call(getOasisNic, network)
-  const { epoch, chainContext } = yield* all({
-    epoch: call([nic, nic.beaconGetEpoch], oasis.consensus.HEIGHT_LATEST),
-    chainContext: call([nic, nic.consensusGetChainContext]),
-  })
   const networkState = {
-    chainContext: chainContext,
     ticker: config[network].ticker,
-    epoch: Number(epoch), // TODO: numeric precision
     selectedNetwork: network,
     minimumStakingAmount: config[network].min_delegation,
   }
@@ -96,6 +125,8 @@ export function* networkSaga() {
       yield* put(persistActions.skipUnlocking())
     }
   })
+
+  yield* takeLatest(networkActions.getEpoch, getEpoch)
 
   yield* put(networkActions.initializeNetwork())
 }

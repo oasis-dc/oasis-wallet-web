@@ -1,42 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AccountPage  /> should match snapshot 1`] = `
-.c12 {
+.c13 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   width: 18px;
   height: 18px;
-  fill: #666666;
-  stroke: #666666;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
-.c12 g {
+.c13 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c12 *:not([stroke])[fill='none'] {
+.c13 *:not([stroke])[fill='none'] {
   stroke-width: 0;
 }
 
-.c12 *[stroke*='#'],.c12 *[STROKE*='#'] {
+.c13 *[stroke*='#'],
+.c13 *[STROKE*='#'] {
   stroke: inherit;
   fill: none;
 }
 
-.c12 *[fill-rule],
-.c12 *[FILL-RULE],
-.c12 *[fill*='#'],.c12 *[FILL*='#'] {
+.c13 *[fill-rule],
+.c13 *[FILL-RULE],
+.c13 *[fill*='#'],
+.c13 *[FILL*='#'] {
   fill: inherit;
   stroke: none;
 }
 
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -83,47 +85,6 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
-  background-color: rgba(194,245,234,1);
-  color: #16213E;
-  border-left: solid 3px #2ad5ab;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-}
-
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
   background-color: #FFFFFF;
   color: #16213E;
   border: solid 1px #EDEDED;
@@ -135,7 +96,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c7 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,7 +118,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   padding: 12px;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -174,7 +135,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   flex: 1 1;
 }
 
-.c18 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -188,35 +149,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   flex-direction: column;
 }
 
-.c26 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #0092f6;
-  color: #F8F8F8;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border-radius: 24px;
-}
-
-.c29 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -228,9 +161,12 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
-.c30 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -241,16 +177,31 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  min-width: 300px;
-  -webkit-flex: 1 1;
-  -ms-flex: 1 1;
-  flex: 1 1;
-  -webkit-flex-basis: 25%;
-  -ms-flex-preferred-size: 25%;
-  flex-basis: 25%;
+  max-width: 100%;
+  -webkit-flex: 1 0;
+  -ms-flex: 1 0;
+  flex: 1 0;
+  -webkit-flex-basis: 32ex;
+  -ms-flex-preferred-size: 32ex;
+  flex-basis: 32ex;
 }
 
-.c31 {
+.c18 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0px;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -267,7 +218,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   padding: 24px;
 }
 
-.c33 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -282,7 +233,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   flex-direction: column;
 }
 
-.c37 {
+.c28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -301,7 +252,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c40 {
+.c30 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -312,30 +263,16 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex: 1 1;
-  -ms-flex: 1 1;
-  flex: 1 1;
-  -webkit-flex-basis: 75%;
-  -ms-flex-preferred-size: 75%;
-  flex-basis: 75%;
-}
-
-.c41 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
   max-width: 100%;
-  margin: 0px;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex: 3 0;
+  -ms-flex: 3 0;
+  flex: 3 0;
+  -webkit-flex-basis: 80ex;
+  -ms-flex-preferred-size: 80ex;
+  flex-basis: 80ex;
 }
 
-.c42 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -354,7 +291,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c8 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -369,7 +306,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   max-width: 100%;
 }
 
-.c9 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -389,7 +326,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c10 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -406,42 +343,14 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  width: 690px;
+  width: min(690px,100%);
   -webkit-flex: 1 1;
   -ms-flex: 1 1;
   flex: 1 1;
   padding-bottom: 12px;
 }
 
-.c20 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  background-color: #FFFFFF;
-  color: #16213E;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-box-pack: space-evenly;
-  -webkit-justify-content: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-
-.c36 {
+.c25 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -451,23 +360,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   height: 24px;
 }
 
-.c39 {
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
-  align-self: stretch;
-  width: 12px;
-}
-
-.c5 {
-  font-size: 12px;
-  line-height: normal;
-  font-weight: bold;
-}
-
-.c14 {
+.c9 {
   font-size: inherit;
   line-height: normal;
   font-weight: bold;
@@ -475,39 +368,27 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 }
 
 .c15 {
-  font-size: inherit;
-  line-height: normal;
-}
-
-.c19 {
   font-size: 12px;
   line-height: 18px;
-  color: #a3a3a3;
+  color: #0500e2;
   font-weight: 600;
 }
 
-.c28 {
-  font-size: 14px;
-  line-height: 20px;
-  color: #FFFFFF;
-  font-weight: normal;
-}
-
-.c32 {
+.c21 {
   margin-left: 12px;
   margin-right: 12px;
   margin-top: 6px;
   margin-bottom: 6px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
 }
 
-.c17 {
-  font-size: 18px;
-  line-height: 24px;
+.c32 {
+  font-size: 16px;
+  line-height: 20px;
 }
 
-.c43 {
+.c19 {
   font-size: 26px;
   line-height: 32px;
   max-width: 624px;
@@ -515,27 +396,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   overflow-wrap: break-word;
 }
 
-.c23 {
-  position: relative;
-}
-
-.c24 {
-  position: relative;
-  display: block;
-}
-
-.c25 {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.c27 {
-  margin-top: -10px;
-  margin-right: -10px;
-}
-
-.c11 {
+.c29 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -546,125 +407,13 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  color: inherit;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
-  line-height: 0;
-  padding: 12px;
-}
-
-.c11:focus {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c11:focus > circle,
-.c11:focus > ellipse,
-.c11:focus > line,
-.c11:focus > path,
-.c11:focus > polygon,
-.c11:focus > polyline,
-.c11:focus > rect {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c11:focus::-moz-focus-inner {
-  border: 0;
-}
-
-.c11:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.c11:focus:not(:focus-visible) > circle,.c11:focus:not(:focus-visible) > ellipse,
-.c11:focus:not(:focus-visible) > line,.c11:focus:not(:focus-visible) > path,
-.c11:focus:not(:focus-visible) > polygon,.c11:focus:not(:focus-visible) > polyline,
-.c11:focus:not(:focus-visible) > rect {
-  outline: none;
-  box-shadow: none;
-}
-
-.c11:focus:not(:focus-visible)::-moz-focus-inner {
-  border: 0;
-}
-
-.c22 {
-  display: inline-block;
-  box-sizing: border-box;
-  cursor: pointer;
-  font: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  margin: 0;
-  background: transparent;
-  overflow: visible;
-  text-transform: none;
-  color: inherit;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
-}
-
-.c22:focus {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c22:focus > circle,
-.c22:focus > ellipse,
-.c22:focus > line,
-.c22:focus > path,
-.c22:focus > polygon,
-.c22:focus > polyline,
-.c22:focus > rect {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c22:focus::-moz-focus-inner {
-  border: 0;
-}
-
-.c22:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.c22:focus:not(:focus-visible) > circle,.c22:focus:not(:focus-visible) > ellipse,
-.c22:focus:not(:focus-visible) > line,.c22:focus:not(:focus-visible) > path,
-.c22:focus:not(:focus-visible) > polygon,.c22:focus:not(:focus-visible) > polyline,
-.c22:focus:not(:focus-visible) > rect {
-  outline: none;
-  box-shadow: none;
-}
-
-.c22:focus:not(:focus-visible)::-moz-focus-inner {
-  border: 0;
-}
-
-.c38 {
-  display: inline-block;
-  box-sizing: border-box;
-  cursor: pointer;
-  font: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  margin: 0;
-  background: transparent;
-  overflow: visible;
-  text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #0500e2;
   color: #F8F8F8;
   border-radius: 4px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
@@ -676,48 +425,127 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   font-weight: bold;
 }
 
-.c38:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+.c29:hover {
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
-.c38:focus {
+.c29:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c38:focus > circle,
-.c38:focus > ellipse,
-.c38:focus > line,
-.c38:focus > path,
-.c38:focus > polygon,
-.c38:focus > polyline,
-.c38:focus > rect {
+.c29:focus > circle,
+.c29:focus > ellipse,
+.c29:focus > line,
+.c29:focus > path,
+.c29:focus > polygon,
+.c29:focus > polyline,
+.c29:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c38:focus::-moz-focus-inner {
+.c29:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c38:focus:not(:focus-visible) {
+.c29:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c38:focus:not(:focus-visible) > circle,.c38:focus:not(:focus-visible) > ellipse,
-.c38:focus:not(:focus-visible) > line,.c38:focus:not(:focus-visible) > path,
-.c38:focus:not(:focus-visible) > polygon,.c38:focus:not(:focus-visible) > polyline,
-.c38:focus:not(:focus-visible) > rect {
+.c29:focus:not(:focus-visible) > circle,
+.c29:focus:not(:focus-visible) > ellipse,
+.c29:focus:not(:focus-visible) > line,
+.c29:focus:not(:focus-visible) > path,
+.c29:focus:not(:focus-visible) > polygon,
+.c29:focus:not(:focus-visible) > polyline,
+.c29:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c38:focus:not(:focus-visible)::-moz-focus-inner {
+.c29:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
-.c35 {
+.c10 {
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  font: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin: 0;
+  background: transparent;
+  overflow: visible;
+  text-transform: none;
+  color: inherit;
+  outline: none;
+  border: none;
+  padding: 0;
+  text-align: inherit;
+}
+
+.c10:focus {
+  outline: none;
+  box-shadow: 0 0 2px 2px #00A9FF;
+}
+
+.c10:focus > circle,
+.c10:focus > ellipse,
+.c10:focus > line,
+.c10:focus > path,
+.c10:focus > polygon,
+.c10:focus > polyline,
+.c10:focus > rect {
+  outline: none;
+  box-shadow: 0 0 2px 2px #00A9FF;
+}
+
+.c10:focus::-moz-focus-inner {
+  border: 0;
+}
+
+.c10:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+.c10:focus:not(:focus-visible) > circle,
+.c10:focus:not(:focus-visible) > ellipse,
+.c10:focus:not(:focus-visible) > line,
+.c10:focus:not(:focus-visible) > path,
+.c10:focus:not(:focus-visible) > polygon,
+.c10:focus:not(:focus-visible) > polyline,
+.c10:focus:not(:focus-visible) > rect {
+  outline: none;
+  box-shadow: none;
+}
+
+.c10:focus:not(:focus-visible)::-moz-focus-inner {
+  border: 0;
+}
+
+.c12 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.c24 {
   box-sizing: border-box;
   font-size: inherit;
   font-family: inherit;
@@ -726,7 +554,10 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   background: transparent;
   color: inherit;
   width: 100%;
-  padding: 11px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-weight: 600;
   margin: 0;
   border: 1px solid rgba(0,0,0,0.33);
@@ -735,38 +566,136 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   border: none;
 }
 
-.c35::-webkit-input-placeholder {
+.c24::-webkit-input-placeholder {
   color: #AAAAAA;
 }
 
-.c35::-moz-placeholder {
+.c24::-moz-placeholder {
   color: #AAAAAA;
 }
 
-.c35:-ms-input-placeholder {
+.c24:-ms-input-placeholder {
   color: #AAAAAA;
 }
 
-.c35::-webkit-search-decoration {
+.c24::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-.c35::-moz-focus-inner {
+.c24::-moz-focus-inner {
   border: none;
   outline: none;
 }
 
-.c35:-moz-placeholder,
-.c35::-moz-placeholder {
+.c24:-moz-placeholder,
+.c24::-moz-placeholder {
   opacity: 1;
 }
 
-.c34 {
+.c24::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.c24::-moz-placeholder {
+  font-size: 14px;
+}
+
+.c24:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.c24::placeholder {
+  font-size: 14px;
+}
+
+.c27 {
+  box-sizing: border-box;
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  -webkit-appearance: none;
+  background: transparent;
+  color: inherit;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: 600;
+  margin: 0;
+  border: 1px solid rgba(0,0,0,0.33);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  padding-right: 48px;
+}
+
+.c27::-webkit-input-placeholder {
+  color: #AAAAAA;
+}
+
+.c27::-moz-placeholder {
+  color: #AAAAAA;
+}
+
+.c27:-ms-input-placeholder {
+  color: #AAAAAA;
+}
+
+.c27::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.c27::-moz-focus-inner {
+  border: none;
+  outline: none;
+}
+
+.c27:-moz-placeholder,
+.c27::-moz-placeholder {
+  opacity: 1;
+}
+
+.c27::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.c27::-moz-placeholder {
+  font-size: 14px;
+}
+
+.c27:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.c27::placeholder {
+  font-size: 14px;
+}
+
+.c23 {
   position: relative;
   width: 100%;
 }
 
-.c16 {
+.c26 {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-packjustify: center;
+  -webkit-justify: center;
+  -ms-flex-packjustify: center;
+  justify: center;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  pointer-events: none;
+  right: 6px;
+}
+
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -781,26 +710,14 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   padding: 12px 12px 6px;
 }
 
-.c16 dt,
-.c16 dd {
+.c14 dt,
+.c14 dd {
   margin: 0;
 }
 
-.c16 dt:first-of-type,
-.c16 dd:first-of-type {
+.c14 dt:first-of-type,
+.c14 dd:first-of-type {
   font-weight: bold;
-}
-
-.c21 {
-  padding: 12px;
-}
-
-.c21:hover {
-  background-color: #11111108;
-}
-
-.c21.active {
-  background-color: #EFEFEF;
 }
 
 @media only screen and (max-width:768px) {
@@ -817,25 +734,12 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c3 {
-    border-left: solid 3px #2ad5ab;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c3 {
-    padding-left: 6px;
-    padding-right: 6px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c6 {
     border: solid 1px #EDEDED;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c7 {
+  .c4 {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -854,7 +758,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .c7 {
+  .c4 {
     padding: 6px;
   }
 }
@@ -876,110 +780,67 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-
-}
-
-@media only screen and (max-width:768px) {
-  .c26 {
-    border-radius: 12px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c29 {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-basis: auto;
-    -ms-flex-preferred-size: auto;
-    flex-basis: auto;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-items: stretch;
-    -webkit-box-align: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c31 {
-    padding: 12px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c33 {
-    border-bottom: solid 1px rgba(0,0,0,0.33);
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c37 {
-    margin-top: 12px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c41 {
+  .c18 {
     margin: 0px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c42 {
+  .c20 {
+    padding: 12px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c22 {
+    border-bottom: solid 1px rgba(0,0,0,0.33);
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c28 {
+    margin-top: 12px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c31 {
     border: solid 1px #EDEDED;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c42 {
+  .c31 {
     padding: 24px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c9 {
+  .c6 {
     padding-right: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c10 {
+  .c7 {
     border-bottom: solid 1px #EDEDED;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c10 {
+  .c7 {
     padding-bottom: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c20 {
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c36 {
+  .c25 {
     height: 12px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c39 {
-    width: auto;
-    height: 6px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c43 {
+  .c19 {
     font-size: 18px;
     line-height: 24px;
     max-width: 432px;
@@ -987,56 +848,38 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 }
 
 @media only screen and (min-width:768px) {
-  .c16 dt {
+  .c14 dt {
     width: 40%;
   }
 
-  .c16 dd {
+  .c14 dd {
     width: 60%;
   }
 
-  .c16 dt:not(:last-of-type),.c16 dd:not(:last-of-type) {
+  .c14 dt:not(:last-of-type),
+  .c14 dd:not(:last-of-type) {
     margin-bottom: 6px;
-  }
-
-  .c16 dt:first-of-type,
-  .c16 dd:first-of-type {
-    font-size: 22px;
-    line-height: 28px;
-    margin-bottom: 12px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c16 dt {
+  .c14 dt {
     width: 30%;
   }
 
-  .c16 dd {
+  .c14 dd {
     width: 70%;
     text-align: right;
   }
 
-  .c16 dt,
-  .c16 dd {
+  .c14 dt,
+  .c14 dd {
     font-size: 16px;
   }
 
-  .c16 dt:not(:last-of-type),.c16 dd:not(:last-of-type) {
+  .c14 dt:not(:last-of-type),
+  .c14 dd:not(:last-of-type) {
     margin-bottom: 3px;
-  }
-
-  .c16 dt:first-of-type,
-  .c16 dd:first-of-type {
-    font-size: 18px;
-    line-height: 24px;
-    margin-bottom: 6px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c21 {
-    padding: 6px;
   }
 }
 
@@ -1049,106 +892,81 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   >
     <div
       class="c2"
-    >
-      <div
-        class="c3"
-      >
-        <div
-          class="c4"
-        >
-          <span
-            class="c5"
-            style="margin-top: 10px; margin-bottom: 10px;"
-          >
-            This is your account.
-          </span>
-        </div>
-      </div>
-    </div>
+    />
     <div
-      class="c6"
+      class="c3"
     >
       <div
-        class="c7"
+        class="c4"
       >
         <div
-          class="c8"
+          class="c5"
         >
           <div
-            class="c9"
+            class="c6"
           >
             <div
-              class="c10"
+              class="c7"
             >
-              <button
-                class="c11"
-                data-testid="copy-address-icon"
-                type="button"
-              >
-                <svg
-                  aria-label="Copy"
-                  class="c12"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M9 15h8-8zm0-4h10H9zm0-4h4-4zm7-6v6h6M6 5H2v18h16v-4m4 0H6V1h11l5 5v13z"
-                    fill="none"
-                    stroke="#000"
-                    stroke-width="2"
-                  />
-                </svg>
-              </button>
               <div
-                class="c13"
+                class="c8"
               >
                 <span
-                  class="c14"
+                  class="c9"
                   style="display: inline-flex; align-items: center; justify-content: space-between; flex: 1;"
                 >
-                  <span
-                    class="c15"
-                    style="font-family: "Roboto mono", monospace; letter-spacing: 0;"
+                  <button
+                    class="c10"
+                    data-testid="copy-address-button"
+                    type="button"
                   >
-                    <span
-                      class="notranslate"
-                      translate="no"
+                    <div
+                      class="c11 c12"
                     >
-                      oasis1 qz0k 5q8v jqvu 4s4n wxyj 406y lnfl kc4v rcjg huwk
-                    </span>
-                  </span>
+                      oasis1qz...jghuwk
+                      <svg
+                        aria-label="Copy"
+                        class="c13"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M9 15h8-8zm0-4h10H9zm0-4h4-4zm7-6v6h6M6 5H2v18h16v-4m4 0H6V1h11l5 5v13z"
+                          fill="none"
+                          stroke="#000"
+                          stroke-width="2"
+                        />
+                      </svg>
+                    </div>
+                  </button>
                 </span>
               </div>
             </div>
           </div>
           <dl
-            class="c16"
+            class="c14"
             data-testid="account-balance-summary"
           >
             <dt>
-              <span
-                class="c17"
-              >
-                Total
-              </span>
+              Total
             </dt>
             <dd
               data-testid="account-balance-total"
             >
               <span>
                 <div
-                  class="c18"
-                  style="display: inline-flex; white-space: nowrap;"
+                  class="c11"
+                  style="display: inline-flex; white-space: nowrap; font-family: "Roboto mono", monospace; letter-spacing: 0;"
                 >
                   100.000001111
                 </div>
                 <span
-                  class="c19"
+                  class="c15"
                 >
                   <span
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1159,19 +977,19 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
             <dd>
               <span>
                 <div
-                  class="c18"
-                  style="display: inline-flex; white-space: nowrap;"
+                  class="c11"
+                  style="display: inline-flex; white-space: nowrap; font-family: "Roboto mono", monospace; letter-spacing: 0;"
                 >
                   100.0
                 </div>
                 <span
-                  class="c19"
+                  class="c15"
                 >
                   <span
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1183,19 +1001,19 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
             <dd>
               <span>
                 <div
-                  class="c18"
-                  style="display: inline-flex; white-space: nowrap;"
+                  class="c11"
+                  style="display: inline-flex; white-space: nowrap; font-family: "Roboto mono", monospace; letter-spacing: 0;"
                 >
                   0.000001111
                 </div>
                 <span
-                  class="c19"
+                  class="c15"
                 >
                   <span
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1206,19 +1024,19 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
             <dd>
               <span>
                 <div
-                  class="c18"
-                  style="display: inline-flex; white-space: nowrap;"
+                  class="c11"
+                  style="display: inline-flex; white-space: nowrap; font-family: "Roboto mono", monospace; letter-spacing: 0;"
                 >
                   0.0
                 </div>
                 <span
-                  class="c19"
+                  class="c15"
                 >
                   <span
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1227,180 +1045,140 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
         </div>
       </div>
     </div>
-    <nav
-      class="c20"
+    <div
+      class="c2"
+    />
+    <div
+      class="c16"
+      style="gap: 24px;"
     >
-      <a
-        aria-current="page"
-        class="c21 active"
-        href="/account/oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk"
-      >
-        <button
-          class="c22"
-          tabindex="-1"
-          type="button"
-        >
-          Transactions
-        </button>
-      </a>
-      <a
-        class="c21"
-        href="/account/oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk/active-delegations"
+      <div
+        class="c17"
       >
         <div
-          class="c23"
+          class="c18"
         >
-          <div
-            class="c24"
+          <h2
+            class="c19"
           >
-            <button
-              class="c22"
-              tabindex="-1"
-              type="button"
-            >
-              Delegations
-            </button>
-          </div>
+            Send
+          </h2>
           <div
-            class="c25"
-            style="top: 0px; right: 0px; transform: translate(50%, -50%); transform-origin: 100% 0%;"
+            class="c3"
           >
-            <div
-              class="c26 c27"
-              style="min-height: 20px; min-width: 20px;"
-            >
-              <span
-                class="c28"
+            <form>
+              <div
+                class="c20"
               >
-                1
-              </span>
-            </div>
+                <div
+                  class="c2 "
+                >
+                  <label
+                    class="c21"
+                    for="recipient-id"
+                  >
+                    Recipient
+                  </label>
+                  <div
+                    class="c22 "
+                  >
+                    <div
+                      class="c23"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        aria-expanded="false"
+                        autocomplete="off"
+                        class="c24"
+                        id="recipient-id"
+                        name="recipient"
+                        placeholder="Enter an address"
+                        required=""
+                        role="combobox"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="c25"
+                />
+                <div
+                  class="c2 "
+                >
+                  <label
+                    class="c21"
+                    for="amount-id"
+                  >
+                    Amount
+                  </label>
+                  <div
+                    class="c22 "
+                  >
+                    <div
+                      class="c23"
+                    >
+                      <div
+                        class="c26"
+                      >
+                        <span
+                          class="c15"
+                        >
+                          TEST
+                        </span>
+                      </div>
+                      <input
+                        autocomplete="off"
+                        class="c27"
+                        id="amount-id"
+                        min="0"
+                        name="amount"
+                        placeholder="Enter an amount"
+                        required=""
+                        step="any"
+                        type="number"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="c25"
+                />
+                <div
+                  class="c28"
+                >
+                  <button
+                    class="c29"
+                    type="submit"
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </a>
-      <a
-        class="c21"
-        href="/account/oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk/debonding-delegations"
-      >
-        <button
-          class="c22"
-          tabindex="-1"
-          type="button"
-        >
-          Debonding
-        </button>
-      </a>
-    </nav>
-    <div
-      class="c29"
-    >
+      </div>
       <div
         class="c30"
       >
         <div
-          class="c6"
+          class="c18"
         >
-          <form>
-            <div
-              class="c31"
-            >
-              <div
-                class="c2 "
-              >
-                <label
-                  class="c32"
-                  for="recipient-id"
-                >
-                  Recipient
-                </label>
-                <div
-                  class="c33 "
-                >
-                  <div
-                    class="c34"
-                  >
-                    <input
-                      aria-autocomplete="list"
-                      aria-expanded="false"
-                      autocomplete="off"
-                      class="c35"
-                      id="recipient-id"
-                      name="recipient"
-                      placeholder="Enter an address"
-                      required=""
-                      role="combobox"
-                      value=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div
-                class="c36"
-              />
-              <div
-                class="c2 "
-              >
-                <label
-                  class="c32"
-                  for="amount-id"
-                >
-                  Amount
-                </label>
-                <div
-                  class="c33 "
-                >
-                  <div
-                    class="c34"
-                  >
-                    <input
-                      autocomplete="off"
-                      class="c35"
-                      id="amount-id"
-                      min="0"
-                      name="amount"
-                      placeholder="Enter an amount"
-                      required=""
-                      step="any"
-                      type="number"
-                      value=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div
-                class="c36"
-              />
-              <div
-                class="c37"
-              >
-                <button
-                  class="c38"
-                  type="submit"
-                >
-                  Send
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div
-        class="c39"
-      />
-      <div
-        class="c40"
-      >
-        <div
-          class="c41"
-        >
-          <div
-            class="c42"
+          <h2
+            class="c19"
           >
-            <h3
-              class="c43"
+            Activity
+          </h2>
+          <div
+            class="c31"
+          >
+            <span
+              class="c32"
             >
               No transactions found.
-            </h3>
+            </span>
           </div>
         </div>
       </div>
@@ -1409,6 +1187,4 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 </div>
 `;
 
-exports[`<AccountPage  /> with missing delegations 1`] = `"Total-Available100.0  Staked-Debonding-"`;
-
-exports[`<AccountPage  /> with missing delegations 2`] = `"TransactionsDelegationsDebonding"`;
+exports[`<AccountPage  /> with missing delegations 1`] = `"Total-Available100.0 TEST Staked-Debonding-"`;

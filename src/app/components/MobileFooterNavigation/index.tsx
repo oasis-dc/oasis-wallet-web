@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Box } from 'grommet/es6/components/Box'
 import { Text } from 'grommet/es6/components/Text'
 import { LineChart } from 'grommet-icons/es6/icons/LineChart'
 import { Inherit } from 'grommet-icons/es6/icons/Inherit'
-import { Money } from 'grommet-icons/es6/icons/Money'
+import { MuiWalletIcon } from '../../../styles/theme/icons/mui-icons/MuiWalletIcon'
 import { CreditCard } from 'grommet-icons/es6/icons/CreditCard'
 import styled from 'styled-components'
 import { normalizeColor } from 'grommet/es6/utils'
@@ -14,6 +14,8 @@ import { selectAddress } from 'app/state/wallet/selectors'
 import { useParaTimesNavigation } from 'app/pages/ParaTimesPage/useParaTimesNavigation'
 import { IS_FIAT_ONRAMP_ENABLED } from '../../pages/FiatOnrampPage/isEnabled'
 import { mobileFooterNavigationHeight } from '../../../styles/theme/elementSizes'
+// eslint-disable-next-line no-restricted-imports
+import type { Icon } from 'grommet-icons/es6/icons'
 
 const StyledMobileFooterNavigation = styled.nav`
   background-color: ${({ theme }) => normalizeColor('background-front', theme)};
@@ -23,8 +25,8 @@ const StyledMobileFooterNavigation = styled.nav`
   right: 0;
   height: ${mobileFooterNavigationHeight};
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  align-items: stretch;
+  justify-content: space-between;
   box-shadow: ${({ theme }) =>
     `0px 0px ${theme.global?.borderSize?.xsmall} ${normalizeColor('background-front-border', theme)}`};
   border-top: ${({ theme }) =>
@@ -32,24 +34,36 @@ const StyledMobileFooterNavigation = styled.nav`
   flex-direction: row;
 `
 
-export interface MobileFooterNavigationProps {
-  walletHasAccounts: boolean
-  isMobile: boolean
-}
+const StyledNavLink = styled(NavLink)`
+  // Make items equal width
+  flex-grow: 1;
+  flex-basis: 0;
 
-export const MobileFooterNavigation = ({ walletHasAccounts, isMobile }: MobileFooterNavigationProps) => {
+  &:hover {
+    color: ${({ theme }) => normalizeColor('text', theme)};
+    background-color: ${({ theme }) => normalizeColor('active', theme)};
+  }
+
+  &.active {
+    color: ${({ theme }) => normalizeColor('text', theme, true)};
+    background-color: ${({ theme }) => normalizeColor('control', theme)};
+  }
+`
+
+export const MobileFooterNavigation = () => {
   const { t } = useTranslation()
   const address = useSelector(selectAddress)
   const { getParaTimesRoutePath, paraTimesRouteLabel } = useParaTimesNavigation()
   const getMenuItems = useMemo(() => {
     const menuItems = [
       {
-        label: t('menu.wallet', 'Wallet'),
-        Icon: Money,
+        label: t('menu.wallet', 'Account'),
+        Icon: MuiWalletIcon,
         to: `/account/${address}`,
+        exactActive: true,
       },
       {
-        label: t('menu.stake', 'Stake'),
+        label: t('menu.stake-mobile', 'Stake'),
         Icon: LineChart,
         to: `/account/${address}/stake`,
       },
@@ -61,7 +75,7 @@ export const MobileFooterNavigation = ({ walletHasAccounts, isMobile }: MobileFo
       ...(IS_FIAT_ONRAMP_ENABLED
         ? [
             {
-              label: t('menu.fiatOnramp', 'Buy'),
+              label: t('menu.fiatOnramp-mobile', 'Buy'),
               Icon: CreditCard,
               to: `/account/${address}/fiat`,
             },
@@ -71,22 +85,34 @@ export const MobileFooterNavigation = ({ walletHasAccounts, isMobile }: MobileFo
     return menuItems
   }, [address, getParaTimesRoutePath, paraTimesRouteLabel, t])
 
-  if (!isMobile || !walletHasAccounts) {
-    return null
-  }
-
   return (
     <StyledMobileFooterNavigation data-testid="mobile-footer-navigation">
-      {getMenuItems.map(({ label, Icon, to }) => (
-        <NavLink to={to} key={to}>
-          <Box as="span" justify="center" align="center" pad={{ horizontal: 'medium' }}>
-            <Box as="span" margin="xsmall">
-              <Icon />
-            </Box>
-            <Text size="small">{label}</Text>
-          </Box>
-        </NavLink>
+      {getMenuItems.map(params => (
+        <MobileFooterButton key={params.to} {...params} />
       ))}
     </StyledMobileFooterNavigation>
+  )
+}
+
+function MobileFooterButton({
+  label,
+  Icon,
+  to,
+  exactActive,
+}: {
+  label: string
+  Icon: Icon
+  to: string
+  exactActive?: boolean | undefined
+}) {
+  return (
+    <StyledNavLink to={to} end={exactActive}>
+      <Box as="span" justify="center" align="center" fill="vertical" gap="small">
+        <Icon size="24px" />
+        <Text size="small" textAlign="center" style={{ lineHeight: 1 }}>
+          {label}
+        </Text>
+      </Box>
+    </StyledNavLink>
   )
 }

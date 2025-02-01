@@ -20,6 +20,7 @@ interface Props<TFormValue> {
   suggestions?: Array<{ label: string; value: any }>
   validate?: (password: string, form: TFormValue) => string | undefined
   error?: string | false
+  /** @deprecated Use `validate` */
   required?: boolean
   showTip: string
   hideTip: string
@@ -56,7 +57,7 @@ export function PasswordField<TFormValue = any>(props: Props<TFormValue>) {
           <Tip content={passwordIsVisible ? props.hideTip : props.showTip}>
             <Button
               onClick={() => setPasswordIsVisible(!passwordIsVisible)}
-              icon={passwordIsVisible ? <View /> : <Hide />}
+              icon={passwordIsVisible ? <View size="24px" /> : <Hide size="24px" />}
               a11yTitle={passwordIsVisible ? props.hideTip : props.showTip}
             />
           </Tip>

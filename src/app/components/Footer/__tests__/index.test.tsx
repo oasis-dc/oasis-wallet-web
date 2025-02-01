@@ -41,12 +41,13 @@ describe('<Footer />', () => {
     })
   })
 
-  it('should render a link with commit sha', () => {
+  it('should render a link with commit sha after toggling', async () => {
     renderComponent(store, 'large')
 
-    expect(screen.getByRole('link', { name: 'sha0000' })).toHaveAttribute(
+    const commitLink = await screen.findByRole('link', { name: /sha0000/i })
+    expect(commitLink).toHaveAttribute(
       'href',
-      'https://github.com/oasisprotocol/oasis-wallet-web/commit/sha0000000000000000000000000000000000000',
+      'https://github.com/oasisprotocol/wallet/commit/sha0000000000000000000000000000000000000',
     )
   })
 
@@ -55,14 +56,8 @@ describe('<Footer />', () => {
 
     expect(screen.getByRole('link', { name: '1.0.0-dev.1' })).toHaveAttribute(
       'href',
-      'https://github.com/oasisprotocol/oasis-wallet-web/releases/tag/v1.0.0-dev.1',
+      'https://github.com/oasisprotocol/wallet/releases/tag/v1.0.0-dev.1',
     )
-  })
-
-  it('should render backend label', () => {
-    renderComponent(store, 'large')
-
-    expect(screen.getByText(/Powered by Oasis Scan API.*/)).toBeInTheDocument()
   })
 
   it('should render mobile version of footer', () => {

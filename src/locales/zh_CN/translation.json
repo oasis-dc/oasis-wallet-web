@@ -46,8 +46,7 @@
       },
       "noTransactionFound": "交易无法找到",
       "noWalletIsOpen": "转账、接收、质押{{ticker}}代币，<HomeLink>打开钱包</HomeLink>",
-      "notYourAccount": "这不是您的账户",
-      "yourAccount": "这是您的账户"
+      "notYourAccount": "这不是您的账户"
     },
     "transaction": {
       "addEscrow": {
@@ -231,11 +230,13 @@
     "addAccounts": "添加账户",
     "closeWallet": "关闭钱包",
     "fiatOnramp": "购买",
+    "fiatOnramp-mobile": "购买",
     "home": "主页",
     "lockProfile": "锁定个人资料",
     "openMenu": "菜单",
     "paraTimes": "ParaTimes",
     "stake": "质押",
+    "stake-mobile": "质押",
     "unlockProfile": "解锁个人资料",
     "wallet": "钱包"
   },
@@ -479,13 +480,7 @@
       "settings": "设置"
     },
     "wallets": {
-      "select": "选择",
-      "type": {
-        "bluetoothLedger": "BLE Ledger",
-        "mnemonic": "助记词",
-        "privateKey": "私钥",
-        "usbLedger": "USB Ledger"
-      }
+      "select": "选择"
     }
   },
   "transaction": {

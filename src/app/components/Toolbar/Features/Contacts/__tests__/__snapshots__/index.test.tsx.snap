@@ -3,8 +3,8 @@
 exports[`<Contacts  /> should match snapshot 1`] = `
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -42,7 +42,7 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
-  border: solid 1px #0092f6;
+  border: solid 1px #0500e2;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: row;
@@ -54,6 +54,11 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   padding: 12px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.c3:hover {
+  background-color: rgba(183,183,183,0.5);
+  color: black;
 }
 
 .c4 {
@@ -97,10 +102,6 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -146,13 +147,13 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   box-sizing: border-box;
   max-width: 100%;
   margin-bottom: 48px;
+  margin-left: -2px;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-left: 2px;
   padding-right: 12px;
   overflow-y: auto;
 }
@@ -168,8 +169,8 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 }
 
 .c6 {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: bold;
 }
 
@@ -184,21 +185,33 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  color: #0092f6;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
+  border: 2px solid #0500e2;
+  border-radius: 18px;
+  color: #16213E;
+  padding: 4px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #0500e2;
+  color: #F8F8F8;
+  border-radius: 18px;
+  -webkit-transition-property: color,background-color,border-color,box-shadow;
+  transition-property: color,background-color,border-color,box-shadow;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  font-weight: bold;
 }
 
 .c9:hover {
-  background-color: rgba(221,221,221,0.4);
+  background-color: rgba(183,183,183,0.4);
   color: #000000;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c9:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c9:focus > circle,
@@ -209,7 +222,7 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 .c9:focus > polyline,
 .c9:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c9:focus::-moz-focus-inner {
@@ -221,9 +234,12 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c9:focus:not(:focus-visible) > circle,.c9:focus:not(:focus-visible) > ellipse,
-.c9:focus:not(:focus-visible) > line,.c9:focus:not(:focus-visible) > path,
-.c9:focus:not(:focus-visible) > polygon,.c9:focus:not(:focus-visible) > polyline,
+.c9:focus:not(:focus-visible) > circle,
+.c9:focus:not(:focus-visible) > ellipse,
+.c9:focus:not(:focus-visible) > line,
+.c9:focus:not(:focus-visible) > path,
+.c9:focus:not(:focus-visible) > polygon,
+.c9:focus:not(:focus-visible) > polyline,
 .c9:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -244,13 +260,13 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #0500e2;
   color: #F8F8F8;
   border-radius: 4px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
@@ -263,12 +279,12 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 }
 
 .c13:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c13:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c13:focus > circle,
@@ -279,7 +295,7 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 .c13:focus > polyline,
 .c13:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c13:focus::-moz-focus-inner {
@@ -291,9 +307,12 @@ exports[`<Contacts  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c13:focus:not(:focus-visible) > circle,.c13:focus:not(:focus-visible) > ellipse,
-.c13:focus:not(:focus-visible) > line,.c13:focus:not(:focus-visible) > path,
-.c13:focus:not(:focus-visible) > polygon,.c13:focus:not(:focus-visible) > polyline,
+.c13:focus:not(:focus-visible) > circle,
+.c13:focus:not(:focus-visible) > ellipse,
+.c13:focus:not(:focus-visible) > line,
+.c13:focus:not(:focus-visible) > path,
+.c13:focus:not(:focus-visible) > polygon,
+.c13:focus:not(:focus-visible) > polyline,
 .c13:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -304,9 +323,11 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 }
 
 .c10 {
-  padding: 0.5ex 0.7ch;
-  margin: -0.5ex -0.7ch;
   border-radius: 4px;
+}
+
+@media only screen and (max-width:768px) {
+
 }
 
 @media only screen and (max-width:768px) {
@@ -323,7 +344,7 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c3 {
-    border: solid 1px #0092f6;
+    border: solid 1px #0500e2;
   }
 }
 
@@ -341,8 +362,13 @@ exports[`<Contacts  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c2 {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    margin-left: -2px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c2 {
+    padding-left: 2px;
   }
 }
 
@@ -434,7 +460,7 @@ exports[`<Contacts  /> should match snapshot 1`] = `
         class="c13"
         type="button"
       >
-        Add Contact
+        Add contact
       </button>
     </div>
   </div>

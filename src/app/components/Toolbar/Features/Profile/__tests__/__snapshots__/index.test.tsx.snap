@@ -1,42 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Profile  /> should render unavailable state 1`] = `
-.c10 {
+.c9 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   width: 24px;
   height: 24px;
-  fill: #666666;
-  stroke: #666666;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
-.c10 g {
+.c9 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c10 *:not([stroke])[fill='none'] {
+.c9 *:not([stroke])[fill='none'] {
   stroke-width: 0;
 }
 
-.c10 *[stroke*='#'],.c10 *[STROKE*='#'] {
+.c9 *[stroke*='#'],
+.c9 *[STROKE*='#'] {
   stroke: inherit;
   fill: none;
 }
 
-.c10 *[fill-rule],
-.c10 *[FILL-RULE],
-.c10 *[fill*='#'],.c10 *[FILL*='#'] {
+.c9 *[fill-rule],
+.c9 *[FILL-RULE],
+.c9 *[fill*='#'],
+.c9 *[FILL*='#'] {
+  fill: inherit;
+  stroke: none;
+}
+
+.c17 {
+  display: inline-block;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.c17 g {
+  fill: inherit;
+  stroke: inherit;
+}
+
+.c17 *:not([stroke])[fill='none'] {
+  stroke-width: 0;
+}
+
+.c17 *[stroke*='#'],
+.c17 *[STROKE*='#'] {
+  stroke: inherit;
+  fill: none;
+}
+
+.c17 *[fill-rule],
+.c17 *[FILL-RULE],
+.c17 *[fill*='#'],
+.c17 *[FILL*='#'] {
   fill: inherit;
   stroke: none;
 }
 
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -63,7 +99,7 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   flex: 1 0 auto;
 }
 
-.c3 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -78,7 +114,7 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   max-width: 384px;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -93,7 +129,7 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   flex-direction: column;
 }
 
-.c5 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -108,7 +144,7 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   flex-direction: column;
 }
 
-.c6 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -126,7 +162,7 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   flex-direction: row;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -139,50 +175,28 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
 }
 
-.c13 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
-  margin-top: 24px;
+  margin-top: 40px;
   min-width: 0;
   min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
-.c17 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
-  margin-top: 48px;
-  -webkit-align-items: flex-end;
-  -webkit-box-align: flex-end;
-  -ms-flex-align: flex-end;
-  align-items: flex-end;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-.c19 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -204,17 +218,17 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   justify-content: center;
 }
 
-.c15 {
+.c14 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  height: 12px;
+  width: 24px;
 }
 
-.c20 {
+.c18 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -224,12 +238,7 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   width: 12px;
 }
 
-.c14 {
-  font-size: 18px;
-  line-height: 24px;
-}
-
-.c9 {
+.c8 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -249,44 +258,47 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   padding: 12px;
 }
 
-.c9:focus {
+.c8:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c9:focus > circle,
-.c9:focus > ellipse,
-.c9:focus > line,
-.c9:focus > path,
-.c9:focus > polygon,
-.c9:focus > polyline,
-.c9:focus > rect {
+.c8:focus > circle,
+.c8:focus > ellipse,
+.c8:focus > line,
+.c8:focus > path,
+.c8:focus > polygon,
+.c8:focus > polyline,
+.c8:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c9:focus::-moz-focus-inner {
+.c8:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c9:focus:not(:focus-visible) {
+.c8:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c9:focus:not(:focus-visible) > circle,.c9:focus:not(:focus-visible) > ellipse,
-.c9:focus:not(:focus-visible) > line,.c9:focus:not(:focus-visible) > path,
-.c9:focus:not(:focus-visible) > polygon,.c9:focus:not(:focus-visible) > polyline,
-.c9:focus:not(:focus-visible) > rect {
+.c8:focus:not(:focus-visible) > circle,
+.c8:focus:not(:focus-visible) > ellipse,
+.c8:focus:not(:focus-visible) > line,
+.c8:focus:not(:focus-visible) > path,
+.c8:focus:not(:focus-visible) > polygon,
+.c8:focus:not(:focus-visible) > polyline,
+.c8:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c9:focus:not(:focus-visible)::-moz-focus-inner {
+.c8:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
-.c12 {
+.c11 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -297,13 +309,13 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #0500e2;
   color: #F8F8F8;
   border-radius: 4px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
@@ -315,48 +327,51 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   font-weight: bold;
 }
 
-.c12:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+.c11:hover {
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
-.c12:focus {
+.c11:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c12:focus > circle,
-.c12:focus > ellipse,
-.c12:focus > line,
-.c12:focus > path,
-.c12:focus > polygon,
-.c12:focus > polyline,
-.c12:focus > rect {
+.c11:focus > circle,
+.c11:focus > ellipse,
+.c11:focus > line,
+.c11:focus > path,
+.c11:focus > polygon,
+.c11:focus > polyline,
+.c11:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c12:focus::-moz-focus-inner {
+.c11:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c12:focus:not(:focus-visible) {
+.c11:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c12:focus:not(:focus-visible) > circle,.c12:focus:not(:focus-visible) > ellipse,
-.c12:focus:not(:focus-visible) > line,.c12:focus:not(:focus-visible) > path,
-.c12:focus:not(:focus-visible) > polygon,.c12:focus:not(:focus-visible) > polyline,
-.c12:focus:not(:focus-visible) > rect {
+.c11:focus:not(:focus-visible) > circle,
+.c11:focus:not(:focus-visible) > ellipse,
+.c11:focus:not(:focus-visible) > line,
+.c11:focus:not(:focus-visible) > path,
+.c11:focus:not(:focus-visible) > polygon,
+.c11:focus:not(:focus-visible) > polyline,
+.c11:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c12:focus:not(:focus-visible)::-moz-focus-inner {
+.c11:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
-.c16 {
+.c13 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -371,8 +386,8 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #d24c00;
   color: #F8F8F8;
   border-radius: 4px;
@@ -385,48 +400,51 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   font-weight: bold;
 }
 
-.c16:hover {
+.c13:hover {
   box-shadow: 0px 0px 0px 2px #d24c00;
 }
 
-.c16:focus {
+.c13:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c16:focus > circle,
-.c16:focus > ellipse,
-.c16:focus > line,
-.c16:focus > path,
-.c16:focus > polygon,
-.c16:focus > polyline,
-.c16:focus > rect {
+.c13:focus > circle,
+.c13:focus > ellipse,
+.c13:focus > line,
+.c13:focus > path,
+.c13:focus > polygon,
+.c13:focus > polyline,
+.c13:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c16:focus::-moz-focus-inner {
+.c13:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c16:focus:not(:focus-visible) {
+.c13:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c16:focus:not(:focus-visible) > circle,.c16:focus:not(:focus-visible) > ellipse,
-.c16:focus:not(:focus-visible) > line,.c16:focus:not(:focus-visible) > path,
-.c16:focus:not(:focus-visible) > polygon,.c16:focus:not(:focus-visible) > polyline,
-.c16:focus:not(:focus-visible) > rect {
+.c13:focus:not(:focus-visible) > circle,
+.c13:focus:not(:focus-visible) > ellipse,
+.c13:focus:not(:focus-visible) > line,
+.c13:focus:not(:focus-visible) > path,
+.c13:focus:not(:focus-visible) > polygon,
+.c13:focus:not(:focus-visible) > polyline,
+.c13:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c16:focus:not(:focus-visible)::-moz-focus-inner {
+.c13:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
-.c18 {
+.c15 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -437,12 +455,12 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
   transition-property: color,background-color,border-color,box-shadow;
   -webkit-transition-duration: 0.1s;
@@ -452,54 +470,51 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   font-weight: bold;
 }
 
-.c18:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+.c15:hover {
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
-.c18:focus {
+.c15:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c18:focus > circle,
-.c18:focus > ellipse,
-.c18:focus > line,
-.c18:focus > path,
-.c18:focus > polygon,
-.c18:focus > polyline,
-.c18:focus > rect {
+.c15:focus > circle,
+.c15:focus > ellipse,
+.c15:focus > line,
+.c15:focus > path,
+.c15:focus > polygon,
+.c15:focus > polyline,
+.c15:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c18:focus::-moz-focus-inner {
+.c15:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c18:focus:not(:focus-visible) {
+.c15:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c18:focus:not(:focus-visible) > circle,.c18:focus:not(:focus-visible) > ellipse,
-.c18:focus:not(:focus-visible) > line,.c18:focus:not(:focus-visible) > path,
-.c18:focus:not(:focus-visible) > polygon,.c18:focus:not(:focus-visible) > polyline,
-.c18:focus:not(:focus-visible) > rect {
+.c15:focus:not(:focus-visible) > circle,
+.c15:focus:not(:focus-visible) > ellipse,
+.c15:focus:not(:focus-visible) > line,
+.c15:focus:not(:focus-visible) > path,
+.c15:focus:not(:focus-visible) > polygon,
+.c15:focus:not(:focus-visible) > polyline,
+.c15:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c18:focus:not(:focus-visible)::-moz-focus-inner {
+.c15:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
-.c2 {
-  font-size: 18px;
-  line-height: 24px;
-  max-width: 432px;
-}
-
-.c8 {
+.c7 {
   box-sizing: border-box;
   font-size: inherit;
   font-family: inherit;
@@ -508,7 +523,10 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   background: transparent;
   color: inherit;
   width: 100%;
-  padding: 11px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-weight: 600;
   margin: 0;
   border: 1px solid rgba(0,0,0,0.33);
@@ -517,90 +535,100 @@ exports[`<Profile  /> should render unavailable state 1`] = `
   border: none;
 }
 
-.c8:focus {
+.c7:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c8:focus > circle,
-.c8:focus > ellipse,
-.c8:focus > line,
-.c8:focus > path,
-.c8:focus > polygon,
-.c8:focus > polyline,
-.c8:focus > rect {
+.c7:focus > circle,
+.c7:focus > ellipse,
+.c7:focus > line,
+.c7:focus > path,
+.c7:focus > polygon,
+.c7:focus > polyline,
+.c7:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c8:focus::-moz-focus-inner {
+.c7:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c8::-webkit-input-placeholder {
+.c7::-webkit-input-placeholder {
   color: #AAAAAA;
 }
 
-.c8::-moz-placeholder {
+.c7::-moz-placeholder {
   color: #AAAAAA;
 }
 
-.c8:-ms-input-placeholder {
+.c7:-ms-input-placeholder {
   color: #AAAAAA;
 }
 
-.c8::-webkit-search-decoration {
+.c7::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-.c8::-moz-focus-inner {
+.c7::-moz-focus-inner {
   border: none;
   outline: none;
 }
 
-.c8:-moz-placeholder,
-.c8::-moz-placeholder {
+.c7:-moz-placeholder,
+.c7::-moz-placeholder {
   opacity: 1;
 }
 
-.c7 {
+.c7::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.c7::-moz-placeholder {
+  font-size: 14px;
+}
+
+.c7:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.c7::placeholder {
+  font-size: 14px;
+}
+
+.c6 {
   position: relative;
   width: 100%;
 }
 
 @media only screen and (max-width:768px) {
-  .c4 {
+  .c3 {
     margin-bottom: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c5 {
+  .c4 {
     border-bottom: solid 1px rgba(0,0,0,0.33);
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c11 {
+  .c10 {
     margin-top: 12px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c13 {
-    margin-top: 12px;
+  .c12 {
+    margin-top: 40px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c17 {
-    margin-top: 24px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c15 {
-    height: 6px;
+  .c14 {
+    width: 12px;
   }
 }
 
@@ -617,39 +645,34 @@ exports[`<Profile  /> should render unavailable state 1`] = `
       autocorrect="off"
       spellcheck="false"
     >
-      <p
+      <label
+        for="currentPassword"
+      >
+        Set a new password
+      </label>
+      <div
         class="c2"
       >
-        <label
-          for="password1"
-        >
-          Set a new password
-        </label>
-      </p>
-      <div
-        class="c3"
-      >
         <div
-          class="c4 "
+          class="c3 "
         >
           <div
-            class="c5 "
+            class="c4 "
           >
             <div
-              class="c6"
+              class="c5"
             >
               <div
-                class="c7"
+                class="c6"
               >
                 <input
                   autocapitalize="off"
                   autocomplete="off"
                   autocorrect="off"
-                  class="c8"
+                  class="c7"
                   id="currentPassword"
                   name="currentPassword"
                   placeholder="Current password"
-                  required=""
                   spellcheck="false"
                   type="password"
                   value=""
@@ -657,12 +680,12 @@ exports[`<Profile  /> should render unavailable state 1`] = `
               </div>
               <button
                 aria-label="Show password"
-                class="c9"
+                class="c8"
                 type="button"
               >
                 <svg
                   aria-label="Hide"
-                  class="c10"
+                  class="c9"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -678,29 +701,28 @@ exports[`<Profile  /> should render unavailable state 1`] = `
         </div>
       </div>
       <div
-        class="c3"
+        class="c2"
       >
         <div
-          class="c4 "
+          class="c3 "
         >
           <div
-            class="c5 "
+            class="c4 "
           >
             <div
-              class="c6"
+              class="c5"
             >
               <div
-                class="c7"
+                class="c6"
               >
                 <input
                   autocapitalize="off"
                   autocomplete="off"
                   autocorrect="off"
-                  class="c8"
+                  class="c7"
                   id="password1"
                   name="password1"
                   placeholder="New password"
-                  required=""
                   spellcheck="false"
                   type="password"
                   value=""
@@ -708,12 +730,12 @@ exports[`<Profile  /> should render unavailable state 1`] = `
               </div>
               <button
                 aria-label="Show password"
-                class="c9"
+                class="c8"
                 type="button"
               >
                 <svg
                   aria-label="Hide"
-                  class="c10"
+                  class="c9"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -729,25 +751,25 @@ exports[`<Profile  /> should render unavailable state 1`] = `
         </div>
       </div>
       <div
-        class="c3"
+        class="c2"
       >
         <div
-          class="c4 "
+          class="c3 "
         >
           <div
-            class="c5 "
+            class="c4 "
           >
             <div
-              class="c6"
+              class="c5"
             >
               <div
-                class="c7"
+                class="c6"
               >
                 <input
                   autocapitalize="off"
                   autocomplete="off"
                   autocorrect="off"
-                  class="c8"
+                  class="c7"
                   id="password2"
                   name="password2"
                   placeholder="Re-enter new password"
@@ -758,12 +780,12 @@ exports[`<Profile  /> should render unavailable state 1`] = `
               </div>
               <button
                 aria-label="Show password"
-                class="c9"
+                class="c8"
                 type="button"
               >
                 <svg
                   aria-label="Hide"
-                  class="c10"
+                  class="c9"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -779,60 +801,49 @@ exports[`<Profile  /> should render unavailable state 1`] = `
         </div>
       </div>
       <div
-        class="c11"
+        class="c10"
       >
         <button
-          class="c12"
+          class="c11"
           type="submit"
         >
           Update password
         </button>
       </div>
     </form>
-    <div
-      class="c13"
-    >
-      <span
-        class="c14"
-      >
-        Deletion
-      </span>
-      <div
-        class="c15"
-      />
-      <button
-        class="c16"
-        type="button"
-      >
-        Delete profile
-      </button>
-    </div>
   </div>
   <div
-    class="c17"
+    class="c12"
   >
     <button
-      class="c18"
+      class="c13"
+      type="button"
+    >
+      Delete profile
+    </button>
+    <div
+      class="c14"
+    />
+    <button
+      class="c15"
       data-testid="profile-modal-lock-wallet"
       type="button"
     >
       <div
-        class="c19"
+        class="c16"
       >
         <svg
           aria-label="Lock"
-          class="c10"
+          class="c17"
           viewBox="0 0 24 24"
         >
           <path
-            d="M19 23V11H5v12h14zm-7-8v4m5-8V7c0-3 0-6-5-6S7 4 7 7v4"
-            fill="none"
-            stroke="#000"
-            stroke-width="2"
+            d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2m-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2m3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1z"
+            fill="#333"
           />
         </svg>
         <div
-          class="c20"
+          class="c18"
         />
         Lock profile
       </div>

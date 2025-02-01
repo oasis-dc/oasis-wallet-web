@@ -8,7 +8,6 @@ import { all, call, delay, fork, put, select, takeEvery } from 'typed-redux-saga
 import { ErrorPayload, WalletError, WalletErrors } from 'types/errors'
 import { LedgerWalletType, WalletType } from 'app/state/wallet/types'
 import { importAccountsActions } from '.'
-import { selectChainContext } from '../network/selectors'
 import { ImportAccountsListAccount, ImportAccountsStep } from './types'
 import type Transport from '@ledgerhq/hw-transport'
 import {
@@ -22,6 +21,7 @@ import {
 import { getAccountBalanceWithFallback } from '../../lib/getAccountBalanceWithFallback'
 import BleTransport from '@oasisprotocol/ionic-ledger-hw-transport-ble/lib'
 import { ScanResult } from '@capacitor-community/bluetooth-le'
+import { getChainContext } from '../network/saga'
 
 function* setStep(step: ImportAccountsStep) {
   yield* put(importAccountsActions.setStep(step))
@@ -119,7 +119,6 @@ function* enumerateAccountsFromMnemonic(action: PayloadAction<string>) {
     }
     yield* put(importAccountsActions.accountsListed(wallets))
     yield* setStep(ImportAccountsStep.Idle)
-    yield* ensureAllBalancesArePresentOnCurrentPage()
   } catch (e: any) {
     let payload: ErrorPayload
     if (e instanceof WalletError) {
@@ -130,6 +129,7 @@ function* enumerateAccountsFromMnemonic(action: PayloadAction<string>) {
 
     yield* put(importAccountsActions.operationFailed(payload))
   }
+  yield* ensureAllBalancesArePresentOnCurrentPage()
 }
 
 function* fetchBalanceForAccount(account: ImportAccountsListAccount) {
@@ -233,7 +233,7 @@ export function* sign<T>(signer: LedgerSigner, tw: oasis.consensus.TransactionWr
   } else {
     transport = yield* getUSBTransport()
   }
-  const chainContext = yield* select(selectChainContext)
+  const chainContext = yield* call(getChainContext)
 
   signer.setTransport(transport)
   try {

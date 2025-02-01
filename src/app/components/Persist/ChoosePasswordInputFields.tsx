@@ -30,9 +30,8 @@ export function ChoosePasswordInputFields({
         inputElementId="password1"
         name="password1"
         validate={value =>
-          value ? undefined : t('persist.loginToProfile.enterPasswordHere', 'Enter your password here')
+          value ? undefined : t('persist.loginToProfile.enterPasswordHere', 'Enter your password')
         }
-        required
         showTip={t('persist.loginToProfile.showPassword', 'Show password')}
         hideTip={t('persist.loginToProfile.hidePassword', 'Hide password')}
         width="medium"

@@ -1,17 +1,21 @@
 import { NetworkType } from 'app/state/network/types'
 
+export const TRANSACTIONS_LIMIT = 20
+
 export const consensusDecimals = 9
 
 // Moved outside backend.ts to avoid circular dependency
 export enum BackendAPIs {
   OasisMonitor = 'oasismonitor',
-  OasisScan = 'oasisscan',
+  OasisScanV2 = 'oasisscanV2',
+  Nexus = 'nexus',
 }
 
 type BackendApiUrls = {
   explorer: string
   blockExplorer: string
   blockExplorerParatimes?: string
+  blockExplorerAccount?: string
 }
 
 type BackendProviders = {
@@ -19,7 +23,8 @@ type BackendProviders = {
   ticker: string // from nic.stakingTokenSymbol()
   min_delegation: number // from nic.stakingConsensusParameters().min_delegation
   [BackendAPIs.OasisMonitor]: BackendApiUrls
-  [BackendAPIs.OasisScan]: BackendApiUrls
+  [BackendAPIs.OasisScanV2]: BackendApiUrls
+  [BackendAPIs.Nexus]: BackendApiUrls
 }
 
 type BackendConfig = {
@@ -28,32 +33,46 @@ type BackendConfig = {
 
 export const config: BackendConfig = {
   mainnet: {
-    grpc: 'https://grpc.oasis.dev',
+    grpc: 'https://grpc.oasis.io',
     ticker: 'ROSE',
     min_delegation: 100,
     [BackendAPIs.OasisMonitor]: {
       explorer: 'https://monitor.oasis.dev',
       blockExplorer: 'https://oasismonitor.com/operation/{{txHash}}',
     },
-    [BackendAPIs.OasisScan]: {
-      explorer: 'https://api.oasisscan.com/mainnet',
+    [BackendAPIs.OasisScanV2]: {
+      explorer: 'https://api.oasisscan.com/v2/mainnet',
       blockExplorer: 'https://oasisscan.com/transactions/{{txHash}}',
       blockExplorerParatimes: 'https://oasisscan.com/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'https://www.oasisscan.com/accounts/detail/{{address}}',
+    },
+    [BackendAPIs.Nexus]: {
+      explorer: 'https://nexus.oasis.io/v1',
+      blockExplorer: 'https://explorer.oasis.io/mainnet/consensus/tx/{{txHash}}',
+      blockExplorerParatimes: 'https://explorer.oasis.io/mainnet/{{runtimeId}}/tx/{{txHash}}',
+      blockExplorerAccount: 'https://explorer.oasis.io/mainnet/consensus/address/{{address}}',
     },
   },
   testnet: {
-    grpc: 'https://testnet.grpc.oasis.dev',
+    grpc: 'https://testnet.grpc.oasis.io',
     ticker: 'TEST',
     min_delegation: 100,
     [BackendAPIs.OasisMonitor]: {
       explorer: 'https://monitor.oasis.dev/api/testnet',
       blockExplorer: 'https://testnet.oasismonitor.com/operation/{{txHash}}',
     },
-    [BackendAPIs.OasisScan]: {
-      explorer: 'https://api.oasisscan.com/testnet',
+    [BackendAPIs.OasisScanV2]: {
+      explorer: 'https://api.oasisscan.com/v2/testnet',
       blockExplorer: 'https://testnet.oasisscan.com/transactions/{{txHash}}',
       blockExplorerParatimes:
         'https://testnet.oasisscan.com/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'https://testnet.oasisscan.com/accounts/detail/{{address}}',
+    },
+    [BackendAPIs.Nexus]: {
+      explorer: 'https://testnet.nexus.oasis.io/v1',
+      blockExplorer: 'https://explorer.oasis.io/testnet/consensus/tx/{{txHash}}',
+      blockExplorerParatimes: 'https://explorer.oasis.io/testnet/{{runtimeId}}/transactions/{{txHash}}',
+      blockExplorerAccount: 'https://explorer.oasis.io/testnet/consensus/address/{{address}}',
     },
   },
   local: {
@@ -64,11 +83,19 @@ export const config: BackendConfig = {
       explorer: 'http://localhost:9001',
       blockExplorer: 'http://localhost:9001/data/transactions?operation_id={{txHash}}',
     },
-    [BackendAPIs.OasisScan]: {
+    [BackendAPIs.OasisScanV2]: {
       explorer: 'http://localhost:9001',
       blockExplorer: 'http://localhost:9001/data/transactions?operation_id={{txHash}}',
       blockExplorerParatimes:
         'http://localhost:9001/data/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'http://localhost:9001/data/accounts/detail/{{address}}',
+    },
+    [BackendAPIs.Nexus]: {
+      explorer: 'http://localhost:9001',
+      blockExplorer: 'http://localhost:9001/data/transactions?operation_id={{txHash}}',
+      blockExplorerParatimes:
+        'http://localhost:9001/data/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'http://localhost:9001/data/accounts/detail/{{address}}',
     },
   },
 }
@@ -128,7 +155,7 @@ const cipherConfig: ParaTimeConfig = {
     runtimeId: undefined,
   },
   gasPrice: 5n,
-  feeGas: 500_000n,
+  feeGas: 5_000_000n,
   decimals: 9,
   displayOrder: 3,
   type: RuntimeTypes.Oasis,
@@ -171,7 +198,7 @@ export const paraTimesConfig: ParaTimesConfig = {
 }
 
 // https://github.com/mozilla/webextension-polyfill/blob/6e3e26c/src/browser-polyfill.js#L9
-export const runtimeIs = (window as any).chrome?.runtime?.id ? 'extension' : 'webapp'
+export const runtimeIs = (globalThis as any).chrome?.runtime?.id ? 'extension' : 'webapp'
 
 export const deploys = {
   production: 'https://wallet.oasis.io',

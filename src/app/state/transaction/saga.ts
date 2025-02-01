@@ -9,13 +9,14 @@ import { call, delay, put, race, select, take, takeEvery } from 'typed-redux-sag
 import { ErrorPayload, ExhaustedTypeError, WalletError, WalletErrors } from 'types/errors'
 import { transactionActions } from '.'
 import { sign } from '../importaccounts/saga'
-import { getOasisNic } from '../network/saga'
+import { getChainContext, getOasisNic } from '../network/saga'
 import { selectAccountAddress, selectAccountAllowances } from '../account/selectors'
-import { selectChainContext } from '../network/selectors'
+import { selectSelectedNetwork } from '../network/selectors'
 import { selectActiveWallet } from '../wallet/selectors'
 import { Wallet, WalletType } from '../wallet/types'
-import { TransactionPayload, TransactionStep } from './types'
+import { Transaction, TransactionPayload, TransactionStatus, TransactionStep, TransactionType } from './types'
 import { ParaTimeTransaction, Runtime, TransactionTypes } from '../paratimes/types'
+import { accountActions } from '../account'
 
 export function* transactionSaga() {
   yield* takeEvery(transactionActions.sendTransaction, doTransaction)
@@ -136,7 +137,8 @@ function* prepareReclaimEscrow(signer: Signer, shares: bigint, validator: string
 export function* doTransaction(action: PayloadAction<TransactionPayload>) {
   const wallet = yield* select(selectActiveWallet)
   const nic = yield* call(getOasisNic)
-  const chainContext = yield* select(selectChainContext)
+  const chainContext = yield* call(getChainContext)
+  const networkType = yield* select(selectSelectedNetwork)
 
   try {
     yield* setStep(TransactionStep.Building)
@@ -201,6 +203,42 @@ export function* doTransaction(action: PayloadAction<TransactionPayload>) {
 
     // Notify that the transaction was a success
     yield* put(transactionActions.transactionSent(action.payload))
+
+    const hash = yield* call([tw, tw.hash])
+
+    const transaction: Transaction = {
+      hash,
+      type: tw.transaction.method as TransactionType,
+      from: activeWallet.address,
+      amount: action.payload.amount,
+      to: undefined,
+      ...(action.payload.type === 'transfer'
+        ? {
+            to: action.payload.to,
+          }
+        : {}),
+      ...(action.payload.type === 'addEscrow'
+        ? {
+            to: action.payload.validator,
+          }
+        : {}),
+      ...(action.payload.type === 'reclaimEscrow'
+        ? {
+            to: action.payload.validator,
+          }
+        : {}),
+      status: TransactionStatus.Pending,
+      fee: undefined,
+      level: undefined,
+      round: undefined,
+      runtimeId: undefined,
+      runtimeName: undefined,
+      timestamp: undefined,
+      nonce: undefined,
+    }
+
+    // TODO: Handle ParaTime transactions in similar way
+    yield* put(accountActions.addPendingTransaction({ transaction, from: activeWallet.address, networkType }))
   } catch (e: any) {
     let payload: ErrorPayload
     if (e instanceof WalletError) {
@@ -244,7 +282,7 @@ export function* submitParaTimeTransaction(runtime: Runtime, transaction: ParaTi
     ? yield* call(getEvmBech32Address, privateToEthAddress(transaction.ethPrivateKey))
     : yield* select(selectAccountAddress)
   const nic = yield* call(getOasisNic)
-  const chainContext = yield* select(selectChainContext)
+  const chainContext = yield* call(getChainContext)
   const paraTimeTransactionSigner = transaction.ethPrivateKey
     ? yield* call(signerFromEthPrivateKey, misc.fromHex(transaction.ethPrivateKey))
     : yield* getSigner()
@@ -285,7 +323,7 @@ function assertValidAddress(address: string) {
 function* assertSufficientBalance(amount: bigint) {
   const wallet = yield* select(selectActiveWallet)
   // If balance is missing, allow this to pass. It's just more likely that transaction will fail after submitting.
-  if (wallet?.balance.available == null) return
+  if (wallet?.balance?.available == null) return
 
   const balance = BigInt(wallet.balance.available)
   if (amount > balance) {
