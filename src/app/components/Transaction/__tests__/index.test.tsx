@@ -11,14 +11,15 @@ import copy from 'copy-to-clipboard'
 
 import { Transaction } from '..'
 import * as transactionTypes from 'app/state/transaction/types'
+import { TransactionStatus } from 'app/state/transaction/types'
 import { NetworkType } from 'app/state/network/types'
-import type { UseTranslationResponse, Trans } from 'react-i18next'
+import type { Trans, UseTranslationResponse } from 'react-i18next'
 
 jest.mock('copy-to-clipboard')
 
 type TransType = typeof Trans
 jest.mock('react-i18next', () => ({
-  Trans: (({ i18nKey }) => <>{i18nKey}</>) as TransType,
+  Trans: (({ i18nKey }) => i18nKey) as TransType,
   useTranslation: () => {
     return {
       t: (str: string) => str,
@@ -57,12 +58,12 @@ describe('<Transaction  />', () => {
     to: 'destination',
     type: transactionTypes.TransactionType.StakingTransfer,
     hash: 'ff1234',
-    status: true,
+    status: TransactionStatus.Successful,
   } as transactionTypes.Transaction
   const network = 'mainnet'
 
   beforeEach(() => {
-    jest.mocked(backend).mockImplementation(() => BackendAPIs.OasisScan)
+    jest.mocked(backend).mockImplementation(() => BackendAPIs.Nexus)
     store = configureAppStore()
 
     when(useSelector as any)
@@ -86,7 +87,7 @@ describe('<Transaction  />', () => {
   })
 
   it('should mark failed transactions', () => {
-    renderComponent(store, ref, { ...transaction, status: false }, network)
+    renderComponent(store, ref, { ...transaction, status: TransactionStatus.Failed }, network)
     expect(screen.getByText('account.transaction.failed')).toBeInTheDocument()
   })
 
@@ -103,10 +104,11 @@ describe('<Transaction  />', () => {
         hash: 'ff1234',
         fee: undefined,
         level: undefined,
-        status: true,
+        status: TransactionStatus.Successful,
         runtimeName: undefined,
         runtimeId: undefined,
         round: undefined,
+        nonce: 0n.toString(),
       },
       network,
     )
@@ -126,10 +128,11 @@ describe('<Transaction  />', () => {
         hash: 'ff1234',
         fee: undefined,
         level: undefined,
-        status: true,
+        status: TransactionStatus.Successful,
         runtimeName: undefined,
         runtimeId: undefined,
         round: undefined,
+        nonce: 0n.toString(),
       },
       network,
     )
@@ -142,7 +145,7 @@ describe('<Transaction  />', () => {
     renderComponent(store, ref, transaction, 'testnet')
     expect(screen.getByTestId('explorer-link')).toHaveAttribute(
       'href',
-      'https://testnet.oasisscan.com/transactions/ff1234',
+      'https://explorer.oasis.io/testnet/consensus/tx/ff1234',
     )
   })
 
@@ -184,7 +187,7 @@ describe('<Transaction  />', () => {
     expect(screen.queryByText('common.block')).not.toBeInTheDocument()
     expect(screen.getByTestId('explorer-link')).toHaveAttribute(
       'href',
-      `https://oasisscan.com/paratimes/transactions/ff1234?runtime=${runtimeId}`,
+      `https://explorer.oasis.io/mainnet/${runtimeId}/tx/ff1234`,
     )
     expect(screen.getByLabelText('Inherit')).toHaveStyleRule('stroke', '#FFCA58')
   })

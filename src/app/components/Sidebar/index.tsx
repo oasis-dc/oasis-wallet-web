@@ -1,5 +1,4 @@
 import { selectAddress, selectHasAccounts } from 'app/state/wallet/selectors'
-import { Avatar } from 'grommet/es6/components/Avatar'
 import { Box } from 'grommet/es6/components/Box'
 import { Button } from 'grommet/es6/components/Button'
 import { Layer } from 'grommet/es6/components/Layer'
@@ -8,16 +7,16 @@ import { Nav } from 'grommet/es6/components/Nav'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
 import { Sidebar as GSidebar } from 'grommet/es6/components/Sidebar'
 import { Text } from 'grommet/es6/components/Text'
-import { Tip } from 'grommet/es6/components/Tip'
+import { normalizeColor } from 'grommet/es6/utils'
 import { Github } from 'grommet-icons/es6/icons/Github'
 import { FormDown } from 'grommet-icons/es6/icons/FormDown'
 import { Home } from 'grommet-icons/es6/icons/Home'
 import { Inherit } from 'grommet-icons/es6/icons/Inherit'
 import { LineChart } from 'grommet-icons/es6/icons/LineChart'
-import { Lock } from 'grommet-icons/es6/icons/Lock'
+import { MuiLockIcon } from '../../../styles/theme/icons/mui-icons/MuiLockIcon'
 import { Logout } from 'grommet-icons/es6/icons/Logout'
 import { Menu as MenuIcon } from 'grommet-icons/es6/icons/Menu'
-import { Money } from 'grommet-icons/es6/icons/Money'
+import { MuiWalletIcon } from '../../../styles/theme/icons/mui-icons/MuiWalletIcon'
 import { CreditCard } from 'grommet-icons/es6/icons/CreditCard'
 import * as React from 'react'
 import { useContext } from 'react'
@@ -27,7 +26,8 @@ import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { Language } from '../../../styles/theme/icons/language/Language'
 import { useParaTimesNavigation } from 'app/pages/ParaTimesPage/useParaTimesNavigation'
 import { ThemeSwitcher } from '../ThemeSwitcher'
-import logotype from '../../../../public/logo192.png'
+import walletBlueLogotype from '../../../../public/Rose Wallet Blue.svg'
+import walletWhiteLogotype from '../../../../public/Rose Wallet White.svg'
 import { languageLabels } from '../../../locales/i18n'
 import { selectIsLockableOrCloseable } from 'app/state/selectIsLockableOrCloseable'
 import { persistActions } from 'app/state/persist'
@@ -35,28 +35,12 @@ import { IS_FIAT_ONRAMP_ENABLED } from '../../pages/FiatOnrampPage/isEnabled'
 import {
   sidebarSmallSizeLogo,
   sidebarMediumSizeLogo,
+  sidebarLargeSizeLogo,
   mobileToolbarZIndex,
 } from '../../../styles/theme/elementSizes'
-
-const SidebarTooltip = (props: { children: React.ReactNode; isActive: boolean; label: string }) => {
-  const size = useContext(ResponsiveContext)
-  const isMediumSize = size === 'medium'
-  const tooltip = (
-    <Box
-      pad={{ vertical: 'small', right: 'medium' }}
-      margin="none"
-      background={props.isActive ? 'background-oasis-blue' : 'component-sidebar'}
-      round={{ size: 'medium', corner: 'right' }}
-    >
-      {props.label}
-    </Box>
-  )
-  return (
-    <Tip content={isMediumSize ? tooltip : undefined} dropProps={{ align: { left: 'right' } }} plain={true}>
-      {props.children}
-    </Tip>
-  )
-}
+import styled, { ThemeContext } from 'styled-components'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { MobileFooterNavigation } from '../MobileFooterNavigation'
 
 interface SidebarButtonBaseProps {
   needsWalletOpen?: boolean
@@ -66,28 +50,26 @@ interface SidebarButtonBaseProps {
 
 type SidebarButtonProps = SidebarButtonBaseProps &
   (
-    | { route: string; newTab?: boolean; onClick?: undefined }
+    | { route: string; exactActive?: boolean; newTab?: boolean; onClick?: undefined }
     | {
         route?: undefined
+        exactActive?: undefined
         newTab?: undefined
         onClick: React.MouseEventHandler<HTMLButtonElement> & React.MouseEventHandler<HTMLAnchorElement>
       }
   )
 
-export const SidebarButton = ({
+const UnstyledSidebarButton = ({
   needsWalletOpen,
   icon,
   label,
   route,
   newTab,
+  exactActive,
   onClick,
   ...rest
 }: SidebarButtonProps) => {
   const walletHasAccounts = useSelector(selectHasAccounts)
-  const size = useContext(ResponsiveContext)
-  const location = useLocation()
-  const isActive = route ? route === location.pathname : false
-  const isMediumSize = size === 'medium'
 
   if (!walletHasAccounts && needsWalletOpen) {
     return null
@@ -95,16 +77,14 @@ export const SidebarButton = ({
 
   const component = (
     <Box
-      pad={{ vertical: 'small', left: isMediumSize ? 'none' : 'medium' }}
-      background={isActive ? 'background-oasis-blue' : undefined}
+      pad={{ vertical: 'small', left: 'medium' }}
       responsive={false}
       direction="row"
       gap="medium"
-      justify={isMediumSize ? 'center' : 'start'}
+      justify="start"
     >
-      {/* eslint-disable-next-line no-restricted-syntax -- icon is not a plain text node */}
       {icon}
-      {!isMediumSize && <Text>{label}</Text>}
+      <Text>{label}</Text>
     </Box>
   )
 
@@ -115,29 +95,34 @@ export const SidebarButton = ({
       throw new Error('Must use newTab with absolute URLs. React-router Link component uses relative routes.')
     }
 
-    return (
-      <SidebarTooltip label={label} isActive={isActive}>
-        {newTab ? (
-          <a aria-label={label} href={route} target="_blank" rel="noopener" {...rest}>
-            {component}
-          </a>
-        ) : (
-          <NavLink aria-label={label} to={route} {...rest}>
-            {component}
-          </NavLink>
-        )}
-      </SidebarTooltip>
+    return newTab ? (
+      <a aria-label={label} href={route} target="_blank" rel="noopener" {...rest}>
+        {component}
+      </a>
+    ) : (
+      <NavLink aria-label={label} to={route} end={exactActive} {...rest}>
+        {component}
+      </NavLink>
     )
   } else {
     return (
-      <SidebarTooltip label={label} isActive={isActive}>
-        <Button a11yTitle={label} fill="horizontal" onClick={onClick} {...rest}>
-          {component}
-        </Button>
-      </SidebarTooltip>
+      <Button a11yTitle={label} fill="horizontal" onClick={onClick} {...rest}>
+        {component}
+      </Button>
     )
   }
 }
+export const SidebarButton = styled(UnstyledSidebarButton)`
+  &:hover {
+    color: ${({ theme }) => normalizeColor('text', theme)};
+    background-color: ${({ theme }) => normalizeColor('active', theme)};
+  }
+
+  &.active {
+    color: ${({ theme }) => normalizeColor('text', theme, true)};
+    background-color: ${({ theme }) => normalizeColor('control', theme)};
+  }
+`
 
 type Size = 'small' | 'medium' | 'large'
 
@@ -150,25 +135,28 @@ interface SidebarFooterProps {
 }
 
 const SidebarHeader = (props: SidebarHeaderProps) => {
+  const { dark } = useContext<any>(ThemeContext)
+
   const size = props.size
   const sizeLogo = {
     small: `${sidebarSmallSizeLogo}px`,
     medium: `${sidebarMediumSizeLogo}px`,
-    large: 'medium',
+    large: `${sidebarLargeSizeLogo}px`,
   }
 
   return (
     <Box
       align="center"
       margin={{ bottom: size !== 'small' ? 'medium' : undefined }}
-      pad="medium"
+      pad={{ horizontal: 'medium', vertical: 'small' }}
       alignSelf={size === 'large' ? undefined : 'center'}
     >
       <Link to="/">
-        <Box align="center" direction="row" gap="small">
-          <Avatar src={logotype} size={sizeLogo[size]} />
-          {size !== 'medium' && <Text>Oasis Wallet</Text>}
-        </Box>
+        <img
+          alt="ROSE Wallet logo"
+          src={dark ? walletWhiteLogotype : walletBlueLogotype}
+          style={{ height: sizeLogo[size] }}
+        />
       </Link>
     </Box>
   )
@@ -212,69 +200,78 @@ const SidebarFooter = (props: SidebarFooterProps) => {
       )}
       {isLockableOrCloseable === 'lockable' && (
         <SidebarButton
-          icon={<Lock />}
+          icon={<MuiLockIcon />}
           label={t('menu.lockProfile', 'Lock profile')}
           onClick={() => lockProfile()}
         />
       )}
 
       {size === 'small' && (
-        <SidebarTooltip label="Language" isActive={false}>
-          <Box pad="small" align="start">
-            <Menu
-              hoverIndicator={false}
-              dropProps={{ align: { bottom: 'bottom', left: 'left' } }}
-              items={languageLabels.map(([key, label]) => ({
-                label: label,
-                onClick: () => setLanguage(key),
-              }))}
-              a11yTitle="Language"
-            >
-              <Box direction="row">
-                <Box pad="small">
-                  <Language />
-                </Box>
-                <Box pad="small" flex="grow">
-                  {/* Intentionally not translated */}
-                  <Text>Language</Text>
-                </Box>
-                <Box pad="small">
-                  <FormDown />
-                </Box>
+        <Box pad="small" align="start">
+          <Menu
+            hoverIndicator={false}
+            dropProps={{ align: { bottom: 'bottom', left: 'left' } }}
+            items={languageLabels.map(([key, label]) => ({
+              label: label,
+              onClick: () => setLanguage(key),
+              primary: key === i18n.resolvedLanguage,
+            }))}
+            a11yTitle="Language"
+          >
+            <Box direction="row">
+              <Box pad="small">
+                <Language />
               </Box>
-            </Menu>
-          </Box>
-        </SidebarTooltip>
+              <Box pad="small" flex="grow">
+                {/* Intentionally not translated */}
+                <Text>Language</Text>
+              </Box>
+              <Box pad="small">
+                <FormDown />
+              </Box>
+            </Box>
+          </Menu>
+        </Box>
       )}
       <SidebarButton
         icon={<Github />}
         label="GitHub"
-        route="https://github.com/oasisprotocol/oasis-wallet-web"
+        route="https://github.com/oasisprotocol/wallet"
         newTab
       ></SidebarButton>
     </Nav>
   )
 }
 
+/** See also {@link MobileFooterNavigation} */
 function SidebarMenuItems() {
   const address = useSelector(selectAddress)
   const { t } = useTranslation()
   const { getParaTimesRoutePath, paraTimesRouteLabel } = useParaTimesNavigation()
   const menu = {
-    home: <SidebarButton icon={<Home />} label={t('menu.home', 'Home')} route="/" data-testid="nav-home" />,
+    home: (
+      <SidebarButton
+        icon={<Home />}
+        label={t('menu.home', 'Home')}
+        route="/"
+        exactActive
+        data-testid="nav-home"
+      />
+    ),
     wallet: (
       <SidebarButton
-        icon={<Money />}
-        label={t('menu.wallet', 'Wallet')}
+        icon={<MuiWalletIcon />}
+        label={t('menu.wallet', 'Account')}
         needsWalletOpen={true}
         route={`/account/${address}`}
+        exactActive
         data-testid="nav-myaccount"
       />
     ),
     stake: (
       <SidebarButton
         icon={<LineChart />}
-        label={t('menu.stake', 'Stake')}
+        label={t('menu.stake', 'Stake ROSE')}
         needsWalletOpen={true}
         route={`/account/${address}/stake`}
         data-testid="nav-stake"
@@ -292,7 +289,7 @@ function SidebarMenuItems() {
     fiatOnramp: (
       <SidebarButton
         icon={<CreditCard />}
-        label={t('menu.fiatOnramp', 'Buy')}
+        label={t('menu.fiatOnramp', 'Buy ROSE')}
         needsWalletOpen={true}
         route={`/account/${address}/fiat`}
       />
@@ -321,7 +318,7 @@ export function Sidebar() {
       footer={<SidebarFooter size={size} />}
       pad={{ left: 'none', right: 'none', vertical: 'medium' }}
       gap="small"
-      width={size === 'medium' ? undefined : '220px'}
+      width="220px"
     >
       <SidebarMenuItems />
     </GSidebar>

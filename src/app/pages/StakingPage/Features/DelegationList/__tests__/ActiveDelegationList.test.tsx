@@ -6,12 +6,15 @@ import { ActiveDelegationList } from '../ActiveDelegationList'
 import { configureAppStore } from 'store/configureStore'
 import { stakingActions } from 'app/state/staking'
 import { ThemeProvider } from '../../../../../../styles/theme/ThemeProvider'
+import { MemoryRouter } from 'react-router-dom'
 
 const renderComponent = (store: any) =>
   render(
     <Provider store={store}>
       <ThemeProvider>
-        <ActiveDelegationList />
+        <MemoryRouter>
+          <ActiveDelegationList />
+        </MemoryRouter>
       </ThemeProvider>
     </Provider>,
   )
@@ -24,7 +27,7 @@ describe('<ActiveDelegationList  />', () => {
   })
 
   it('should match snapshot', () => {
-    const component = renderComponent(store)
+    renderComponent(store)
     act(() => {
       store.dispatch(
         stakingActions.updateDelegations({
@@ -39,7 +42,6 @@ describe('<ActiveDelegationList  />', () => {
                 rank: 1,
                 status: 'active',
                 name: 'test-validator',
-                nodeAddress: 'oasis1qq7pgk9v8l3hu2aenjtflezy5vajc2cz3y4d96rj',
                 escrow: 1000n.toString(),
               },
             },
@@ -49,7 +51,7 @@ describe('<ActiveDelegationList  />', () => {
       )
     })
 
-    expect(component.baseElement).toMatchSnapshot()
+    expect(screen.getByTestId('active-delegations')).toMatchSnapshot()
 
     expect(screen.getByText('7%')).toBeInTheDocument()
     expect(screen.queryByText('7.000000000000001%')).not.toBeInTheDocument()
@@ -70,7 +72,6 @@ describe('<ActiveDelegationList  />', () => {
                 rank: 1,
                 status: 'active',
                 name: 'test-validator1',
-                nodeAddress: 'oasis1qq7pgk9v8l3hu2aenjtflezy5vajc2cz3y4d96rj',
                 escrow: 1000n.toString(),
               },
             },

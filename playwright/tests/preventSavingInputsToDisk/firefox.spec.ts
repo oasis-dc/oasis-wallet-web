@@ -13,7 +13,7 @@ const test = testWithUserDataDir(firefox)
 
 test.beforeEach(async ({ context }) => {
   await warnSlowApi(context)
-  await mockApi(context, 0)
+  await mockApi(context, '0')
 })
 
 test('Firefox expect mnemonic, privateKey, and password to NOT leak with preventSavingInputsToUserData', async ({
@@ -23,19 +23,19 @@ test('Firefox expect mnemonic, privateKey, and password to NOT leak with prevent
 }) => {
   await test.step('fill sensitive inputs (visibility pre-toggled)', async () => {
     await page.goto('/open-wallet/mnemonic')
-    await page.getByPlaceholder('Enter your keyphrase here').fill(mnemonic)
+    await page.getByPlaceholder('Enter your mnemonic here').fill(mnemonic)
     // Do not submit form.
 
     const tab2 = await context.newPage()
     await tab2.goto('/open-wallet/private-key')
-    await tab2.getByText('Store private keys locally, protected by a password').check()
+    await tab2.getByText('Create a profile').check()
     await tab2.getByRole('button', { name: /Show private key/ }).click()
     await tab2.getByRole('button', { name: 'Show password' }).nth(1).click()
     await tab2.getByRole('button', { name: 'Show password' }).nth(0).click()
 
     await tab2.getByPlaceholder('Enter your private key here').fill(privateKey)
-    await tab2.getByPlaceholder('Enter your password here').fill(password)
-    await tab2.getByPlaceholder('Re-enter your password').fill(password)
+    await tab2.getByPlaceholder('Enter your password', { exact: true }).fill(password)
+    await tab2.getByPlaceholder('Confirm your password').fill(password)
     // Do not submit form.
   })
 

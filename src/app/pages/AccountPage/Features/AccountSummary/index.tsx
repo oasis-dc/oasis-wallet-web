@@ -4,7 +4,6 @@ import { AlertBox } from 'app/components/AlertBox'
 import { AmountFormatter } from 'app/components/AmountFormatter'
 import { AnchorLink } from 'app/components/AnchorLink'
 import { Box } from 'grommet/es6/components/Box'
-import { Text } from 'grommet/es6/components/Text'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
 import { QRCodeCanvas } from 'qrcode.react'
 import { useContext, useState } from 'react'
@@ -48,12 +47,6 @@ const StyledDescriptionList = styled.dl`
       :not(:last-of-type) {
         margin-bottom: ${({ theme }) => theme.global?.edgeSize?.xsmall};
       }
-
-      :first-of-type {
-        font-size: ${({ theme }) => theme.text?.large?.size};
-        line-height: ${({ theme }) => theme.text?.large?.height};
-        margin-bottom: ${({ theme }) => theme.global?.edgeSize?.small};
-      }
     }
   }
 
@@ -73,12 +66,6 @@ const StyledDescriptionList = styled.dl`
 
       :not(:last-of-type) {
         margin-bottom: ${({ theme }) => theme.global?.edgeSize?.xxsmall};
-      }
-
-      :first-of-type {
-        font-size: ${({ theme }) => theme.text?.medium?.size};
-        line-height: ${({ theme }) => theme.text?.medium?.height};
-        margin-bottom: ${({ theme }) => theme.global?.edgeSize?.xsmall};
       }
     }
   }
@@ -116,16 +103,13 @@ export function AccountSummary({
   return (
     <>
       <Box margin={{ bottom: 'small' }}>
-        {walletHasAccounts && wallet?.address === address && (
-          <AlertBox status="ok-weak">{t('account.summary.yourAccount', 'This is your account.')}</AlertBox>
-        )}
-        {walletHasAccounts && wallet?.address !== address && (
-          <AlertBox status="warning">
+        {(!walletHasAccounts || wallet?.address !== address) && (
+          <AlertBox status="error">
             {t('account.summary.notYourAccount', 'This is not your account.')}
           </AlertBox>
         )}
         {!walletHasAccounts && (
-          <AlertBox status="warning">
+          <AlertBox status="error">
             <Trans
               i18nKey="account.summary.noWalletIsOpen"
               t={t}
@@ -143,7 +127,7 @@ export function AccountSummary({
       >
         <Box pad="small" direction="row-responsive" flex justify="between">
           <Box width={{ max: isMobile ? '100%' : '75%' }}>
-            {!canEditName && <AddressBox address={address} separator />}
+            {!canEditName && <AddressBox address={address} separator trimMobile />}
             {canEditName && !wallet?.name && (
               <EditableAddressBox address={address} openEditModal={() => setLayerVisibility(true)} />
             )}
@@ -155,11 +139,7 @@ export function AccountSummary({
               />
             )}
             <StyledDescriptionList data-testid="account-balance-summary">
-              <dt>
-                <Text size={isMobile ? 'medium' : 'large'}>
-                  {t('account.summary.balance.total', 'Total')}
-                </Text>
-              </dt>
+              <dt>{t('account.summary.balance.total', 'Total')}</dt>
               <dd data-testid="account-balance-total">
                 <AmountFormatter amount={balance.total} smallTicker={true} />
               </dd>

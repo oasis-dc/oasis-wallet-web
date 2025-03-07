@@ -16,7 +16,7 @@ Make a release:
 
 Staging:
 
-- download <https://github.com/oasisprotocol/oasis-wallet-web/releases>
+- download <https://github.com/oasisprotocol/wallet/releases>
 - deploy to <https://wallet.stg.oasis.io/>
 
 Production:
@@ -29,7 +29,7 @@ Production:
 
 ### Deploy
 
-<https://github.com/oasisprotocol/oasis-wallet-web/wiki/Deployment-on-AWS>.
+<https://github.com/oasisprotocol/wallet/wiki/Deployment-on-AWS>.
 
 Verify deployed version by opening the page in
 incognito (no cache) - it is displayed in the footer.
@@ -44,7 +44,7 @@ Verify security headers were updated:
   ```
 
 - Compare to Content-Security-Policy.txt and Permissions-Policy.txt in
-  <https://github.com/oasisprotocol/oasis-wallet-web/releases>
+  <https://github.com/oasisprotocol/wallet/releases>
 
 ## TODO: Extension wallet
 
@@ -60,7 +60,7 @@ VERSION=`cat extension/src/manifest.json | jq .version -r`
 COMMIT=`git rev-parse --short HEAD`
 yarn install --frozen-lockfile
 yarn build:ext
-zip -r oasis-wallet-$VERSION-$COMMIT.zip build-ext/
+zip -r rose-wallet-$VERSION-$COMMIT.zip build-ext/
 ```
 
 - GitHub pre-release with zip file

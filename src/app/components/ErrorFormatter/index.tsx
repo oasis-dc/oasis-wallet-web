@@ -21,7 +21,8 @@ export function ErrorFormatter(props: Props) {
 
   const backendToLabel = {
     [BackendAPIs.OasisMonitor]: t('backends.oasismonitor', 'Oasis Monitor API'),
-    [BackendAPIs.OasisScan]: t('backends.oasisscan', 'Oasis Scan API'),
+    [BackendAPIs.OasisScanV2]: t('backends.oasisscanV2', 'Oasis Scan API v2'),
+    [BackendAPIs.Nexus]: t('backends.nexus', 'Nexus API'),
   }
 
   const errorMap: { [code in WalletErrors]: string | React.ReactElement } = {
@@ -36,7 +37,7 @@ export function ErrorFormatter(props: Props) {
     [WalletErrors.NoOpenWallet]: t('errors.noOpenWallet', 'No wallet opened'),
     [WalletErrors.USBTransportNotSupported]: t(
       'errors.usbTransportNotSupported',
-      'Your browser does not support WebUSB (e.g. Firefox). Try using Chrome.',
+      'Current platform does not support WebUSB capability. Try on different platform or browser (preferably Chrome).',
     ),
     [WalletErrors.USBTransportError]: t('errors.usbTransportError', 'USB Transport error: {{message}}.', {
       message,
@@ -57,13 +58,19 @@ export function ErrorFormatter(props: Props) {
         components={{
           LedgerHelp: (
             <Anchor
-              href="https://support.ledger.com/hc/en-us/articles/115005165269-Fix-USB-connection-issues-with-Ledger-Live?support=true"
+              href="https://support.ledger.com/article/115005165269-zd"
               target="_blank"
               rel="noopener"
+              style={{ display: 'inline' }}
             />
           ),
           ChromeHelp: (
-            <Anchor href="https://support.google.com/chrome/answer/114662" target="_blank" rel="noopener" />
+            <Anchor
+              href="https://support.google.com/chrome/answer/114662"
+              target="_blank"
+              rel="noopener"
+              style={{ display: 'inline' }}
+            />
           ),
         }}
       />
@@ -100,10 +107,10 @@ export function ErrorFormatter(props: Props) {
     ),
     [WalletErrors.BluetoothTransportNotSupported]: t(
       'errors.bluetoothTransportNotSupported',
-      'Your device does not support Bluetooth.',
+      'Bluetooth may be turned off or your current platform does not support Bluetooth capability.',
     ),
   }
 
   const error = errorMap[props.code]
-  return <>{error}</>
+  return <span>{error}</span>
 }

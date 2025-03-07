@@ -8,8 +8,8 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   flex: 0 0 auto;
   width: 18px;
   height: 18px;
-  fill: #666666;
-  stroke: #666666;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
 .c9 g {
@@ -21,22 +21,24 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   stroke-width: 0;
 }
 
-.c9 *[stroke*='#'],.c9 *[STROKE*='#'] {
+.c9 *[stroke*='#'],
+.c9 *[STROKE*='#'] {
   stroke: inherit;
   fill: none;
 }
 
 .c9 *[fill-rule],
 .c9 *[FILL-RULE],
-.c9 *[fill*='#'],.c9 *[FILL*='#'] {
+.c9 *[fill*='#'],
+.c9 *[FILL*='#'] {
   fill: inherit;
   stroke: none;
 }
 
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -165,11 +167,11 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 6px;
+  margin-right: 6px;
   margin-top: 3px;
   margin-bottom: 3px;
-  border-bottom: solid 2px #0092f6;
+  border-bottom: solid 2px #0500e2;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: column;
@@ -253,9 +255,9 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 }
 
 .c17 {
-  font-size: 18px;
-  line-height: 24px;
-  color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  color: #0500e2;
 }
 
 .c8 {
@@ -280,7 +282,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 
 .c8:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c8:focus > circle,
@@ -291,7 +293,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 .c8:focus > polyline,
 .c8:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c8:focus::-moz-focus-inner {
@@ -303,9 +305,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c8:focus:not(:focus-visible) > circle,.c8:focus:not(:focus-visible) > ellipse,
-.c8:focus:not(:focus-visible) > line,.c8:focus:not(:focus-visible) > path,
-.c8:focus:not(:focus-visible) > polygon,.c8:focus:not(:focus-visible) > polyline,
+.c8:focus:not(:focus-visible) > circle,
+.c8:focus:not(:focus-visible) > ellipse,
+.c8:focus:not(:focus-visible) > line,
+.c8:focus:not(:focus-visible) > path,
+.c8:focus:not(:focus-visible) > polygon,
+.c8:focus:not(:focus-visible) > polyline,
 .c8:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -335,7 +340,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 
 .c14:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c14:focus > circle,
@@ -346,7 +351,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 .c14:focus > polyline,
 .c14:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c14:focus::-moz-focus-inner {
@@ -358,9 +363,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c14:focus:not(:focus-visible) > circle,.c14:focus:not(:focus-visible) > ellipse,
-.c14:focus:not(:focus-visible) > line,.c14:focus:not(:focus-visible) > path,
-.c14:focus:not(:focus-visible) > polygon,.c14:focus:not(:focus-visible) > polyline,
+.c14:focus:not(:focus-visible) > circle,
+.c14:focus:not(:focus-visible) > ellipse,
+.c14:focus:not(:focus-visible) > line,
+.c14:focus:not(:focus-visible) > path,
+.c14:focus:not(:focus-visible) > polygon,
+.c14:focus:not(:focus-visible) > polyline,
 .c14:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -381,12 +389,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
   transition-property: color,background-color,border-color,box-shadow;
   -webkit-transition-duration: 0.1s;
@@ -397,12 +405,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 }
 
 .c26:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c26:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c26:focus > circle,
@@ -413,7 +421,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 .c26:focus > polyline,
 .c26:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c26:focus::-moz-focus-inner {
@@ -425,9 +433,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c26:focus:not(:focus-visible) > circle,.c26:focus:not(:focus-visible) > ellipse,
-.c26:focus:not(:focus-visible) > line,.c26:focus:not(:focus-visible) > path,
-.c26:focus:not(:focus-visible) > polygon,.c26:focus:not(:focus-visible) > polyline,
+.c26:focus:not(:focus-visible) > circle,
+.c26:focus:not(:focus-visible) > ellipse,
+.c26:focus:not(:focus-visible) > line,
+.c26:focus:not(:focus-visible) > path,
+.c26:focus:not(:focus-visible) > polygon,
+.c26:focus:not(:focus-visible) > polyline,
 .c26:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -448,13 +459,13 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #0500e2;
   color: #F8F8F8;
   border-radius: 4px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
@@ -467,12 +478,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 }
 
 .c27:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c27:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c27:focus > circle,
@@ -483,7 +494,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 .c27:focus > polyline,
 .c27:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c27:focus::-moz-focus-inner {
@@ -495,9 +506,12 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c27:focus:not(:focus-visible) > circle,.c27:focus:not(:focus-visible) > ellipse,
-.c27:focus:not(:focus-visible) > line,.c27:focus:not(:focus-visible) > path,
-.c27:focus:not(:focus-visible) > polygon,.c27:focus:not(:focus-visible) > polyline,
+.c27:focus:not(:focus-visible) > circle,
+.c27:focus:not(:focus-visible) > ellipse,
+.c27:focus:not(:focus-visible) > line,
+.c27:focus:not(:focus-visible) > path,
+.c27:focus:not(:focus-visible) > polygon,
+.c27:focus:not(:focus-visible) > polyline,
 .c27:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -537,10 +551,20 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   flex-grow: 1;
 }
 
+.c11 > [role='tablist'] > button {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.c11 > [role='tablist'] > button svg {
+  width: 14px;
+  margin-top: -5px;
+}
+
 .c16 {
   white-space: nowrap;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 6px;
+  margin-right: 6px;
   margin-top: 3px;
   margin-bottom: 3px;
 }
@@ -562,7 +586,10 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   background: transparent;
   color: inherit;
   width: 100%;
-  padding: 11px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-weight: 600;
   margin: 0;
   border: 1px solid rgba(0,0,0,0.33);
@@ -597,6 +624,22 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   opacity: 1;
 }
 
+.c23::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.c23::-moz-placeholder {
+  font-size: 14px;
+}
+
+.c23:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.c23::placeholder {
+  font-size: 14px;
+}
+
 .c22 {
   position: relative;
   width: 100%;
@@ -611,7 +654,10 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   background: transparent;
   color: inherit;
   width: 100%;
-  padding: 11px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-weight: 600;
   margin: 0;
   border: 1px solid rgba(0,0,0,0.33);
@@ -649,10 +695,26 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   opacity: 1;
 }
 
+.c24::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.c24::-moz-placeholder {
+  font-size: 14px;
+}
+
+.c24:-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.c24::placeholder {
+  font-size: 14px;
+}
+
 .c1 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -716,6 +778,10 @@ exports[`<AddContact  /> should match snapshot 1`] = `
   position: absolute;
 }
 
+.c4:focus {
+  outline: none;
+}
+
 @media only screen and (max-width:768px) {
   .c6 {
     margin-left: 12px;
@@ -737,8 +803,8 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c15 {
-    margin-left: 6px;
-    margin-right: 6px;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 }
 
@@ -751,7 +817,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c15 {
-    border-bottom: solid 2px #0092f6;
+    border-bottom: solid 2px #0500e2;
   }
 }
 
@@ -840,7 +906,7 @@ exports[`<AddContact  /> should match snapshot 1`] = `
         <div
           class="c3 fix-responsive-layer"
           data-g-portal-id="0"
-          style="overflow-y: auto; width: 100%; max-width: none; min-height: min(550px, 90dvh);"
+          style="overflow-y: auto; width: 100%; max-width: none; min-height: min(600px, 90dvh);"
         >
           <a
             aria-hidden="true"

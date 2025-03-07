@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { ParaTimeContent } from '../ParaTimeContent'
 import { ParaTimeFormFooter } from '../ParaTimeFormFooter'
 import { useParaTimes } from '../useParaTimes'
+import { getParaTimeName } from '../getParaTimeName'
 import { useParaTimesNavigation } from '../useParaTimesNavigation'
 import { ThemeContext } from 'styled-components'
 import { ThemeType } from 'grommet/es6/themes'
@@ -41,7 +42,7 @@ export const ParaTimeSelection = () => {
   } = useParaTimes()
   const { navigateToRecipient } = useParaTimesNavigation()
   const options = availableParaTimesForSelectedNetwork.map(item => ({
-    label: <ParaTimeOption label={t(`paraTimes.common.${item.value}`)} isEvm={item.isEvm} />,
+    label: <ParaTimeOption label={getParaTimeName(t, item.value)} isEvm={item.isEvm} />,
     value: item.value,
   }))
 
@@ -73,7 +74,7 @@ export const ParaTimeSelection = () => {
         onSubmit={navigateToRecipient}
         value={transactionForm}
       >
-        <Box style={{ maxWidth: '300px' }}>
+        <Box style={{ maxWidth: 'min(100%, 300px)', margin: '0 auto' }}>
           <Box margin={{ bottom: 'medium' }}>
             <FormField name="paraTime" required>
               <Select

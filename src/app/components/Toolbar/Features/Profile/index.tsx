@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
 import { Box } from 'grommet/es6/components/Box'
 import { Button } from 'grommet/es6/components/Button'
-import { Text } from 'grommet/es6/components/Text'
 import { User } from 'grommet-icons/es6/icons/User'
 import { selectUnlockedStatus } from 'app/state/selectUnlockedStatus'
 import { UpdatePassword } from './UpdatePassword'
 import { DeleteProfileButton } from '../../../Persist/DeleteProfileButton'
-import { Lock } from 'grommet-icons/es6/icons/Lock'
+import { MuiLockIcon } from '../../../../../styles/theme/icons/mui-icons/MuiLockIcon'
 import { Logout } from 'grommet-icons/es6/icons/Logout'
 import { selectIsLockableOrCloseable } from 'app/state/selectIsLockableOrCloseable'
 import { persistActions } from 'app/state/persist'
@@ -20,7 +19,7 @@ type ProfileEmptyStateProps = {
 
 const ProfileEmptyState = ({ children }: ProfileEmptyStateProps) => (
   <Box gap="medium" align="center" pad={{ top: 'large' }}>
-    <User size="36px" color="currentColor" />
+    <User size="36px" />
     <Box pad="large">{children}</Box>
   </Box>
 )
@@ -70,17 +69,10 @@ export const Profile = ({ closeHandler }: ProfileProps) => {
           </ProfileEmptyState>
         )}
 
-        {isProfileAvailable && (
-          <>
-            <UpdatePassword />
-            <Box gap="small" margin={{ top: 'medium' }} alignSelf="start">
-              <Text>{t('toolbar.profile.deletion', 'Deletion')}</Text>
-              <DeleteProfileButton prominent />
-            </Box>
-          </>
-        )}
+        {isProfileAvailable && <UpdatePassword />}
       </Box>
-      <Box align="end" margin={{ top: 'large' }}>
+      <Box direction="row" justify="between" gap="medium" margin={{ top: '40px' }}>
+        {isProfileAvailable ? <DeleteProfileButton prominent variant="voluntary" /> : <span />}
         {isLockableOrCloseable === 'closeable' && (
           <Button
             data-testid="profile-modal-close-wallet"
@@ -92,7 +84,7 @@ export const Profile = ({ closeHandler }: ProfileProps) => {
         {isLockableOrCloseable === 'lockable' && (
           <Button
             data-testid="profile-modal-lock-wallet"
-            icon={<Lock />}
+            icon={<MuiLockIcon />}
             label={t('menu.lockProfile', 'Lock profile')}
             onClick={() => lockProfile()}
           />

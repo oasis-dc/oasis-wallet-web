@@ -49,6 +49,12 @@ export const privateKeyUnlockedState = {
     transactions: [],
     transactionsError: undefined,
     loading: false,
+    pendingTransactions: {
+      local: [],
+      testnet: [],
+      mainnet: [],
+    },
+    nonce: '1',
   },
   contacts: {},
   evmAccounts: {},
@@ -65,9 +71,9 @@ export const privateKeyUnlockedState = {
   },
   network: {
     ticker: 'ROSE',
-    chainContext: 'b11b369e0da5bb230b220127f5e7b242d385ef8c6f54906243f30af63c815535',
+    chainContext: '',
     selectedNetwork: 'mainnet',
-    epoch: 18372,
+    epoch: 0,
     minimumStakingAmount: 100,
   },
   paraTimes: {
@@ -80,6 +86,7 @@ export const privateKeyUnlockedState = {
       confirmTransferToForeignAccount: false,
       defaultFeeAmount: '',
       ethPrivateKey: '',
+      ethPrivateKeyRaw: '',
       feeAmount: '',
       feeGas: '',
       paraTime: undefined,
@@ -114,6 +121,7 @@ export const privateKeyUnlockedState = {
           available: '0',
           debonding: '0',
           delegations: '0',
+          nonce: '1',
           total: '0',
           validator: {
             escrow: '0',
@@ -213,6 +221,11 @@ export const walletExtensionV0PersistedState = {
   },
 } satisfies WalletExtensionV0State
 
+export const ethAccount = {
+  address: '0xbA1b346233E5bB5b44f5B4aC6bF224069f427b18',
+  privateKey: '6593a788d944bb3e25357df140fac5b0e6273f1500a3b37d6513bf9e9807afe2',
+}
+
 export const walletExtensionV0UnlockedState = {
   account: {
     address: 'oasis1qq30ejf9puuc6qnrazmy9dmn7f3gessveum5wnr6',
@@ -223,6 +236,12 @@ export const walletExtensionV0UnlockedState = {
     transactions: [],
     loading: false,
     allowances: [],
+    pendingTransactions: {
+      local: [],
+      testnet: [],
+      mainnet: [],
+    },
+    nonce: '1',
   },
   contacts: {
     oasis1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe: {
@@ -235,9 +254,9 @@ export const walletExtensionV0UnlockedState = {
     },
   },
   evmAccounts: {
-    '0xbA1b346233E5bB5b44f5B4aC6bF224069f427b18': {
-      ethAddress: '0xbA1b346233E5bB5b44f5B4aC6bF224069f427b18',
-      ethPrivateKey: '6593a788d944bb3e25357df140fac5b0e6273f1500a3b37d6513bf9e9807afe2',
+    [ethAccount.address]: {
+      ethAddress: ethAccount.address,
+      ethPrivateKey: ethAccount.privateKey,
     },
   },
   createWallet: { checkbox: false, mnemonic: [] },
@@ -252,10 +271,10 @@ export const walletExtensionV0UnlockedState = {
     showBleLedgerDevicesModal: false,
   },
   network: {
-    chainContext: 'b11b369e0da5bb230b220127f5e7b242d385ef8c6f54906243f30af63c815535',
+    chainContext: '',
     ticker: 'ROSE',
     selectedNetwork: 'mainnet',
-    epoch: 27884,
+    epoch: 0,
     minimumStakingAmount: 100,
   },
   paraTimes: {
@@ -268,6 +287,7 @@ export const walletExtensionV0UnlockedState = {
       confirmTransferToForeignAccount: false,
       defaultFeeAmount: '',
       ethPrivateKey: '',
+      ethPrivateKeyRaw: '',
       feeAmount: '',
       feeGas: '',
       paraTime: undefined,
@@ -298,6 +318,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'ledger5',
         path: [44, 474, 0, 0, 5],
@@ -314,6 +335,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'ledger1',
         path: [44, 474, 0, 0, 0],
@@ -330,6 +352,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'Account 1',
         path: [44, 474, 0],
@@ -348,6 +371,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'Account 2',
         path: [44, 474, 1],
@@ -366,6 +390,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'short privatekey',
         privateKey:
@@ -382,6 +407,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'ledger5-1',
         path: [44, 474, 0, 0, 6],
@@ -398,6 +424,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '1',
         },
         name: 'private key1',
         privateKey:

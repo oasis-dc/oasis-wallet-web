@@ -1,6 +1,7 @@
 {
   "account": {
     "addEscrow": {
+      "availableAmount": "Available:",
       "confirmDelegatingToInactive": {
         "description": "Status of this validator is {{validatorStatus}}. Your delegation might not generate any rewards.",
         "title": "Are you sure you want to continue?"
@@ -12,12 +13,15 @@
       "delegate": "Delegate"
     },
     "addressCopied": "Address copied.",
+    "emptyActiveDelegationsList": "There are currently no active delegations for this account.",
+    "emptyDebondingDelegationsList": "There are no debonding delegations for this account.",
     "loading": "Loading account",
     "loadingError": "Couldn't load account.",
     "reclaimEscrow": {
-      "convertedToShares": "Corresponding number of gigashares: {{shares}}",
+      "convertedToShares": "Corresponding number of shares: {{shares}}",
       "reclaim": "Reclaim",
-      "reclaimAll": "Reclaim all"
+      "reclaimAll": "Reclaim all",
+      "reclaimableAmount": "Available:"
     },
     "sendTransaction": {
       "confirmSendingToValidator": {
@@ -31,13 +35,13 @@
       "success": "Transaction successfully sent. The transaction might take up to a minute to appear on your account."
     },
     "subnavigation": {
-      "activeDelegations": "Active delegations",
-      "debondingDelegations": "Debonding delegations",
-      "mobileActiveDelegations": "Delegations",
-      "mobileDebondingDelegations": "Debonding",
-      "transactions": "Transactions"
+      "activeDelegations": "Staked",
+      "debondingDelegations": "Debonding",
+      "mobileActiveDelegations": "Staked",
+      "mobileDebondingDelegations": "Debonding"
     },
     "summary": {
+      "activity": "Activity",
       "balance": {
         "available": "Available",
         "debonding": "Debonding",
@@ -45,13 +49,16 @@
         "total": "Total"
       },
       "noTransactionFound": "No transactions found.",
+      "noTransactionFoundOasisscanV2": "No transactions since November 29, 2023.",
       "noWalletIsOpen": "To send, receive, stake and swap {{ticker}} tokens, <HomeLink>open your wallet</HomeLink>.",
       "notYourAccount": "This is not your account.",
-      "yourAccount": "This is your account."
+      "pendingTransactions": "Pending transactions",
+      "someTxsInPendingState": "Some transactions are currently in a pending state.",
+      "viewAccountTxs": "View account transactions"
     },
     "transaction": {
       "addEscrow": {
-        "received": "Received <Amount> delegation in escrow",
+        "received": "Received <Amount/> delegation in escrow",
         "sent": "Delegated <Amount/> to validator"
       },
       "consensusDeposit": {
@@ -69,6 +76,7 @@
         "header": "Method '{{method}}'"
       },
       "loadingError": "Couldn't load transactions.",
+      "pending": "Pending",
       "reclaimEscrow": {
         "received": "<Amount/> reclaimed by delegator",
         "sent": "Reclaimed <Amount/> from validator"
@@ -76,6 +84,9 @@
       "stakingAllow": {
         "received": "Received <Amount/> allowance",
         "sent": "Set <Amount/> allowance"
+      },
+      "stakingBurn": {
+        "sent": "Burned <Amount/>"
       },
       "successful": "Successful",
       "transfer": {
@@ -94,13 +105,15 @@
       "showingStale": "Showing validator list as of {{staleTimestamp}}."
     }
   },
+  "appTitle": "ROSE Wallet",
   "backends": {
+    "nexus": "Nexus API",
     "oasismonitor": "Oasis Monitor API",
-    "oasisscan": "Oasis Scan API"
+    "oasisscanV2": "Oasis Scan API v2"
   },
   "banner": {
-    "buildPreview": "Please note this is an experimental build of Oasis Wallet and your secrets are not safe. ONLY USE IT FOR TESTING.",
-    "buildStaging": "Please note this is the staging deployment of Oasis Wallet. ONLY USE IT FOR TESTING."
+    "buildPreview": "Please note this is an experimental build of ROSE Wallet and your secrets are not safe. ONLY USE IT FOR TESTING.",
+    "buildStaging": "Please note this is the staging deployment of ROSE Wallet. ONLY USE IT FOR TESTING."
   },
   "common": {
     "amount": "Amount",
@@ -110,6 +123,7 @@
     "delegator": "Delegator",
     "from": "From",
     "hash": "Tx Hash",
+    "postfixAmountInBillions": "B",
     "round": "Round",
     "time": "Time",
     "to": "To",
@@ -118,16 +132,14 @@
     "validators": "Validators"
   },
   "createWallet": {
-    "confirmSaved": "I saved my keyphrase",
-    "doNotShare": "Never share your keyphrase, anyone with your keyphrase can access your wallet and your tokens.",
-    "instruction": "Save your keyphrase <strong>in the right order</strong> in a secure location, you will need it to open your wallet.",
+    "confirmSaved": "I saved my mnemonic",
+    "doNotShare": "Never share your mnemonic, anyone with your mnemonic can access your wallet and your tokens.",
+    "instruction": "Save your mnemonic <strong>in the right order</strong> in a secure location, you will need it to open your wallet.",
     "mnemonicMismatch": "Entered mnemonic does not match.",
     "newMnemonic": "Generate a new mnemonic",
     "thisIsYourPhrase": "This is your mnemonic"
   },
   "delegations": {
-    "activeDelegations": "Active delegations",
-    "debondingDelegations": "Debonding delegations",
     "debondingTimeEnd": "End of debonding",
     "delegatedAmount": "Delegated amount",
     "loadingError": "Couldn't load delegations.",
@@ -136,12 +148,12 @@
   "deleteForm": {
     "confirm": "Yes, delete",
     "confirmationKeyword": "delete",
-    "hint": "Type '{{confirmationKeyword}}'"
+    "hint": "Type <strong>{{confirmationKeyword}}</strong>"
   },
   "errors": {
     "LedgerDerivedDifferentAccount": "This account does not belong to the currently connected Ledger.",
     "LedgerOasisAppIsNotOpen": "Oasis App on Ledger is closed.",
-    "bluetoothTransportNotSupported": "Your device does not support Bluetooth.",
+    "bluetoothTransportNotSupported": "Bluetooth may be turned off or your current platform does not support Bluetooth capability.",
     "cannotSendToSelf": "Cannot send to yourself",
     "disconnectedError": "Lost connection.",
     "duplicateTransaction": "Duplicate transaction",
@@ -160,31 +172,37 @@
     "unknownLedgerError": "Unknown ledger error: {{message}}",
     "unknownParaTimeError": "Unknown ParaTime error: {{message}}",
     "usbTransportError": "USB Transport error: {{message}}.",
-    "usbTransportNotSupported": "Your browser does not support WebUSB (e.g. Firefox). Try using Chrome."
+    "usbTransportNotSupported": "Current platform does not support WebUSB capability. Try on different platform or browser (preferably Chrome)."
   },
   "fatalError": {
+    "checkStatus": "Check network status",
     "copied": "Error copied to clipboard",
     "copy": "Copy error to clipboard",
-    "heading": "A fatal error occurred",
-    "instruction": "A fatal error has occurred and Oasis Wallet must stop. Try refreshing the page and reopening your wallet to see if the issue persists. If the issue persists, please contact our support team via <Email/> email and attach the report below."
+    "description": "The error that has occurred triggers the wallet to stop. <strong>Your funds are safe.</strong><br/><br/>Please try refreshing the page and reopening your wallet to see if the issue persists. You can check the current status of the network below.",
+    "heading": "An error occurred.",
+    "instruction": "If the issue is not resolved after refreshing, please email our support team at  <Email/> and attach the error report.",
+    "reloadApp": "Reload app"
   },
   "fiatOnramp": {
-    "astarFootnote": "It is hereby noted that AStar Technologies, a Cayman Islands exempted company is acting on behalf and for the purposes of Oasis, and is also the provider of the Oasis Wallet.",
-    "description": "This feature allows you to convert your fiat currency into cryptocurrency.",
+    "astarFootnote": "It is hereby noted that AStar Technologies, a Cayman Islands exempted company is acting on behalf and for the purposes of Oasis, and is also the provider of the ROSE Wallet.",
+    "buyNowInNewTab": "Buy ROSE now",
+    "description": "Convert your fiat currency into crypto.",
     "header": "Buy ROSE",
     "headerInWidget": "Purchase ROSE to your wallet",
-    "notMainnet": "You can only use this feature when your are on the mainnet.",
+    "notMainnet": "You can only use this feature when you are on the mainnet.",
     "notYourAccount": "You can only use this feature when your wallet is open.",
     "openYourWallet": "Open your wallet",
     "switchToMainnet": "Switch to Mainnet",
     "thirdPartyAcknowledge": "I understand that I’m using a third-party solution and Oasis* does not carry any responsibility over the usage of this solution.",
-    "thirdPartyDisclaimer": "This service is provided by an external party. Oasis* does not carry any responsibility. All fees charged by Transak."
+    "thirdPartyDisclaimer": "This service is provided by Transak - an external party. Oasis* does not carry any responsibility. All fees charged by Transak."
   },
   "footer": {
-    "github": "Oasis Wallet is fully <GithubLink>open source</GithubLink> - Feedback and issues are appreciated!",
+    "feedback": "We’d love your feedback at <EmailLink>wallet@oasisprotocol.org</EmailLink>",
+    "github": "ROSE Wallet is <GithubLink>open source</GithubLink> and powered by",
     "poweredBy": {
-      "oasismonitor": "Powered by Oasis Monitor API & Oasis gRPC",
-      "oasisscan": "Powered by Oasis Scan API & Oasis gRPC"
+      "nexus": "Nexus API & Oasis gRPC",
+      "oasismonitor": "Oasis Monitor API & Oasis gRPC",
+      "oasisscanV2": "Oasis Scan API v2 & Oasis gRPC"
     },
     "terms": "<TermsLink>Terms and Conditions</TermsLink>",
     "version": "Version: <ReleaseLink/> (commit: <CommitLink/>) built at {{buildTime}}"
@@ -201,43 +219,56 @@
       "header": "Access existing wallet"
     }
   },
+  "icons": {
+    "bluetooth": "Bluetooth",
+    "mnemonic": "Mnemonic",
+    "privateKey": "Private key",
+    "usb": "Usb",
+    "wallet": {
+      "label": "Wallet"
+    }
+  },
   "infoBox": {
     "valueCopied": "{{label}} copied."
   },
   "language": "Language",
   "ledger": {
     "extension": {
+      "closingPopup": "Closing... Please re-open the wallet app",
       "connect": "Connect Ledger device",
       "failed": "Connection failed",
-      "grantAccess": "Grant access to your Ledger",
-      "instructionStep": "Once device is connected continue the operation in the wallet app",
+      "grantAccess": "Grant access to your USB Ledger",
       "succeed": "Device connected"
     },
     "instructionSteps": {
-      "closeLedgerLive": "Close Ledger Live app on the computer",
-      "connectLedger": "Connect your Ledger device to the computer",
+      "closeLedgerLive": "Close the Ledger Live app on your computer",
+      "connectBluetoothLedger": "Connect your Ledger to this device via Bluetooth",
+      "connectUsbLedger": "Connect your Ledger to this device via USB",
+      "deviceIsPaired": "Make sure your Ledger is paired with this device",
       "header": "Steps:",
-      "openOasisApp": "Open the Oasis App on your Ledger device"
+      "openOasisApp": "Open the Oasis app on your Ledger"
     },
     "steps": {
+      "accessingLedger": "Connecting with Ledger device",
       "idle": "Idle",
       "loadingAccounts": "Loading account details",
       "loadingBalances": "Loading balance details",
-      "loadingBluetoothDevices": "Loading bluetooth devices",
-      "openingUsb": "Opening Ledger through USB"
+      "loadingBluetoothDevices": "Loading bluetooth devices"
     }
   },
   "menu": {
     "addAccounts": "Add accounts",
     "closeWallet": "Close wallet",
-    "fiatOnramp": "Buy",
+    "fiatOnramp": "Buy ROSE",
+    "fiatOnramp-mobile": "Buy",
     "home": "Home",
     "lockProfile": "Lock profile",
     "openMenu": "Menu",
     "paraTimes": "ParaTimes",
-    "stake": "Stake",
+    "stake": "Stake ROSE",
+    "stake-mobile": "Stake",
     "unlockProfile": "Unlock profile",
-    "wallet": "Wallet"
+    "wallet": "Account"
   },
   "migrateV0Extension": {
     "backupInvalidPrivateKeys": {
@@ -257,21 +288,39 @@
     "requiredField": "This field is required",
     "title": "Important Wallet Update"
   },
+  "mobileUpdate": {
+    "errorTitle": "Unexpected error",
+    "later": "Later",
+    "retry": "Retry",
+    "unknownOrErrorDescription": "Apologies for the inconvenience, an unexpected error has transpired. Please verify your internet connection and retry by clicking on the \"{{retryButtonLabel}}\" button.",
+    "unknownTitle": "Unknown error",
+    "updateAvailableDescription": "A new update is available for your ROSE Wallet. We recommend updating to the latest version for bug fixes, enhanced security and new features.",
+    "updateAvailableTitle": "Update pending...",
+    "updateInProgressDescription": "Your ROSE Wallet is currently undergoing an update. Please check back at later time. Alternatively, you may choose to retry by clicking on the \"{{retryButtonLabel}}\" button.",
+    "updateInProgressTitle": "Update in progress...",
+    "updateNow": "Update now"
+  },
   "openWallet": {
     "bitpie": {
       "warning": "❗ BitPie wallet users: You cannot import the mnemonic phrase directly from your BitPie wallet. <DocsLink>Check documentation for details.</DocsLink>"
     },
     "header": "How do you want to open your wallet?",
     "importAccounts": {
+      "NoBLEDevicesFound": "No Bluetooth devices found",
       "accountCounter": "{{count}} accounts selected",
       "accountCounter_one": "One account selected",
       "accountCounter_plural": "{{count}} accounts selected",
       "accountCounter_zero": "No account selected",
+      "bluetoothLedger": "Bluetooth Ledger",
+      "connectDeviceHeader": "How do you want to connect your Ledger device?",
       "next": "Next",
       "openWallets": "Open",
       "pageNumber": "Page {{pageNum}} of {{totalPages}}",
       "prev": "Prev",
-      "selectWallets": "Select accounts to open"
+      "selectDevice": "Select device",
+      "selectLedgerDevice": "Select Ledger device",
+      "selectWallets": "Select accounts to open",
+      "usbLedger": "USB Ledger"
     },
     "ledger": {
       "header": "Open from Ledger device"
@@ -282,15 +331,16 @@
       "privateKey": "Private key"
     },
     "mnemonic": {
-      "enterPhraseHere": "Enter your keyphrase here",
-      "error": "Invalid keyphrase. Please make sure to input the words in the right order, all lowercase.",
-      "header": "Enter your keyphrase",
+      "enterPhraseHere": "Enter your mnemonic here",
+      "error": "Invalid mnemonic. Please make sure to input the words in the right order, all lowercase.",
+      "header": "Enter your mnemonic",
       "import": "Import my wallet",
-      "instruction": "Enter all your keyphrase words below separated by spaces. Most keyphrases are made of either 24 or 12 words."
+      "instruction": "Enter all your mnemonic words below separated by spaces. Most mnemonics are made of either 24 or 12 words."
     },
     "privateKey": {
       "enterPrivateKeyHere": "Enter your private key here",
       "error": "Invalid private key",
+      "errorKeyIsInEthFormat": "This input is intended for Oasis Consensus private keys. The private key you entered looks like an Ethereum-compatible private key (e.g. from MetaMask for Sapphire). If you want to use your Ethereum-compatible private key to move ROSE from Sapphire to Consensus, click \"{{paratimesMenu}}\", then \"{{withdrawButton}}\", and paste it there.",
       "header": "Enter your private key",
       "hidePrivateKey": "Hide private key",
       "instruction": "Enter your private key in Base64 format.",
@@ -312,6 +362,7 @@
     "common": {
       "cipher": "Cipher",
       "depositHeader": "Deposit to ParaTime",
+      "discouragedType": "(experimental)",
       "emerald": "Emerald",
       "evmcType": "(EVMc)",
       "header": "ParaTime Transfers",
@@ -383,21 +434,25 @@
   },
   "persist": {
     "createProfile": {
-      "choosePassword": "Choose a password",
       "passwordMismatch": "Entered password does not match",
-      "repeatPassword": "Re-enter your password",
-      "startPersisting": "Store private keys locally, protected by a password",
+      "repeatPassword": "Confirm your password",
+      "requiredField": "This field is required",
+      "startPersisting": "Store your private keys locally and protect them with a password by creating a profile.",
+      "startPersistingToggle": "Create a profile",
+      "undependableAcknowledge": "I understand this password and profile do not substitute my mnemonic.",
       "unsupported": "Persistence is not supported in this browser."
     },
     "loading": "Loading",
     "loginToProfile": {
       "deleteProfile": {
         "button": "Delete profile",
-        "description": "Are you sure you want to delete this profile? This action cannot be undone and will <strong>erase your private keys</strong>.<br/><br/>To continue please enter '{{confirmationKeyword}}' below.",
+        "description": "This will <strong>permanently remove your private keys from this device.</strong><br/><br/>To confirm and proceed, please type <strong>{{confirmationKeyword}}</strong> below.",
+        "forgotPasswordButton": "Forgot password?",
+        "forgotPasswordDescription": "ROSE Wallet does not store your password and cannot help you retrieve it. If you forgot your password, you can delete your locked profile here. After that, you can create a new one using your mnemonic phrase or private keys, and use your ROSE tokens again.",
         "title": "Delete Profile"
       },
-      "description": "Log into your existing user profile on this computer to access the wallets you already added.",
-      "enterPasswordHere": "Enter your password here",
+      "description": "Enter your password to access your existing wallets on this device.",
+      "enterPasswordHere": "Enter your password",
       "hidePassword": "Hide password",
       "showPassword": "Show password",
       "skipUnlocking": "Continue without the profile",
@@ -409,11 +464,12 @@
   "theme": {
     "darkMode": "Dark mode",
     "lightMode": "Light mode",
+    "system": "System",
     "title": "Theme"
   },
   "toolbar": {
     "contacts": {
-      "add": "Add Contact",
+      "add": "Add contact",
       "address": "Address",
       "cancel": "Cancel",
       "delete": {
@@ -441,7 +497,6 @@
       "testnet": "Testnet"
     },
     "profile": {
-      "deletion": "Deletion",
       "notAvailable": "You can setup your profile while <OpenWalletButton>opening a wallet</OpenWalletButton>.",
       "password": {
         "current": "Current password",
@@ -459,7 +514,7 @@
       "contacts": "Contacts",
       "delete": {
         "description": "Are you sure you want to delete the following account?",
-        "inputHelp": "This action cannot be undone. To continue please enter '{{confirmationKeyword}}' below.",
+        "inputHelp": "This action cannot be undone. To continue please type <strong>{{confirmationKeyword}}</strong> below.",
         "title": "Delete Account",
         "tooltip": "You must have at least one account at all times."
       },
@@ -467,7 +522,7 @@
         "confirm": "I understand, reveal my private key",
         "copied": "Private key copied.",
         "hint1": "The private key consists of a string of characters. Anyone with access to your private key has direct access to the assets of that account.",
-        "hint2": "Once the private key is lost, it cannot be retrieved. Please make sure to Backup the private key and keep it in a safe place.",
+        "hint2": "If the private key is lost, it cannot be retrieved. Please make sure to backup the private key and keep it in a safe place.",
         "title": "Export Private Key"
       },
       "manageAccount": "Manage",
@@ -479,13 +534,7 @@
       "settings": "Settings"
     },
     "wallets": {
-      "select": "Select",
-      "type": {
-        "bluetoothLedger": "BLE Ledger",
-        "mnemonic": "Mnemonic",
-        "privateKey": "Private key",
-        "usbLedger": "USB Ledger"
-      }
+      "select": "Select"
     }
   },
   "transaction": {
@@ -497,7 +546,7 @@
       "from": "From",
       "gas": "Gas",
       "genesisHash": "Genesis hash",
-      "shares": "Gigashares",
+      "shares": "Shares",
       "to": "To",
       "type": "Type",
       "validator": "Validator",

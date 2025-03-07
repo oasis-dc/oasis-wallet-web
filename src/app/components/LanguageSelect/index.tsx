@@ -5,6 +5,7 @@ import { Text } from 'grommet/es6/components/Text'
 import { Language } from 'styles/theme/icons/language/Language'
 import { SelectWithIcon } from '../SelectWithIcon'
 import { languageLabels, LanguageKey } from '../../../locales/i18n'
+import { ButtonExtendedProps } from 'grommet/es6/components/Button'
 
 const languageOptions: { value: LanguageKey; label: string }[] = languageLabels.map(lang => ({
   value: lang[0],
@@ -20,7 +21,7 @@ export const LanguageSelect = () => {
 
   return (
     <SelectWithIcon
-      icon={<Language />}
+      icon={<Language size="24px" />}
       id="language"
       label={t('language', 'Language')}
       name="language"
@@ -38,10 +39,11 @@ export const LanguageMenu = () => {
     return null
   }
 
-  const languageOptions = languageLabels.map(lang => ({
-    value: lang[0],
-    label: lang[1],
-    onClick: () => i18n.changeLanguage(lang[0]),
+  const languageOptions: ButtonExtendedProps[] = languageLabels.map(([key, label]) => ({
+    value: key,
+    label: label,
+    onClick: () => i18n.changeLanguage(key),
+    primary: key === i18n.resolvedLanguage,
   }))
   const selectedLabel = languageOptions.find(lang => lang.value === i18n.resolvedLanguage)?.label
 

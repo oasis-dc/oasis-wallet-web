@@ -6,22 +6,20 @@ import { CheckBox } from 'grommet/es6/components/CheckBox'
 import { Spinner } from 'grommet/es6/components/Spinner'
 import { Text } from 'grommet/es6/components/Text'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
-import { memo, useContext, useState } from 'react'
+import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BalanceDetails } from '../../../../state/account/types'
 import { Button } from 'grommet/es6/components/Button'
 import { DerivationFormatter, DerivationFormatterProps } from './DerivationFormatter'
-import styled from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 
-// Larger area for hoverIndicator
 const StyledManageButton = styled(Button)`
-  padding: 0.5ex 0.7ch;
-  margin: -0.5ex -0.7ch;
   border-radius: ${({ theme }) => theme.button?.border?.radius};
 `
 StyledManageButton.defaultProps = {
-  plain: true,
   color: { light: 'brand', dark: 'white' },
+  size: 'small',
+  primary: true,
   hoverIndicator: true,
 }
 
@@ -44,7 +42,7 @@ export interface AccountProps {
 export const Account = memo((props: AccountProps) => {
   const { t } = useTranslation()
   const size = useContext(ResponsiveContext)
-  const [isHovering, setIsHovering] = useState(false)
+  const { dark } = useContext<any>(ThemeContext)
 
   const address =
     size === 'small' ? <ShortAddress address={props.address} /> : <PrettyAddress address={props.address} />
@@ -55,18 +53,14 @@ export const Account = memo((props: AccountProps) => {
     <Box
       data-testid="account-choice"
       round="5px"
-      background={isHovering ? 'brand' : props.isActive ? 'neutral-2' : undefined}
-      border={{ color: props.isActive ? 'neutral-2' : 'brand' }}
+      background={props.isActive ? 'control' : undefined}
+      border={{ color: 'control' }}
       pad="small"
       flex={{ shrink: 0 }}
       role="checkbox"
       aria-checked={props.isActive}
       onClick={props.onClick ? () => props.onClick!(props.address) : undefined}
-      // `hoverIndicator={{ background: 'brand' }}` does not detect dark background
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      onFocus={() => setIsHovering(true)}
-      onBlur={() => setIsHovering(false)}
+      hoverIndicator={!props.isActive && { color: 'active', dark: dark }}
       direction="row"
     >
       {props.displayCheckbox && (
@@ -91,8 +85,7 @@ export const Account = memo((props: AccountProps) => {
         <Box>
           <Text weight="bold">{address}</Text>
         </Box>
-        <Box direction="row" gap="large" justify="between" wrap>
-          {props.displayDerivation && <DerivationFormatter {...props.displayDerivation} />}
+        <Box direction="row" gap="small" wrap>
           {props.displayManageButton && (
             <Box direction="row">
               <StyledManageButton
@@ -105,8 +98,9 @@ export const Account = memo((props: AccountProps) => {
               />
             </Box>
           )}
+          {props.displayDerivation && <DerivationFormatter {...props.displayDerivation} />}
           {props.displayBalance && (
-            <Box height="24px">
+            <Box height="24px" margin={{ left: 'auto' }} alignSelf="center">
               {props.balance ? <AmountFormatter amount={props.balance.total} /> : <Spinner />}
             </Box>
           )}

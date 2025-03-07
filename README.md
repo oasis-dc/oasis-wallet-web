@@ -1,4 +1,4 @@
-# Oasis Wallet
+# ROSE Wallet
 
 [![CI build status][github-ci-build-badge]][github-ci-build-link]
 [![CI test status][github-ci-test-badge]][github-ci-test-link]
@@ -11,37 +11,52 @@
 > :warning: **NEVER use the private keys and mnemonics given as examples
 > in this repository.**
 
-![Demo](docs/images/demo.gif)
-
-- [Oasis Wallet](#oasis-wallet)
-  - [Features](#features)
-  - [Getting started](#getting-started)
-    - [Installing and running oasis-wallet][install-link]
-    - [Test accounts](#test-accounts)
-  - [Architecture](#architecture)
-  - [Contributing & development](#contributing--development)
-    - [Running the tests](#running-the-tests)
-    - [Code style](#code-style)
-    - [Internationalization](#internationalization)
+[demo-video]
 
 ## Deploys
 
-- `stable` branch: <https://wallet.oasis.io>
-- `master` branch: <https://wallet.stg.oasis.io>
+- Production browser extension: [chromewebstore.google.com]
+
+- Production / Stable deploy: <https://wallet.oasis.io>
+
+  The main deploy of the wallet available to the general public.
+
+- Staging deploy: <https://wallet.stg.oasis.io>
+
+  A deploy of the latest released version of the wallet available for users
+  wanting to try out and test the latest version.
+
+- Development deploy: <https://wallet.dev.oasis.io>
+
+  A deploy of the latest code in the `master` branch available for power users
+  and developers to try out the latest (unreleased) version.
 
 ## Features
 
-- Opening wallets through private key or mnemonic
-- Transaction history, currently all transactions are listed
-- Multiple languages (English and French currently supported)
-- Submitting transactions
-- [Ledger](http://ledger.com/) support
-- Multiple accounts open in parallel
-- Staking (Adding / reclaiming escrow)
+### Wallet and Accounts
+
+- Create/Restore wallets using standard [BIP-0039] mnemonic phrases
+- Import accounts from your [Ledger] hardware wallet
+- Import accounts directly from their private keys
+- Address book of your saved contacts
+- Create a profile to quickly access stored accounts with a password
+
+### Transactions
+
+- View transaction history
+- Send ROSE tokens between Consensus accounts
+- Stake/Debond ROSE tokens
+- Deposit and withdraw from ParaTimes (Sapphire, Emerald, Cipher)
+- Purchase ROSE using [Transak On-Ramp]
+
+### Accessibility
+
+- Available in multiple languages
+- Should not crash when using Google Translate
 
 ## Getting started
 
-### Installing and running oasis-wallet
+### Installing and running from source code
 
 You can quickly get started with the following commands:
 
@@ -78,7 +93,7 @@ oasis1qq5t7f2gecsjsdxmp5zxtwgck6pzpjmkvc657z6l
 
 ## Architecture
 
-Oasis-wallet needs multiple components to run, all provided in the
+This code needs multiple components to run, all provided in the
 [docker-compose.yml] for local development.
 
 ![Architecture diagram](docs/images/architecture.svg)
@@ -86,12 +101,9 @@ Oasis-wallet needs multiple components to run, all provided in the
 - [envoy-proxy], used as a gRPC gateway for live access to the oasis-node, to
   fetch live balance, information about the current state of the network, and to
   submit transactions.
-- [oasis-monitor], a block indexer to store historical data about transactions,
-  accounts, validators, rewards, blocks and more. It exposes an
-  [OpenAPI][monitor-swagger]. `oasis-monitor` requires two databases:
-
-  - A PostgreSQL instance to keep track of it's import batches
-  - A [Clickhouse] server to store the indexed data
+- [oasis-nexus], is the official indexer for the Oasis Network, providing
+the backend for the Oasis Explorer and ROSE Wallet.
+It exposes an [API][oasis-nexus-api-spec].
 
 - [oasis-scan], oasis blockchain explorer that enables view of historical data
   about transactions, accounts, validators, paratimes, blocks, proposals and
@@ -138,6 +150,9 @@ yarn start:prod
 # Open http://localhost:5000/account/oasis1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe/stake
 # and switch to testnet. This exercises at least: fonts, grpc, testnet grpc, API,
 # and validator logos.
+
+# Update screenshots
+(cd playwright; yarn test:screenshots)
 ```
 
 ### Code style
@@ -172,9 +187,9 @@ A detailed post on Git commit messages: [How To Write a Git Commit Message].
 
 Translating: We have [Transifex] to easily contribute translations.
 
-Development: Oasis Wallet uses [react-i18next] for internationalization. You can
-simply use the [useTranslation hook] inside your components to add additional
-translation-ready strings. You can then export the new keys to the
+Development: ROSE Wallet uses [react-i18next] for internationalization.
+You can simply use the [useTranslation hook] inside your components to add
+additional translation-ready strings. You can then export the new keys to the
 [English translation.json] by running `yarn run extract-messages`.
 
 Updating from [Transifex]: [English translation.json] is set as an automatically
@@ -190,18 +205,23 @@ Adding a new language:
 
 1. first add it to Transifex and translate the strings,
 2. create a folder with the new language code in `src/locales`
-and download the translation file there,
+   and download the translation file there,
 3. add the new language to the [list of resources][i18n.ts]
+
+## Mobile app development
+
+[Capacitor and Ionic docs](docs/mobile-development.md)
 
 ## Preparing a Release
 
 [Release process doc](docs/release-process.md)
 
+[demo-video]: https://github.com/oasisprotocol/wallet/assets/3758846/ef11fbea-dd55-42b1-87a4-1b74509a2809
+[chromewebstore.google.com]: https://chromewebstore.google.com/detail/rose-wallet/ppdadbejkmjnefldpcdjhnkpbjkikoip
 [docker-compose.yml]: docker-compose.yml
 [envoy-proxy]: https://www.envoyproxy.io
-[oasis-monitor]: https://oasismonitor.com
-[monitor-swagger]: https://github.com/everstake/oasis-explorer/blob/master/swagger/swagger.yml
-[Clickhouse]: https://github.com/ClickHouse/ClickHouse
+[oasis-nexus]: https://github.com/oasisprotocol/nexus
+[oasis-nexus-api-spec]: https://nexus.oasis.io/v1/spec/v1.html
 [oasis-scan]: https://www.oasisscan.com
 [scan-api-repo]: https://github.com/bitcat365/oasisscan-backend#oasisscan-api
 [Cypress]: https://www.cypress.io/
@@ -214,18 +234,20 @@ and download the translation file there,
 [useTranslation hook]: https://react.i18next.com/latest/usetranslation-hook
 [English translation.json]: src/locales/en/translation.json
 [i18n.ts]: src/locales/i18n.ts
-[github-ci-build-badge]: https://github.com/oasisprotocol/oasis-wallet-web/actions/workflows/ci-build.yml/badge.svg
-[github-ci-build-link]: https://github.com/oasisprotocol/oasis-wallet-web/actions?query=workflow:ci-build+branch:master
-[github-ci-test-badge]: https://github.com/oasisprotocol/oasis-wallet-web/actions/workflows/ci-test.yml/badge.svg
-[github-ci-test-link]: https://github.com/oasisprotocol/oasis-wallet-web/actions?query=workflow:ci-test+branch:master
-[github-ci-lint-badge]: https://github.com/oasisprotocol/oasis-wallet-web/actions/workflows/ci-lint.yml/badge.svg
-[github-ci-lint-link]: https://github.com/oasisprotocol/oasis-wallet-web/actions?query=workflow:ci-lint+branch:master
-[github-release-badge]: https://github.com/oasisprotocol/oasis-wallet-web/actions/workflows/release.yml/badge.svg
-[github-release-link]: https://github.com/oasisprotocol/oasis-wallet-web/actions?query=workflow:release
+[github-ci-build-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/ci-build.yml/badge.svg
+[github-ci-build-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:ci-build+branch:master
+[github-ci-test-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/ci-test.yml/badge.svg
+[github-ci-test-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:ci-test+branch:master
+[github-ci-lint-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/ci-lint.yml/badge.svg
+[github-ci-lint-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:ci-lint+branch:master
+[github-release-badge]: https://github.com/oasisprotocol/wallet/actions/workflows/release.yml/badge.svg
+[github-release-link]: https://github.com/oasisprotocol/wallet/actions?query=workflow:release
 [github-renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
 [github-renovate-link]: https://www.mend.io/renovate/
 [license-badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
 [license-link]: https://opensource.org/licenses/Apache-2.0
 [codecov-badge]: https://codecov.io/gh/oasisprotocol/oasis-wallet-web/branch/master/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/oasisprotocol/oasis-wallet-web
-[install-link]: #installing-and-running-oasis-wallet
+[BIP-0039]: https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
+[Ledger]: https://ledger.com/
+[Transak On-Ramp]: https://transak.com/

@@ -7,7 +7,7 @@ const extensionPath = path.join(__dirname, '..', process.env.EXTENSION_PATH ?? '
 const getPopupFile = () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const extensionManifest = require(path.join(extensionPath, '/manifest.json'))
-  return extensionManifest.browser_action.default_popup
+  return extensionManifest.action.default_popup
 }
 
 // From https://playwright.dev/docs/chrome-extensions
@@ -29,12 +29,12 @@ const test = base.extend<{
   },
   extensionId: async ({ context }, use) => {
     // for manifest v2:
-    let [background] = context.backgroundPages()
-    if (!background) background = await context.waitForEvent('backgroundpage')
+    // let [background] = context.backgroundPages()
+    // if (!background) background = await context.waitForEvent('backgroundpage')
 
     // for manifest v3:
-    // let [background] = context.serviceWorkers()
-    // if (!background) background = await context.waitForEvent('serviceworker')
+    let [background] = context.serviceWorkers()
+    if (!background) background = await context.waitForEvent('serviceworker')
 
     const extensionId = background.url().split('/')[2]
     await use(extensionId)
@@ -47,8 +47,9 @@ const test = base.extend<{
   },
 })
 
-test.use({
-  viewport: { width: 360, height: 600 },
-})
+/** file://./../../extension/src/popup.html `min-width: 375px; min-height: 600px` */
+const extensionViewport = { width: 375, height: 600 }
 
-export { test }
+test.use({ viewport: extensionViewport })
+
+export { test, extensionViewport }

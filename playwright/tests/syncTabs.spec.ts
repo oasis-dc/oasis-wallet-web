@@ -12,11 +12,11 @@ import {
 } from '../../src/utils/__fixtures__/test-inputs'
 import { addPersistedStorageV1, clearPersistedStorage } from '../utils/storage'
 import { fillPrivateKeyWithoutPassword, fillPrivateKeyAndPassword } from '../utils/fillPrivateKey'
-import type { AccountsRow } from '../../src/vendors/oasisscan/index'
+import type { Account } from '../../src/vendors/nexus/index'
 
 test.beforeEach(async ({ context, page }) => {
   await warnSlowApi(context)
-  await mockApi(context, 0)
+  await mockApi(context, '0')
   await clearPersistedStorage(page, '/app.webmanifest')
 })
 
@@ -29,7 +29,6 @@ test.describe('syncTabs', () => {
     test('unpersisted', async ({ page, context }) => {
       await page.goto('/open-wallet/private-key')
       await fillPrivateKeyWithoutPassword(page, {
-        persistenceCheckboxChecked: false,
         persistenceCheckboxDisabled: false,
       })
       await expect(page.getByTestId('account-selector')).toBeVisible()
@@ -49,7 +48,8 @@ test.describe('syncTabs', () => {
       await expect(tab2.getByRole('button', { name: /^Unlock$/ })).toBeVisible()
     })
 
-    test('incognito', async ({ page, context }) => {
+    test.skip('incognito', async ({ page, context }) => {
+      // TODO: remove all code related to "Continue without the profile"
       await addPersistedStorageV1(page, '/app.webmanifest')
       await page.goto('/')
       await page.getByRole('button', { name: 'Continue without the profile' }).click()
@@ -61,8 +61,7 @@ test.describe('syncTabs', () => {
       await expect(tab2.getByRole('button', { name: /^Unlock$/ })).toBeHidden()
       await tab2.goto('/open-wallet/private-key')
       await fillPrivateKeyWithoutPassword(tab2, {
-        persistenceCheckboxChecked: false,
-        persistenceCheckboxDisabled: true,
+        persistenceCheckboxDisabled: 'disabled-unchecked',
       })
       await expect(tab2.getByTestId('account-selector')).toBeVisible()
       await expect(page.getByTestId('account-selector')).toBeVisible()
@@ -76,7 +75,7 @@ test.describe('syncTabs', () => {
       // Second tab should sync the opened wallet
       await tab2.goto('/')
       await expect(tab2.getByTestId('account-selector')).toBeVisible()
-      await tab2.getByRole('link', { name: 'Wallet', exact: true }).click()
+      await tab2.getByTestId('nav-myaccount').click()
       await expect(tab2).toHaveURL(new RegExp(`/account/${privateKeyAddress}`))
       await expect(tab2.getByTestId('account-balance-summary')).toContainText('ROSE')
 
@@ -95,7 +94,6 @@ test.describe('syncTabs', () => {
     test('unpersisted', async ({ page, context }) => {
       await page.goto('/open-wallet/private-key')
       await fillPrivateKeyWithoutPassword(page, {
-        persistenceCheckboxChecked: false,
         persistenceCheckboxDisabled: false,
       })
       const tab2 = await context.newPage()
@@ -105,21 +103,21 @@ test.describe('syncTabs', () => {
     test('persisted', async ({ page, context }) => {
       await addPersistedStorageV1(page, '/app.webmanifest')
       await page.goto('/')
-      await page.getByPlaceholder('Enter your password here').fill(password)
+      await page.getByPlaceholder('Enter your password', { exact: true }).fill(password)
       await page.keyboard.press('Enter')
       const tab2 = await context.newPage()
       await testSyncingNetwork(page, tab2)
     })
 
-    test('incognito', async ({ page, context }) => {
+    test.skip('incognito', async ({ page, context }) => {
+      // TODO: remove all code related to "Continue without the profile"
       await addPersistedStorageV1(page, '/app.webmanifest')
       await page.goto('/')
       await page.getByRole('button', { name: 'Continue without the profile' }).click()
       const tab2 = await context.newPage()
       await tab2.goto('/open-wallet/private-key')
       await fillPrivateKeyWithoutPassword(tab2, {
-        persistenceCheckboxChecked: false,
-        persistenceCheckboxDisabled: true,
+        persistenceCheckboxDisabled: 'disabled-unchecked',
       })
       await testSyncingNetwork(page, tab2)
     })
@@ -146,7 +144,7 @@ test.describe('syncTabs', () => {
     test('persisted', async ({ page, context }) => {
       await addPersistedStorageV1(page, '/app.webmanifest')
       await page.goto('/')
-      await page.getByPlaceholder('Enter your password here').fill(password)
+      await page.getByPlaceholder('Enter your password', { exact: true }).fill(password)
       await page.keyboard.press('Enter')
       const tab2 = await context.newPage()
       await testSyncingContacts(page, tab2)
@@ -157,7 +155,7 @@ test.describe('syncTabs', () => {
       await page.getByTestId('toolbar-contacts-tab').click()
       await page.getByText('You have no contacts yet.')
 
-      await page.getByRole('button', { name: 'Add Contact' }).click()
+      await page.getByRole('button', { name: 'Add contact' }).click()
       await page.getByPlaceholder('Name').fill('stakefish')
       await page
         .getByPlaceholder('Address', { exact: true })
@@ -169,7 +167,7 @@ test.describe('syncTabs', () => {
       await tab2.getByTestId('account-selector').click()
       await tab2.getByTestId('toolbar-contacts-tab').click()
       await expect(tab2.getByTestId('account-choice')).toHaveCount(1)
-      await tab2.getByRole('button', { name: 'Add Contact' }).click()
+      await tab2.getByRole('button', { name: 'Add contact' }).click()
       await tab2.getByPlaceholder('Name').fill('Foo')
       await tab2
         .getByPlaceholder('Address', { exact: true })
@@ -200,7 +198,6 @@ test.describe('syncTabs', () => {
     test('unpersisted', async ({ page, context }) => {
       await page.goto('/open-wallet/private-key')
       await fillPrivateKeyWithoutPassword(page, {
-        persistenceCheckboxChecked: false,
         persistenceCheckboxDisabled: false,
       })
       const tab2 = await context.newPage()
@@ -210,21 +207,21 @@ test.describe('syncTabs', () => {
     test('persisted', async ({ page, context }) => {
       await addPersistedStorageV1(page, '/app.webmanifest')
       await page.goto('/')
-      await page.getByPlaceholder('Enter your password here').fill(password)
+      await page.getByPlaceholder('Enter your password', { exact: true }).fill(password)
       await page.keyboard.press('Enter')
       const tab2 = await context.newPage()
       await testSelectedAccountNotSync(page, tab2)
     })
 
-    test('incognito', async ({ page, context }) => {
+    test.skip('incognito', async ({ page, context }) => {
+      // TODO: remove all code related to "Continue without the profile"
       await addPersistedStorageV1(page, '/app.webmanifest')
       await page.goto('/')
       await page.getByRole('button', { name: 'Continue without the profile' }).click()
       const tab2 = await context.newPage()
       await tab2.goto('/open-wallet/private-key')
       await fillPrivateKeyWithoutPassword(tab2, {
-        persistenceCheckboxChecked: false,
-        persistenceCheckboxDisabled: true,
+        persistenceCheckboxDisabled: 'disabled-unchecked',
       })
       await testSelectedAccountNotSync(page, tab2)
     })
@@ -265,8 +262,9 @@ test.describe('syncTabs', () => {
       await page.getByTestId('network-selector').click()
       await page.getByRole('menuitem', { name: 'Testnet' }).click()
 
-      await page.getByPlaceholder('Enter your keyphrase here').fill(mnemonic)
+      await page.getByPlaceholder('Enter your mnemonic here').fill(mnemonic)
       await page.getByRole('button', { name: /Import my wallet/ }).click()
+      await page.getByText('Create a profile').uncheck()
       await expect(page.getByText('One account selected')).toBeVisible({ timeout: 10_000 })
       await page.getByRole('checkbox', { name: /oasis1/, checked: true }).uncheck()
       for (let i = 0; i < 11; i++) {
@@ -302,7 +300,7 @@ test.describe('syncTabs', () => {
   }) => {
     await addPersistedStorageV1(page, '/app.webmanifest')
     await page.goto('/')
-    await page.getByPlaceholder('Enter your password here').fill(password)
+    await page.getByPlaceholder('Enter your password', { exact: true }).fill(password)
     await page.keyboard.press('Enter')
     await page.getByRole('link', { name: /Home/ }).click()
     await page.getByRole('button', { name: /Open wallet/ }).click()
@@ -314,29 +312,29 @@ test.describe('syncTabs', () => {
 
     // Delay getAccountBalanceWithFallback so addWallet is called after wallet is locked.
     let apiBalance: Route
-    await context.route('**/chain/account/info/*', route => (apiBalance = route))
+    await context.route('**/consensus/accounts/*', route => (apiBalance = route))
 
     await page.getByPlaceholder('Enter your private key here').fill(privateKey2)
     await page.keyboard.press('Enter')
     await tab2.getByRole('button', { name: /Lock profile/ }).click()
     await apiBalance!.fulfill({
       body: JSON.stringify({
-        code: 0,
-        data: {
-          rank: 0,
-          address: '',
-          available: '0',
-          escrow: '0',
-          debonding: '0',
-          total: '0',
-          nonce: 1,
-          allowances: [],
-        } satisfies AccountsRow,
-      }),
+        address: '',
+        available: '0',
+        escrow: '0',
+        debonding: '0',
+        nonce: 1,
+        allowances: [],
+        delegations_balance: '0',
+        debonding_delegations_balance: '0',
+        stats: {
+          num_txns: 1,
+        },
+      } satisfies Account),
     })
     await page.waitForTimeout(100)
 
-    // TODO: https://github.com/oasisprotocol/oasis-wallet-web/pull/975#discussion_r1019567305
+    // TODO: https://github.com/oasisprotocol/wallet/pull/975#discussion_r1019567305
     // await expect(page.getByTestId('fatalerror-stacktrace')).toBeHidden()
     await expect(page.getByTestId('fatalerror-stacktrace')).toBeVisible()
     await page.close() // Just to avoid expectNoFatal in afterEach

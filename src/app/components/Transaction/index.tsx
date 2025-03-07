@@ -26,6 +26,7 @@ import { LinkPrevious } from 'grommet-icons/es6/icons/LinkPrevious'
 import { LinkNext } from 'grommet-icons/es6/icons/LinkNext'
 import { Atm } from 'grommet-icons/es6/icons/Atm'
 import { Alert } from 'grommet-icons/es6/icons/Alert'
+import { MuiLocalFireDepartmentIcon } from '../../../styles/theme/icons/mui-icons/MuiLocalFireDepartmentIcon'
 // eslint-disable-next-line no-restricted-imports
 import type { Icon } from 'grommet-icons/es6/icons'
 import * as React from 'react'
@@ -37,6 +38,7 @@ import { intlDateTimeFormat } from '../DateFormatter/intlDateTimeFormat'
 import { trimLongString } from '../ShortAddress/trimLongString'
 import { InfoBox } from './InfoBox'
 import * as transactionTypes from 'app/state/transaction/types'
+import { TransactionStatus } from 'app/state/transaction/types'
 import { NetworkType } from 'app/state/network/types'
 import { config } from 'config'
 import { backend } from 'vendors/backend'
@@ -59,6 +61,7 @@ type TransactionDictionary = {
 
 const StyledCardBody = styled(CardBody)`
   flex-direction: row;
+  justify-content: space-between;
 
   @media only screen and (min-width: ${({ theme }) =>
       // TODO: extend theme global breakpoints with more breakpoints or at least with 1024px. Requires Sidebar refactor and Grommet lib validation
@@ -83,7 +86,7 @@ export function Transaction(props: TransactionProps) {
   const isMobile = React.useContext(ResponsiveContext) === 'small'
   const transaction = props.transaction
   const referenceAddress = props.referenceAddress
-  const Amount = <AmountFormatter amount={transaction.amount!} size={isMobile ? '16px' : 'medium'} />
+  const Amount = <AmountFormatter amount={transaction.amount!} size="inherit" plainTicker />
   let side: TransactionSide
   let otherAddress = ''
 
@@ -160,7 +163,7 @@ export function Transaction(props: TransactionProps) {
             i18nKey="account.transaction.addEscrow.received"
             t={t}
             components={{ Amount }}
-            defaults="Received <Amount> delegation in escrow"
+            defaults="Received <Amount/> delegation in escrow"
           />
         ),
       },
@@ -286,6 +289,21 @@ export function Transaction(props: TransactionProps) {
         ),
       },
     },
+    [transactionTypes.TransactionType.StakingBurn]: {
+      [TransactionSide.Received]: genericTransaction,
+      [TransactionSide.Sent]: {
+        destination: t('account.transaction.genericTransaction.destination', 'Other address'),
+        icon: MuiLocalFireDepartmentIcon,
+        header: () => (
+          <Trans
+            i18nKey="account.transaction.stakingBurn.sent"
+            t={t}
+            components={{ Amount }}
+            defaults="Burned <Amount/>"
+          />
+        ),
+      },
+    },
 
     [transactionTypes.TransactionType.StakingAmendCommissionSchedule]: {
       [TransactionSide.Received]: genericTransaction,
@@ -303,6 +321,10 @@ export function Transaction(props: TransactionProps) {
       [TransactionSide.Received]: genericTransaction,
       [TransactionSide.Sent]: genericTransaction,
     },
+    [transactionTypes.TransactionType.RoothashSubmitMsg]: {
+      [TransactionSide.Received]: genericTransaction,
+      [TransactionSide.Sent]: genericTransaction,
+    },
     [transactionTypes.TransactionType.RegistryDeregisterEntity]: {
       [TransactionSide.Received]: genericTransaction,
       [TransactionSide.Sent]: genericTransaction,
@@ -316,6 +338,10 @@ export function Transaction(props: TransactionProps) {
       [TransactionSide.Sent]: genericTransaction,
     },
     [transactionTypes.TransactionType.RegistryRegisterRuntime]: {
+      [TransactionSide.Received]: genericTransaction,
+      [TransactionSide.Sent]: genericTransaction,
+    },
+    [transactionTypes.TransactionType.RegistryUnfreezeNode]: {
       [TransactionSide.Received]: genericTransaction,
       [TransactionSide.Sent]: genericTransaction,
     },
@@ -355,6 +381,10 @@ export function Transaction(props: TransactionProps) {
       [TransactionSide.Received]: genericTransaction,
       [TransactionSide.Sent]: genericTransaction,
     },
+    [transactionTypes.TransactionType.VaultCreate]: {
+      [TransactionSide.Received]: genericTransaction,
+      [TransactionSide.Sent]: genericTransaction,
+    },
   }
 
   const isTypeRecognized = (type: string | undefined): type is transactionTypes.TransactionType =>
@@ -380,6 +410,7 @@ export function Transaction(props: TransactionProps) {
       round="xsmall"
       elevation="none"
       background="background-front"
+      border={transaction.status === TransactionStatus.Failed && { color: 'status-error' }}
     >
       <CardHeader
         margin={{ bottom: 'small' }}
@@ -391,15 +422,15 @@ export function Transaction(props: TransactionProps) {
         gap="small"
       >
         <Icon size={isMobile ? '20px' : 'medium'} color="brand" />
-        <Text weight="bold" size={isMobile ? '16px' : 'medium'}>
+        <Text weight="bold" size={isMobile ? '14px' : 'medium'}>
           {header}
         </Text>
       </CardHeader>
       <StyledCardBody margin={{ bottom: 'small' }}>
-        <Box width="75%">
+        <Box>
           {isMobile && (
             <Box pad={{ left: 'small' }}>
-              <Text size="16px" margin={{ bottom: 'xsmall' }}>
+              <Text size="small" margin={{ bottom: 'xsmall' }}>
                 {otherAddress ? (
                   <AddressFormatter address={otherAddress} />
                 ) : (
@@ -411,7 +442,7 @@ export function Transaction(props: TransactionProps) {
           )}
 
           {!isMobile && (
-            <Grid columns={{ count: 'fit', size: 'xsmall' }} gap="none">
+            <Grid columns={{ count: 2, size: 'max-content' }} width="max-content" gap="none">
               <Box pad="none">
                 <InfoBox copyToClipboardValue={otherAddress} icon={ContactInfo} label={destination}>
                   {otherAddress ? (
@@ -430,9 +461,11 @@ export function Transaction(props: TransactionProps) {
               </Box>
 
               <Box pad="none">
-                <InfoBox icon={Clock} label={t('common.time', 'Time')}>
-                  {intlDateTimeFormat(transaction.timestamp!)}
-                </InfoBox>
+                {transaction.timestamp && (
+                  <InfoBox icon={Clock} label={t('common.time', 'Time')}>
+                    {intlDateTimeFormat(transaction.timestamp)}
+                  </InfoBox>
+                )}
 
                 {!transaction.runtimeId && transaction.level && (
                   <InfoBox icon={Cube} label={t('common.block', 'Block')}>
@@ -449,20 +482,42 @@ export function Transaction(props: TransactionProps) {
             </Grid>
           )}
         </Box>
-        <Box width="25%" align="end" pad={{ right: 'small' }} margin={{ top: 'xsmall' }}>
-          <Text weight="bold" size={isMobile ? 'medium' : 'xlarge'}>
+        <Box pad={{ right: 'small' }}>
+          <Text
+            weight="bold"
+            size={isMobile ? 'small' : 'xlarge'}
+            margin={{ bottom: 'xsmall' }}
+            textAlign="end"
+          >
             <AmountFormatter amount={transaction.amount!} smallTicker />
           </Text>
           <Text
-            color={transaction.status ? 'successful-label' : 'status-error'}
-            size={isMobile ? 'xsmall' : 'small'}
+            color={(() => {
+              switch (transaction.status) {
+                case TransactionStatus.Successful:
+                  return 'successful-label'
+                case TransactionStatus.Pending:
+                  return 'status-warning'
+                case TransactionStatus.Failed:
+                default:
+                  return 'status-error'
+              }
+            })()}
+            size="small"
             weight="bold"
+            textAlign="end"
           >
-            {transaction.status ? (
-              <span>{t('account.transaction.successful', 'Successful')}</span>
-            ) : (
-              <span>{t('account.transaction.failed', 'Failed')}</span>
-            )}
+            {(() => {
+              switch (transaction.status) {
+                case TransactionStatus.Successful:
+                  return <span>{t('account.transaction.successful', 'Successful')}</span>
+                case TransactionStatus.Pending:
+                  return <span>{t('account.transaction.pending', 'Pending')}</span>
+                case TransactionStatus.Failed:
+                default:
+                  return <span>{t('account.transaction.failed', 'Failed')}</span>
+              }
+            })()}
           </Text>
         </Box>
       </StyledCardBody>

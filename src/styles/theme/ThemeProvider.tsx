@@ -1,5 +1,5 @@
 import { Grommet } from 'grommet/es6/components/Grommet'
-import { grommet, ThemeType } from 'grommet/es6/themes'
+import { base as baseTheme, grommet, ThemeType } from 'grommet/es6/themes'
 import { deepMerge } from 'grommet/es6/utils'
 import * as React from 'react'
 import { createTheme as dataTableCreateTheme } from 'react-data-table-component'
@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 import { selectTheme } from './slice/selectors'
 import { dataTableTheme } from './dataTableTheme'
 import { css } from 'styled-components'
+import { getTargetTheme } from './utils'
+import { getInitialState as getInitialThemeState } from './slice'
 
 /**
  * React-data-table by default sets its own background and text colors
@@ -16,6 +18,9 @@ import { css } from 'styled-components'
 dataTableCreateTheme('blank', dataTableTheme)
 
 const grommetCustomTheme: ThemeType = {
+  anchor: {
+    color: 'link',
+  },
   button: {
     primary: {
       background: {
@@ -36,6 +41,20 @@ const grommetCustomTheme: ThemeType = {
       },
     },
   },
+  textInput: {
+    extend: css`
+      &::placeholder {
+        font-size: 14px;
+      }
+    `,
+  },
+  textArea: {
+    extend: css`
+      &::placeholder {
+        font-size: 14px;
+      }
+    `,
+  },
   tip: {
     content: {
       // Default background is background-contrast, but we made that one transparent
@@ -45,11 +64,14 @@ const grommetCustomTheme: ThemeType = {
     },
   },
   select: {
-    options: {
-      container: {
-        // Remove padding to match ParaTimeOption when displayed as value and as option
-        pad: 'none',
-      },
+    container: {
+      // Remove padding from selects with custom elements inside options.
+      // Needed to match ParaTimeOption when displayed as value and as option
+      extend: css`
+        button > div:has(span *) {
+          padding: 0;
+        }
+      `,
     },
   },
   global: {
@@ -58,8 +80,8 @@ const grommetCustomTheme: ThemeType = {
       oasisMinty: '#4CD4A9',
       oasisLightGray: '#ececec',
       brand: {
-        dark: '#0092f6bb',
-        light: '#0092f6',
+        dark: '#6EFFFA',
+        light: '#0500e2',
       },
       oasisBlue2: '#4db3f9',
       oasisBlue3: '#26a2f8',
@@ -67,10 +89,21 @@ const grommetCustomTheme: ThemeType = {
         dark: '#d5d6d7',
         light: '#565b61',
       },
-      link: {
-        dark: '#6FFFB0',
-        light: '#0092f6',
+      link: 'brand',
+      ticker: 'brand',
+      focus: {
+        dark: '#00A9FF',
+        light: '#00A9FF',
       },
+      active: 'rgba(183, 183, 183, 0.5)',
+      'accent-1': 'focus',
+      'brand-background-light': '#e3e8ed',
+      'brand-white': '#f8f8f8',
+      white: '#ffffff',
+      'brand-blue': '#0500e2',
+      'brand-light-blue': '#e8f5ff',
+      'brand-gray-medium': '#d5d6d7',
+      'brand-gray-extra-dark': '#06152b',
       'status-ok': '#2ad5ab',
       'status-warning': {
         dark: '#f3d45e',
@@ -79,12 +112,12 @@ const grommetCustomTheme: ThemeType = {
       'status-error': '#d24c00',
 
       'alert-box-info': {
-        dark: '#0092f6',
-        light: '#d4ebff',
+        dark: '#0500e2',
+        light: '#0500e2',
       },
       'alert-box-info-background': {
         dark: '#d4ebff',
-        light: '#0092f6',
+        light: '#d4ebff',
       },
       'alert-box-ok-weak': {
         dark: '#2ad5ab',
@@ -122,19 +155,14 @@ const grommetCustomTheme: ThemeType = {
         dark: '#ffe7d9',
         light: '#f26111',
       },
-
-      'background-oasis-blue': {
-        dark: '#0f477b',
-        light: '#0092f6',
-      },
       lightText: '#a3a3a3',
       neutral: {
         dark: '#310081FF',
         light: '#310081FF',
       },
       'neutral-2': {
-        dark: '#0092f6bb',
-        light: '#0092f6bb',
+        dark: '#0500e2bb',
+        light: '#0500e2bb',
       },
       'background-back': {
         dark: '#1A1A2e',
@@ -165,7 +193,7 @@ const grommetCustomTheme: ThemeType = {
         light: '#00C8FF',
       },
       'background-custom-2': {
-        dark: '#6FFFB0',
+        dark: '#6EFFFA',
         light: '#E8F5FF',
       },
       'component-toolbar': {
@@ -177,7 +205,7 @@ const grommetCustomTheme: ThemeType = {
         light: '#fafafa',
       },
       'successful-label': {
-        dark: '#6FFFB0',
+        dark: '#00fd79',
         light: '#3fa900',
       },
       'text-custom': {
@@ -188,9 +216,36 @@ const grommetCustomTheme: ThemeType = {
         dark: '#F8F8F8',
         light: '#16213E',
       },
+      icon: 'currentColor',
     },
     font: {
       family: 'Rubik, sans-serif',
+      size: '16px',
+      height: '20px',
+    },
+    input: {
+      padding: {
+        horizontal: '5px',
+        vertical: '12px',
+      },
+    },
+    selected: {
+      background: 'control',
+    },
+  },
+  text: {
+    medium: { size: '16px', height: '20px' },
+  },
+  paragraph: {
+    medium: { size: '16px', height: '20px' },
+  },
+  heading: {
+    level: {
+      1: baseTheme.heading?.level?.['2'],
+      2: baseTheme.heading?.level?.['3'],
+      3: baseTheme.heading?.level?.['4'],
+      4: baseTheme.heading?.level?.['5'],
+      5: baseTheme.heading?.level?.['6'],
     },
   },
   notification: {
@@ -214,6 +269,9 @@ const grommetCustomTheme: ThemeType = {
         color: 'brand',
       },
     },
+    margin: {
+      horizontal: 'xsmall',
+    },
   },
   tabs: {
     header: {
@@ -231,6 +289,53 @@ const grommetCustomTheme: ThemeType = {
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+
+      // Arrows displayed when overflowing should be smaller on small screens
+      & > [role='tablist'] > button {
+        padding-left: 0;
+        padding-right: 0;
+
+        svg {
+          width: 14px;
+          margin-top: -5px;
+        }
+      }
+    `,
+  },
+  icon: {
+    size: {
+      medium: '20px',
+    },
+  },
+  radioButton: {
+    icon: {
+      size: '20px',
+    },
+  },
+  checkBox: {
+    size: '20px',
+    icon: {
+      size: '20px',
+    },
+    toggle: {
+      size: '40px',
+      color: {
+        dark: 'text',
+        light: 'grayMedium',
+      },
+    },
+    border: {
+      color: 'text',
+    },
+    hover: {
+      border: {
+        color: 'focus',
+      },
+    },
+    gap: '1.5ex',
+    extend: css`
+      font-size: 14px;
+      line-height: 1.25;
     `,
   },
   layer: {
@@ -278,12 +383,22 @@ const grommetCustomTheme: ThemeType = {
     },
   },
 }
-export const ThemeProvider = (props: { children: React.ReactChild }) => {
+export const ThemeProvider = (props: { children: React.ReactNode }) => {
   const theme = deepMerge(grommet, grommetCustomTheme)
   const mode = useSelector(selectTheme)
 
   return (
-    <Grommet theme={theme} themeMode={mode} style={{ minHeight: '100dvh' }}>
+    <Grommet theme={theme} themeMode={getTargetTheme(mode)} style={{ minHeight: '100dvh' }}>
+      {React.Children.only(props.children)}
+    </Grommet>
+  )
+}
+export const ThemeProviderWithoutRedux = (props: { children: React.ReactNode }) => {
+  const theme = deepMerge(grommet, grommetCustomTheme)
+  const mode = getInitialThemeState().selected
+
+  return (
+    <Grommet theme={theme} themeMode={getTargetTheme(mode)} style={{ minHeight: '100dvh' }}>
       {React.Children.only(props.children)}
     </Grommet>
   )

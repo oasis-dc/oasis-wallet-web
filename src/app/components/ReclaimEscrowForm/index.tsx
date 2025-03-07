@@ -18,6 +18,9 @@ import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { StringifiedBigInt } from 'types/StringifiedBigInt'
 import { TransactionStatus } from '../TransactionStatus'
+import { selectTicker } from '../../state/network/selectors'
+import { AmountFormatter } from '../AmountFormatter'
+import { usePreventChangeOnNumberInputScroll } from '../../lib/usePreventChangeOnNumberInputScroll'
 
 interface Props {
   /** Currently delegated amount */
@@ -33,6 +36,7 @@ interface Props {
 export const ReclaimEscrowForm = memo((props: Props) => {
   const { t } = useTranslation()
   const { error, success } = useSelector(selectTransaction)
+  const ticker = useSelector(selectTicker)
   const [amount, setAmount] = useState('')
   const [shares, setShares] = useState('0' as StringifiedBigInt)
   const dispatch = useDispatch()
@@ -100,9 +104,22 @@ export const ReclaimEscrowForm = memo((props: Props) => {
             value={amount}
             onChange={event => amountChanged(event.target.value)}
             required
+            icon={
+              <Text size="xsmall" weight={600} color="ticker">
+                {ticker}
+              </Text>
+            }
+            reverse
+            {...usePreventChangeOnNumberInputScroll()}
           />
+          <Box align="end" margin={{ top: 'xsmall' }}>
+            <Text weight="bolder" size="small">
+              <span>{t('account.reclaimEscrow.reclaimableAmount', 'Available:')} </span>
+              <AmountFormatter amount={props.maxAmount} smallTicker />
+            </Text>
+          </Box>
         </Box>
-        <Box direction="row" gap="medium">
+        <Box direction="row" gap="medium" height="46px">
           <Box fill={isMobile}>
             <Button fill label={t('account.reclaimEscrow.reclaim', 'Reclaim')} type="submit" primary />
           </Box>
@@ -113,9 +130,10 @@ export const ReclaimEscrowForm = memo((props: Props) => {
       </Box>
       {shares !== '0' && (
         <Text size="small" data-testid="numberOfShares">
-          {t('account.reclaimEscrow.convertedToShares', 'Corresponding number of gigashares: {{shares}}', {
+          {t('account.reclaimEscrow.convertedToShares', 'Corresponding number of shares: {{shares}}', {
             shares: formatBaseUnitsAsRose(shares),
           })}
+          {t('common.postfixAmountInBillions', 'B')}
         </Text>
       )}
       <TransactionStatus error={error} success={success} />

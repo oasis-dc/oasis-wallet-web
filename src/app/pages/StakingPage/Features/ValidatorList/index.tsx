@@ -4,7 +4,6 @@
  *
  */
 import { AmountFormatter } from 'app/components/AmountFormatter'
-import { Header } from 'app/components/Header'
 import { ErrorFormatter } from 'app/components/ErrorFormatter'
 import { ShortAddress } from 'app/components/ShortAddress'
 import { ValidatorStatus } from 'app/pages/StakingPage/Features/ValidatorList/ValidatorStatus'
@@ -31,6 +30,8 @@ import { isWebUri } from 'valid-url'
 import { ValidatorItem } from './ValidatorItem'
 import { formatCommissionPercent } from 'app/lib/helpers'
 import { intlDateTimeFormat } from 'app/components/DateFormatter/intlDateTimeFormat'
+import { StakeSubnavigation } from '../../../AccountPage/Features/StakeSubnavigation'
+import { selectAccountAvailableBalance } from '../../../../state/account/selectors'
 
 interface Props {}
 
@@ -41,6 +42,7 @@ export const ValidatorList = memo((props: Props) => {
   const validatorsTimestamp = useSelector(selectValidatorsTimestamp)
   const updateValidatorsError = useSelector(selectUpdateValidatorsError)
   const isAddressInWallet = useSelector(selectIsAddressInWallet)
+  const accountAvailableBalance = useSelector(selectAccountAvailableBalance)
   const selectedAddress = useSelector(selectSelectedAddress)
   const validatorDetails = useSelector(selectValidatorDetails)
 
@@ -73,6 +75,8 @@ export const ValidatorList = memo((props: Props) => {
       name: t('validator.name', 'Name'),
       id: 'name',
       selector: 'name',
+      maxWidth: '40ex',
+      minWidth: '15ex',
       cell: datum =>
         datum.name ?? (
           <Text data-tag="allowRowEvents">
@@ -86,6 +90,8 @@ export const ValidatorList = memo((props: Props) => {
       name: t('validator.escrow', 'Escrow'),
       id: 'escrow',
       selector: 'escrow',
+      width: '28ex',
+      right: true,
       hide: 'sm',
       cell: datum => (
         <AmountFormatter amount={datum.escrow} minimumFractionDigits={0} maximumFractionDigits={0} />
@@ -99,6 +105,7 @@ export const ValidatorList = memo((props: Props) => {
       selector: 'fee',
       sortable: true,
       width: '110px',
+      right: true,
       cell: datum =>
         datum.current_rate !== undefined ? `${formatCommissionPercent(datum.current_rate)}%` : 'Unknown',
       sortFunction: (row1, row2) => (row1.current_rate ?? 0) - (row2.current_rate ?? 0),
@@ -107,48 +114,54 @@ export const ValidatorList = memo((props: Props) => {
   ]
 
   return (
-    <Box pad="medium" background="background-front">
-      <Header>{t('common.validators', 'Validators')}</Header>
-      {updateValidatorsError && (
-        <p>
-          <span>{t('account.validator.loadingError', "Couldn't load validators.")}</span>
-          {validators.length > 0 && (
-            <span>
-              {t('account.validator.showingStale', 'Showing validator list as of {{staleTimestamp}}.', {
-                staleTimestamp: intlDateTimeFormat(validatorsTimestamp!),
-              })}
-            </span>
+    <>
+      <StakeSubnavigation />
+      <Box as="section" data-testid="validators-list">
+        <Box pad="medium" background="background-front">
+          {updateValidatorsError && (
+            <p>
+              <span>{t('account.validator.loadingError', "Couldn't load validators.")}</span>
+              {validators.length > 0 && (
+                <span>
+                  {' '}
+                  {t('account.validator.showingStale', 'Showing validator list as of {{staleTimestamp}}.', {
+                    staleTimestamp: intlDateTimeFormat(validatorsTimestamp!),
+                  })}
+                </span>
+              )}
+              <br />
+              {validators.length <= 0 && (
+                <ErrorFormatter code={updateValidatorsError.code} message={updateValidatorsError.message} />
+              )}
+            </p>
           )}
-          <br />
-          {validators.length <= 0 && (
-            <ErrorFormatter code={updateValidatorsError.code} message={updateValidatorsError.message} />
-          )}
-        </p>
-      )}
-      <TypeSafeDataTable
-        noHeader={true}
-        columns={columns}
-        data={validators}
-        keyField="address"
-        style={{}}
-        customStyles={dataTableCustomStyles}
-        expandableRowsHideExpander
-        expandableRows={true}
-        expandableRowsComponent={
-          <ValidatorItem
-            data={{} as any}
-            details={validatorDetails}
-            isAddressInWallet={isAddressInWallet}
-            key={selectedAddress}
+          <TypeSafeDataTable
+            noHeader={true}
+            columns={columns}
+            data={validators}
+            keyField="address"
+            style={{}}
+            customStyles={dataTableCustomStyles}
+            expandableRowsHideExpander
+            expandableRows={true}
+            expandableRowsComponent={
+              <ValidatorItem
+                data={{} as any}
+                details={validatorDetails}
+                accountAvailableBalance={accountAvailableBalance}
+                isAddressInWallet={isAddressInWallet}
+                key={selectedAddress}
+              />
+            }
+            expandableRowExpanded={row => row.address === selectedAddress}
+            sortIcon={<Down />}
+            theme="blank"
+            onRowClicked={rowClicked}
+            highlightOnHover
+            pointerOnHover
           />
-        }
-        expandableRowExpanded={row => row.address === selectedAddress}
-        sortIcon={<Down />}
-        theme="blank"
-        onRowClicked={rowClicked}
-        highlightOnHover
-        pointerOnHover
-      />
-    </Box>
+        </Box>
+      </Box>
+    </>
   )
 })

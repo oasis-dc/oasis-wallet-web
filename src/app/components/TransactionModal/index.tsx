@@ -4,7 +4,7 @@ import { selectChainContext } from 'app/state/network/selectors'
 import { transactionActions } from 'app/state/transaction'
 import { selectTransaction } from 'app/state/transaction/selectors'
 import { TransactionStep } from 'app/state/transaction/types'
-import { selectAddress, selectBalance } from 'app/state/wallet/selectors'
+import { selectAddress } from 'app/state/wallet/selectors'
 import { Box } from 'grommet/es6/components/Box'
 import { Button } from 'grommet/es6/components/Button'
 import { Spinner } from 'grommet/es6/components/Spinner'
@@ -45,13 +45,8 @@ export function TransactionModal() {
   const { t } = useTranslation()
   const { preview, step } = useSelector(selectTransaction)
   const walletAddress = useSelector(selectAddress)
-  const balance = useSelector(selectBalance)
   const chainContext = useSelector(selectChainContext)
   const isMobile = useContext(ResponsiveContext) === 'small'
-
-  if (!balance) {
-    throw new Error('No balance found for wallet')
-  }
 
   const dispatch = useDispatch()
 
@@ -66,7 +61,7 @@ export function TransactionModal() {
     <ResponsiveLayer modal position="center" background="background-front">
       <Box pad="medium" gap="medium" width="800px">
         <Box>
-          <ModalHeader level={4} margin={{ top: 'xsmall', bottom: 'medium' }}>
+          <ModalHeader level={3} margin={{ top: 'xsmall', bottom: 'medium' }}>
             {t('transaction.step.preview', 'Preview transaction')}
           </ModalHeader>
           <StyledBox>
@@ -107,19 +102,19 @@ export function TransactionModal() {
         {step === TransactionStep.Building && (
           <Box direction="row" align="center" gap="medium">
             <Spinner size="medium" />
-            <Text size="large">{t('transaction.step.building', 'Building transaction')}</Text>
+            <Text size="medium">{t('transaction.step.building', 'Building transaction')}</Text>
           </Box>
         )}
         {step === TransactionStep.Signing && (
           <Box direction="row" align="center" gap="medium">
             <Spinner size="medium" />
-            <Text size="large">{t('transaction.step.signing', 'Signing transaction')}</Text>
+            <Text size="medium">{t('transaction.step.signing', 'Signing transaction')}</Text>
           </Box>
         )}
         {step === TransactionStep.Submitting && (
           <Box direction="row" align="center" gap="medium">
             <Spinner size="medium" />
-            <Text size="large">{t('transaction.step.submitting', 'Submitting transaction')}</Text>
+            <Text size="medium">{t('transaction.step.submitting', 'Submitting transaction')}</Text>
           </Box>
         )}
       </Box>

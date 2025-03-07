@@ -1,42 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AccountSelector  /> should match snapshot 1`] = `
-.c18 {
+.c14 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: #666666;
-  stroke: #666666;
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  stroke: #fff;
 }
 
-.c18 g {
+.c14 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c18 *:not([stroke])[fill='none'] {
+.c14 *:not([stroke])[fill='none'] {
   stroke-width: 0;
 }
 
-.c18 *[stroke*='#'],.c18 *[STROKE*='#'] {
+.c14 *[stroke*='#'],
+.c14 *[STROKE*='#'] {
   stroke: inherit;
   fill: none;
 }
 
-.c18 *[fill-rule],
-.c18 *[FILL-RULE],
-.c18 *[fill*='#'],.c18 *[FILL*='#'] {
+.c14 *[fill-rule],
+.c14 *[FILL-RULE],
+.c14 *[fill*='#'],
+.c14 *[FILL*='#'] {
+  fill: inherit;
+  stroke: none;
+}
+
+.c21 {
+  display: inline-block;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.c21 g {
+  fill: inherit;
+  stroke: inherit;
+}
+
+.c21 *:not([stroke])[fill='none'] {
+  stroke-width: 0;
+}
+
+.c21 *[stroke*='#'],
+.c21 *[STROKE*='#'] {
+  stroke: inherit;
+  fill: none;
+}
+
+.c21 *[fill-rule],
+.c21 *[FILL-RULE],
+.c21 *[fill*='#'],
+.c21 *[FILL*='#'] {
   fill: inherit;
   stroke: none;
 }
 
 .c0 {
   font-family: Rubik,sans-serif;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   background-color: #ffffff;
   color: #16213E;
   box-sizing: border-box;
@@ -74,7 +110,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
-  border: solid 1px #0092f6;
+  border: solid 1px #0500e2;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: row;
@@ -86,6 +122,11 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   padding: 12px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.c3:hover {
+  background-color: rgba(183,183,183,0.5);
+  color: black;
 }
 
 .c4 {
@@ -129,10 +170,6 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
@@ -159,6 +196,28 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin-left: auto;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: column;
@@ -167,7 +226,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   height: 24px;
 }
 
-.c15 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -185,7 +244,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c17 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -215,13 +274,13 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   box-sizing: border-box;
   max-width: 100%;
   margin-bottom: 48px;
+  margin-left: -2px;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-left: 2px;
   padding-right: 12px;
   overflow-y: auto;
 }
@@ -233,10 +292,10 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  width: 48px;
+  width: 12px;
 }
 
-.c14 {
+.c17 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -246,7 +305,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   height: 24px;
 }
 
-.c19 {
+.c22 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -256,7 +315,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   width: 12px;
 }
 
-.c20 {
+.c23 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -267,14 +326,15 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
 }
 
 .c6 {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   font-weight: bold;
 }
 
-.c13 {
-  font-size: 18px;
-  line-height: 24px;
+.c16 {
+  font-size: 16px;
+  line-height: 20px;
+  color: #0500e2;
 }
 
 .c9 {
@@ -288,21 +348,33 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  color: #0092f6;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
+  border: 2px solid #0500e2;
+  border-radius: 18px;
+  color: #16213E;
+  padding: 4px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #0500e2;
+  color: #F8F8F8;
+  border-radius: 18px;
+  -webkit-transition-property: color,background-color,border-color,box-shadow;
+  transition-property: color,background-color,border-color,box-shadow;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  font-weight: bold;
 }
 
 .c9:hover {
-  background-color: rgba(221,221,221,0.4);
+  background-color: rgba(183,183,183,0.4);
   color: #000000;
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
 .c9:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c9:focus > circle,
@@ -313,7 +385,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
 .c9:focus > polyline,
 .c9:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
 .c9:focus::-moz-focus-inner {
@@ -325,9 +397,12 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   box-shadow: none;
 }
 
-.c9:focus:not(:focus-visible) > circle,.c9:focus:not(:focus-visible) > ellipse,
-.c9:focus:not(:focus-visible) > line,.c9:focus:not(:focus-visible) > path,
-.c9:focus:not(:focus-visible) > polygon,.c9:focus:not(:focus-visible) > polyline,
+.c9:focus:not(:focus-visible) > circle,
+.c9:focus:not(:focus-visible) > ellipse,
+.c9:focus:not(:focus-visible) > line,
+.c9:focus:not(:focus-visible) > path,
+.c9:focus:not(:focus-visible) > polygon,
+.c9:focus:not(:focus-visible) > polyline,
 .c9:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
@@ -337,7 +412,7 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   border: 0;
 }
 
-.c16 {
+.c19 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -348,12 +423,12 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 20px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
   transition-property: color,background-color,border-color,box-shadow;
   -webkit-transition-duration: 0.1s;
@@ -363,48 +438,51 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   font-weight: bold;
 }
 
-.c16:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+.c19:hover {
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
-.c16:focus {
+.c19:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c16:focus > circle,
-.c16:focus > ellipse,
-.c16:focus > line,
-.c16:focus > path,
-.c16:focus > polygon,
-.c16:focus > polyline,
-.c16:focus > rect {
+.c19:focus > circle,
+.c19:focus > ellipse,
+.c19:focus > line,
+.c19:focus > path,
+.c19:focus > polygon,
+.c19:focus > polyline,
+.c19:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c16:focus::-moz-focus-inner {
+.c19:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c16:focus:not(:focus-visible) {
+.c19:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c16:focus:not(:focus-visible) > circle,.c16:focus:not(:focus-visible) > ellipse,
-.c16:focus:not(:focus-visible) > line,.c16:focus:not(:focus-visible) > path,
-.c16:focus:not(:focus-visible) > polygon,.c16:focus:not(:focus-visible) > polyline,
-.c16:focus:not(:focus-visible) > rect {
+.c19:focus:not(:focus-visible) > circle,
+.c19:focus:not(:focus-visible) > ellipse,
+.c19:focus:not(:focus-visible) > line,
+.c19:focus:not(:focus-visible) > path,
+.c19:focus:not(:focus-visible) > polygon,
+.c19:focus:not(:focus-visible) > polyline,
+.c19:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c16:focus:not(:focus-visible)::-moz-focus-inner {
+.c19:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
-.c21 {
+.c24 {
   display: inline-block;
   box-sizing: border-box;
   cursor: pointer;
@@ -415,13 +493,13 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   background: transparent;
   overflow: visible;
   text-transform: none;
-  border: 2px solid #0092f6;
+  border: 2px solid #0500e2;
   border-radius: 4px;
   color: #16213E;
   padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #0092f6;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #0500e2;
   color: #F8F8F8;
   border-radius: 4px;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
@@ -433,50 +511,71 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
   font-weight: bold;
 }
 
-.c21:hover {
-  box-shadow: 0px 0px 0px 2px #0092f6;
+.c24:hover {
+  box-shadow: 0px 0px 0px 2px #0500e2;
 }
 
-.c21:focus {
+.c24:focus {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c21:focus > circle,
-.c21:focus > ellipse,
-.c21:focus > line,
-.c21:focus > path,
-.c21:focus > polygon,
-.c21:focus > polyline,
-.c21:focus > rect {
+.c24:focus > circle,
+.c24:focus > ellipse,
+.c24:focus > line,
+.c24:focus > path,
+.c24:focus > polygon,
+.c24:focus > polyline,
+.c24:focus > rect {
   outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
+  box-shadow: 0 0 2px 2px #00A9FF;
 }
 
-.c21:focus::-moz-focus-inner {
+.c24:focus::-moz-focus-inner {
   border: 0;
 }
 
-.c21:focus:not(:focus-visible) {
+.c24:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-.c21:focus:not(:focus-visible) > circle,.c21:focus:not(:focus-visible) > ellipse,
-.c21:focus:not(:focus-visible) > line,.c21:focus:not(:focus-visible) > path,
-.c21:focus:not(:focus-visible) > polygon,.c21:focus:not(:focus-visible) > polyline,
-.c21:focus:not(:focus-visible) > rect {
+.c24:focus:not(:focus-visible) > circle,
+.c24:focus:not(:focus-visible) > ellipse,
+.c24:focus:not(:focus-visible) > line,
+.c24:focus:not(:focus-visible) > path,
+.c24:focus:not(:focus-visible) > polygon,
+.c24:focus:not(:focus-visible) > polyline,
+.c24:focus:not(:focus-visible) > rect {
   outline: none;
   box-shadow: none;
 }
 
-.c21:focus:not(:focus-visible)::-moz-focus-inner {
+.c24:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background-color: #0092F6;
 }
 
 .c10 {
-  padding: 0.5ex 0.7ch;
-  margin: -0.5ex -0.7ch;
   border-radius: 4px;
 }
 
@@ -493,14 +592,24 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
 }
 
 @media only screen and (max-width:768px) {
+
+}
+
+@media only screen and (max-width:768px) {
   .c3 {
-    border: solid 1px #0092f6;
+    border: solid 1px #0500e2;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c3 {
     padding: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c15 {
+    margin-left: auto;
   }
 }
 
@@ -512,8 +621,13 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c2 {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    margin-left: -2px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c2 {
+    padding-left: 2px;
   }
 }
 
@@ -529,18 +643,18 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
 
 @media only screen and (max-width:768px) {
   .c11 {
-    width: 24px;
+    width: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c14 {
+  .c17 {
     height: 12px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c20 {
+  .c23 {
     width: 12px;
   }
 }
@@ -601,21 +715,42 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
                 <div
                   class="c12"
                 >
+                  <div
+                    class="c13"
+                    color="#0092F6"
+                  >
+                    <svg
+                      aria-label="icons.usb"
+                      class="c14"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M15 7v4h1v2h-3V5h2l-3-4-3 4h2v8H8v-2.07c.7-.37 1.2-1.08 1.2-1.93 0-1.21-.99-2.2-2.2-2.2-1.21 0-2.2.99-2.2 2.2 0 .85.5 1.56 1.2 1.93V13c0 1.11.89 2 2 2h3v3.05c-.71.37-1.2 1.1-1.2 1.95 0 1.22.99 2.2 2.2 2.2 1.21 0 2.2-.98 2.2-2.2 0-.85-.49-1.58-1.2-1.95V15h3c1.11 0 2-.89 2-2v-2h1V7z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="c11"
+                />
+                <div
+                  class="c15"
+                >
                   <span>
                     <div
                       class="c5"
-                      style="display: inline-flex; white-space: nowrap;"
+                      style="display: inline-flex; white-space: nowrap; font-family: "Roboto mono", monospace; letter-spacing: 0;"
                     >
                       0.0000001
                     </div>
                     <span
-                      class="c13"
+                      class="c16"
                     >
                       <span
                         class="notranslate"
                         translate="no"
                       >
-                         
+                         TEST
                       </span>
                     </span>
                   </span>
@@ -625,25 +760,25 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c14"
+          class="c17"
         />
         <div
-          class="c15"
+          class="c18"
         >
           <a
             aria-label="menu.addAccounts"
             href="/"
           >
             <button
-              class="c16"
+              class="c19"
               tabindex="-1"
               type="button"
             >
               <div
-                class="c17"
+                class="c20"
               >
                 <svg
-                  class="c18"
+                  class="c21"
                   viewBox="0 0 24 24"
                 >
                   <path
@@ -654,17 +789,17 @@ exports[`<AccountSelector  /> should match snapshot 1`] = `
                   />
                 </svg>
                 <div
-                  class="c19"
+                  class="c22"
                 />
                 menu.addAccounts
               </div>
             </button>
           </a>
           <div
-            class="c20"
+            class="c23"
           />
           <button
-            class="c21"
+            class="c24"
             type="button"
           >
             toolbar.wallets.select

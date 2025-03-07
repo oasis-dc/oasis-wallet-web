@@ -9,11 +9,15 @@ import { Button } from 'grommet/es6/components/Button'
 import { Form } from 'grommet/es6/components/Form'
 import { FormField } from 'grommet/es6/components/FormField'
 import { TextInput } from 'grommet/es6/components/TextInput'
+import { Text } from 'grommet/es6/components/Text'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { parseRoseStringToBaseUnitString } from 'app/lib/helpers'
+import { selectTicker } from 'app/state/network/selectors'
+import { usePreventChangeOnNumberInputScroll } from 'app/lib/usePreventChangeOnNumberInputScroll'
+import { Heading } from 'grommet/es6/components/Heading'
 
 export interface SendTransactionProps {
   isAddressInWallet: boolean
@@ -30,6 +34,7 @@ export function SendTransaction(props: SendTransactionProps) {
   const { error, success } = useSelector(selectTransaction)
   const validators = useSelector(selectValidators)
   const contacts = useSelector(selectContactsList)
+  const ticker = useSelector(selectTicker)
   const [recipient, setRecipient] = useState('')
   const [amount, setAmount] = useState('')
   const sendTransaction = () =>
@@ -75,48 +80,62 @@ export function SendTransaction(props: SendTransactionProps) {
   }, [dispatch])
 
   return (
-    <Box border={{ color: 'background-front-border', size: '1px' }} round="5px" background="background-front">
-      <Form onSubmit={onSubmit}>
-        <Box fill gap="medium" pad="medium">
-          <FormField
-            htmlFor="recipient-id"
-            name="recipient"
-            label={t('account.sendTransaction.recipient', 'Recipient')}
-          >
-            <TextInput
-              id="recipient-id"
-              suggestions={contacts.map(contact => ({ label: contact.name, value: contact.address }))}
-              onSuggestionSelect={event =>
-                setRecipient(
-                  contacts.find(contact => contact.address === event.suggestion?.value)?.address || '',
-                )
-              }
+    <Box margin="none">
+      <Heading level="2">{t('account.sendTransaction.send', 'Send')}</Heading>
+      <Box
+        border={{ color: 'background-front-border', size: '1px' }}
+        round="5px"
+        background="background-front"
+      >
+        <Form onSubmit={onSubmit}>
+          <Box fill gap="medium" pad="medium">
+            <FormField
+              htmlFor="recipient-id"
               name="recipient"
-              value={recipient}
-              placeholder={t('account.sendTransaction.enterAddress', 'Enter an address')}
-              onChange={event => setRecipient(event.target.value)}
-              required
-            />
-          </FormField>
-          <FormField htmlFor="amount-id" name="amount" label={t('common.amount', 'Amount')}>
-            <TextInput
-              id="amount-id"
-              name="amount"
-              placeholder={t('account.sendTransaction.enterAmount', 'Enter an amount')}
-              type="number"
-              step="any"
-              min="0"
-              value={amount}
-              onChange={event => setAmount(event.target.value)}
-              required
-            />
-          </FormField>
-          <Box direction="row" justify="between" margin={{ top: 'medium' }}>
-            <Button type="submit" label={t('account.sendTransaction.send', 'Send')} primary />
+              label={t('account.sendTransaction.recipient', 'Recipient')}
+            >
+              <TextInput
+                id="recipient-id"
+                suggestions={contacts.map(contact => ({ label: contact.name, value: contact.address }))}
+                onSuggestionSelect={event =>
+                  setRecipient(
+                    contacts.find(contact => contact.address === event.suggestion?.value)?.address || '',
+                  )
+                }
+                name="recipient"
+                value={recipient}
+                placeholder={t('account.sendTransaction.enterAddress', 'Enter an address')}
+                onChange={event => setRecipient(event.target.value)}
+                required
+              />
+            </FormField>
+            <FormField htmlFor="amount-id" name="amount" label={t('common.amount', 'Amount')}>
+              <TextInput
+                id="amount-id"
+                name="amount"
+                placeholder={t('account.sendTransaction.enterAmount', 'Enter an amount')}
+                type="number"
+                step="any"
+                min="0"
+                value={amount}
+                onChange={event => setAmount(event.target.value)}
+                required
+                icon={
+                  <Text size="xsmall" weight={600} color="ticker">
+                    {ticker}
+                  </Text>
+                }
+                reverse
+                {...usePreventChangeOnNumberInputScroll()}
+              />
+            </FormField>
+            <Box direction="row" justify="between" margin={{ top: 'medium' }}>
+              <Button type="submit" label={t('account.sendTransaction.send', 'Send')} primary />
+            </Box>
           </Box>
-        </Box>
-      </Form>
-      <TransactionStatus error={error} success={success} />
+        </Form>
+        <TransactionStatus error={error} success={success} />
+      </Box>
     </Box>
   )
 }

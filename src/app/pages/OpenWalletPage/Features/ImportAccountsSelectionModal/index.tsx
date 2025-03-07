@@ -47,7 +47,6 @@ function ImportAccountsSelector({ accounts }: ImportAccountsSelectorSelectorProp
 
 interface ImportAccountsSelectionModalProps {
   abort: () => void
-  type: WalletType.Mnemonic | WalletType.UsbLedger
 }
 
 interface FormValue extends ChoosePasswordFieldsFormValue {}
@@ -61,10 +60,11 @@ export function ImportAccountsSelectionModal(props: ImportAccountsSelectionModal
   const error = importAccounts.error
   const selectedAccounts = useSelector(selectSelectedAccounts)
   const dispatch = useDispatch()
+  const type = accounts.length > 0 ? accounts[0].type : undefined
 
   const openAccounts = ({ value }: { value: FormValue }) => {
     dispatch(
-      props.type === WalletType.UsbLedger
+      type === WalletType.UsbLedger
         ? walletActions.openWalletsFromLedger({ choosePassword: value.password2 })
         : walletActions.openWalletFromMnemonic({ choosePassword: value.password2 }),
     )
@@ -83,8 +83,8 @@ export function ImportAccountsSelectionModal(props: ImportAccountsSelectionModal
 
   const onNext = () => {
     dispatch(importAccountsActions.setPage(pageNum + 1))
-    if (props.type === 'ledger') {
-      dispatch(importAccountsActions.enumerateMoreAccountsFromLedger(WalletType.UsbLedger))
+    if (type === WalletType.UsbLedger || type === WalletType.BleLedger) {
+      dispatch(importAccountsActions.enumerateMoreAccountsFromLedger(type))
     }
   }
 
@@ -112,7 +112,7 @@ export function ImportAccountsSelectionModal(props: ImportAccountsSelectionModal
               <Box direction="row" gap="medium" alignContent="center" pad={{ top: 'small' }}>
                 <Spinner size="medium" />
                 <Box alignSelf="center">
-                  <Text size="xlarge">
+                  <Text size="medium">
                     <ImportAccountsStepFormatter step={importAccounts.step} />
                   </Text>
                 </Box>

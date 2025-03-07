@@ -10,11 +10,14 @@ import { fetchAccount as stakingFetchAccount } from '../staking/saga'
 import { refreshAccount as walletRefreshAccount } from '../wallet/saga'
 import { transactionActions } from '../transaction'
 import { selectAddress } from '../wallet/selectors'
-import { selectAccountAddress, selectAccountAvailableBalance } from './selectors'
+import { selectAccountAddress, selectAccount, hasAccountUnknownPendingTransactions } from './selectors'
 import { getAccountBalanceWithFallback } from '../../lib/getAccountBalanceWithFallback'
+import { walletActions } from '../wallet'
+import { selectSelectedNetwork } from '../network/selectors'
+import { Transaction } from '../transaction/types'
+import { TRANSACTIONS_LIMIT } from '../../../config'
 
-const ACCOUNT_REFETCHING_INTERVAL = process.env.REACT_APP_E2E_TEST ? 5 * 1000 : 30 * 1000
-const TRANSACTIONS_LIMIT = 20
+const ACCOUNT_REFETCHING_INTERVAL = process.env.REACT_APP_E2E_TEST ? 5 * 1000 : 10 * 1000
 
 export function* fetchAccount(action: PayloadAction<string>) {
   const address = action.payload
@@ -28,6 +31,7 @@ export function* fetchAccount(action: PayloadAction<string>) {
         try {
           const account = yield* call(getAccountBalanceWithFallback, address)
           yield* put(accountActions.accountLoaded(account))
+          yield* put(walletActions.updateBalance({ address: account.address, balance: account }))
         } catch (apiError: any) {
           if (apiError instanceof WalletError) {
             yield* put(accountActions.accountError({ code: apiError.type, message: apiError.message }))
@@ -44,12 +48,15 @@ export function* fetchAccount(action: PayloadAction<string>) {
     ),
     join(
       yield* fork(function* () {
+        const networkType = yield* select(selectSelectedNetwork)
+
         try {
-          const transactions = yield* call(getTransactionsList, {
+          const transactions: Transaction[] = yield* call(getTransactionsList, {
             accountId: address,
             limit: TRANSACTIONS_LIMIT,
           })
-          yield* put(accountActions.transactionsLoaded(transactions))
+
+          yield* put(accountActions.transactionsLoaded({ networkType, transactions }))
         } catch (e: any) {
           console.error('get transactions list failed, continuing without updated list.', e)
           if (e instanceof WalletError) {
@@ -83,6 +90,13 @@ export function* refreshAccountOnParaTimeTransaction() {
   while (true) {
     const { payload } = yield* take(transactionActions.paraTimeTransactionSent)
 
+    // Increase the chance to get updated transactions from API.
+    // Note: We can't rely on nonce to detect pending paratime transactions
+    yield* delay(3000)
+    yield* call(refreshAccount, payload)
+    yield* delay(6000)
+    yield* call(refreshAccount, payload)
+    yield* delay(6000)
     yield* call(refreshAccount, payload)
   }
 }
@@ -108,7 +122,7 @@ export function* fetchingOnAccountPage() {
         yield* put(stakingActions.fetchAccount(address))
         yield* take(accountActions.accountLoaded)
 
-        // Start refetching balance. If balance changes then fetch transactions and staking too.
+        // Continuously refresh balance. If balance changes then fetch transactions and staking too.
         while (true) {
           yield* delay(ACCOUNT_REFETCHING_INTERVAL)
           if (document.hidden) continue
@@ -121,8 +135,17 @@ export function* fetchingOnAccountPage() {
             console.error('refetching account failed, continuing without updated account.', apiError)
             continue // Ignore error when refetching, and don't fallback to more expensive gRPC
           }
-          const staleAvailableBalance = yield* select(selectAccountAvailableBalance)
-          if (staleAvailableBalance !== refreshedAccount.available) {
+
+          const staleBalances = yield* select(selectAccount)
+          const hasPendingTxs = yield* select(hasAccountUnknownPendingTransactions)
+          if (
+            staleBalances.nonce !== refreshedAccount.nonce || // If a new transaction fails it won't change balances
+            staleBalances.available !== refreshedAccount.available ||
+            staleBalances.delegations !== refreshedAccount.delegations ||
+            staleBalances.debonding !== refreshedAccount.debonding ||
+            hasPendingTxs // TODO: reduce setLoading if reloaded transactions haven't changed
+          ) {
+            // Wait for oasisscan to update transactions (it updates balances faster)
             yield* call(fetchAccount, startAction)
             yield* call(stakingFetchAccount, startAction)
             yield* call(walletRefreshAccount, address)

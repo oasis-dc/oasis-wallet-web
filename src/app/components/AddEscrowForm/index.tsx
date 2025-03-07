@@ -5,7 +5,7 @@
  */
 import { useModal } from 'app/components/Modal'
 import { parseRoseStringToBaseUnitString } from 'app/lib/helpers'
-import { selectMinStaking } from 'app/state/network/selectors'
+import { selectMinStaking, selectTicker } from 'app/state/network/selectors'
 import { Validator } from 'app/state/staking/types'
 import { transactionActions } from 'app/state/transaction'
 import { selectTransaction } from 'app/state/transaction/selectors'
@@ -19,13 +19,16 @@ import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
 import React, { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { TransactionStatus } from '../TransactionStatus'
+import { usePreventChangeOnNumberInputScroll } from '../../lib/usePreventChangeOnNumberInputScroll'
+import { AmountFormatter } from '../AmountFormatter'
+import { StringifiedBigInt } from '../../../types/StringifiedBigInt'
 
 interface Props {
   validatorAddress: string
   validatorStatus: Validator['status']
   validatorRank: number
+  accountAvailableBalance: StringifiedBigInt | null
 }
 
 export const AddEscrowForm = memo((props: Props) => {
@@ -37,7 +40,14 @@ export const AddEscrowForm = memo((props: Props) => {
   const [amount, setAmount] = useState('')
   const dispatch = useDispatch()
   const minStaking = useSelector(selectMinStaking)
+  const ticker = useSelector(selectTicker)
   const isMobile = useContext(ResponsiveContext) === 'small'
+  const { onWheel } = usePreventChangeOnNumberInputScroll()
+  const translateValidatorStatus: { [status in Validator['status']]: string } = {
+    active: t('validator.statusActive', 'Active'),
+    inactive: t('validator.statusInactive', 'Inactive'),
+    unknown: t('validator.statusUnknown', 'Unknown'),
+  }
   const delegate = () => {
     dispatch(
       transactionActions.addEscrow({
@@ -54,7 +64,7 @@ export const AddEscrowForm = memo((props: Props) => {
         description: t(
           'account.addEscrow.confirmDelegatingToInactive.description',
           'Status of this validator is {{validatorStatus}}. Your delegation might not generate any rewards.',
-          { validatorStatus: props.validatorStatus },
+          { validatorStatus: translateValidatorStatus[props.validatorStatus] },
         ),
         handleConfirm: delegate,
         isDangerous: true,
@@ -80,7 +90,7 @@ export const AddEscrowForm = memo((props: Props) => {
               'This validator is ranked in the top 20 by stake. Please consider delegating to a smaller validator to increase network security and decentralization.',
             )}
           </Text>
-          <Text size={isMobile ? 'small' : 'medium'} weight="bold">
+          <Text weight="bold">
             <CheckBox
               label={t('account.addEscrow.confirmDelegatingToTop.acknowledge', 'Delegate anyway')}
               checked={!showNotice}
@@ -104,9 +114,27 @@ export const AddEscrowForm = memo((props: Props) => {
                 value={amount}
                 onChange={event => setAmount(event.target.value)}
                 required
+                icon={
+                  <Text size="xsmall" weight={600} color="ticker">
+                    {ticker}
+                  </Text>
+                }
+                reverse
+                onWheel={onWheel}
               />
+              <Box align="end" margin={{ top: 'xsmall' }}>
+                <Text weight="bolder" size="small">
+                  <span>{t('account.addEscrow.availableAmount', 'Available:')} </span>
+                  <AmountFormatter amount={props.accountAvailableBalance} smallTicker />
+                </Text>
+              </Box>
             </Box>
-            <Button label={t('account.addEscrow.delegate', 'Delegate')} type="submit" primary />
+            <Button
+              label={t('account.addEscrow.delegate', 'Delegate')}
+              type="submit"
+              primary
+              style={{ height: 45 }}
+            />
           </Box>
           <TransactionStatus error={error} success={success} />
         </Form>

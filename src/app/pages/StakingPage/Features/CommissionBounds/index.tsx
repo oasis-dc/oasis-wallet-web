@@ -14,7 +14,9 @@ interface CommissionBoundProps {
 const CommissionBound = memo((props: CommissionBoundProps) => {
   const { t } = useTranslation()
   const epoch = useSelector(selectEpoch)
-
+  if (typeof epoch !== 'number') {
+    return null
+  }
   const bound = props.bound
   const isCurrentBounds = epoch > bound.epochStart && (!bound.epochEnd || epoch < bound.epochEnd)
 
@@ -68,6 +70,6 @@ export const CommissionBounds = memo((props: Props) => {
       </Box>
     )
   } else {
-    return <>{t('validator.boundsNotSet', 'No bounds set (0% - 100%)')}</>
+    return <span>{t('validator.boundsNotSet', 'No bounds set (0% - 100%)')}</span>
   }
 })

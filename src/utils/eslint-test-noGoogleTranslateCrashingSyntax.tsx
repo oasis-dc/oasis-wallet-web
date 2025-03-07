@@ -6,6 +6,7 @@
  * these work like "expect eslint error".
  */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
 
 const condition = true
 const bad = 'bad'
@@ -39,6 +40,8 @@ const textBeforeAndOperator = (
       {!condition && <span>good</span>}
       {!condition && (
         <>
+          {/* good */}
+          {!condition && <span>good</span>}
           <span>good</span>
           <span>good</span>
         </>
@@ -76,6 +79,9 @@ const textAfterAndOperator = (
       {!condition && <span>good</span>}
       bad
     </span>
+    good
+    {good}
+    {/* good */}
     <span>
       {!condition && <span>good</span>}
       {/* eslint-disable-next-line no-restricted-syntax */}
@@ -98,6 +104,9 @@ const textBeforeTernaryOperator = (
       bad
       {!condition ? <span>good</span> : <span>good</span>}
     </span>
+    good
+    {good}
+    {/* good */}
     <span>
       {/* eslint-disable-next-line no-restricted-syntax */}
       {bad}
@@ -160,6 +169,8 @@ const textInTernaryOperator = (
       {!condition ? <span>{good}</span> : <span>{good}</span>}
       {!condition ? (
         <>
+          {/* good */}
+          {!condition && <span>good</span>}
           <span>good</span>
           <span>good</span>
         </>
@@ -174,11 +185,16 @@ const textInTernaryOperator = (
 )
 const textAfterTernaryOperator = (
   <div>
+    {/* eslint-disable-next-line no-restricted-syntax */}
     <span>
+      bad
       {/* eslint-disable-next-line no-restricted-syntax */}
       {!condition ? <span>good</span> : <span>good</span>}
       bad
     </span>
+    good
+    {good}
+    {/* good */}
     <span>
       {!condition ? <span>good</span> : <span>good</span>}
       {/* eslint-disable-next-line no-restricted-syntax */}
@@ -193,6 +209,29 @@ const textAfterTernaryOperator = (
     </span>
   </div>
 )
+
+function TextInFragment() {
+  const Arrow1 = () => <>{condition && <span>good</span>}</>
+  /* eslint-disable-next-line no-restricted-syntax */
+  const Arrow2 = () => <>{!condition ? <span>good</span> : 'bad'}</>
+
+  return (
+    <>
+      {/* good */}
+      {condition ? <Arrow1 /> : <Arrow2 />}
+      {condition && <span>good</span>}
+      {!condition ? <span>good</span> : <span>good</span>}
+      {/* eslint-disable-next-line no-restricted-syntax */}
+      {!condition ? <span>good</span> : 'bad'}
+      {/* eslint-disable-next-line no-restricted-syntax */}
+      {'bad'}
+      {/* eslint-disable-next-line no-restricted-syntax */}
+      {bad}
+      {/* eslint-disable-next-line no-restricted-syntax */}
+      {bad.toString()}
+    </>
+  )
+}
 
 const nestedConditionsAreNotSupported = (
   <div>

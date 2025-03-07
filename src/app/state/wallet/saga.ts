@@ -51,7 +51,7 @@ export function* openWalletsFromLedger({ payload }: PayloadAction<OpenSelectedAc
     yield* call(addWallet, {
       address: account.address,
       publicKey: account.publicKey,
-      type: WalletType.UsbLedger,
+      type: account.type,
       balance: account.balance!,
       path: account.path,
       pathDisplay: account.pathDisplay,
@@ -91,7 +91,7 @@ export function* openWalletFromMnemonic({ payload }: PayloadAction<OpenSelectedA
   for (const account of accounts) {
     yield* call(addWallet, {
       address: account.address,
-      balance: account.balance!,
+      balance: account.balance!, // should be defined due to ensureAllBalancesArePresentOnCurrentPage
       path: account.path,
       pathDisplay: account.pathDisplay,
       privateKey: account.privateKey,
@@ -152,6 +152,8 @@ function* refreshAccountOnParaTimeTransaction() {
   while (true) {
     const { payload } = yield* take(transactionActions.paraTimeTransactionSent)
 
+    // Increase the chance to get updated balance from API.
+    yield* delay(3000)
     yield* call(refreshAccount, payload)
   }
 }

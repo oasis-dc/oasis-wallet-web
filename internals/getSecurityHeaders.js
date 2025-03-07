@@ -34,9 +34,10 @@ const getCsp = ({ isExtension, isDev }) =>
     default-src 'none';
     script-src
       'self'
-      ${isDev ? reactErrorOverlay : ''}
-      ${isDev ? hmrScripts : ''}
-      'report-sample';
+      ${!isExtension && isDev ? reactErrorOverlay : '' /* Manifest v3 doesn't allow anything */}
+      ${!isExtension && isDev ? hmrScripts : ''}
+      ${!isExtension ? 'report-sample' : ''}
+      ;
     style-src
       'self'
       'unsafe-inline'
@@ -45,16 +46,18 @@ const getCsp = ({ isExtension, isDev }) =>
       'self';
     connect-src
       'self'
-      https://grpc.oasis.dev
-      https://testnet.grpc.oasis.dev
+      https://grpc.oasis.io
+      https://testnet.grpc.oasis.io
       https://api.oasisscan.com
-      https://monitor.oasis.dev
+      https://nexus.oasis.io
+      https://testnet.nexus.oasis.io
       ${isDev ? localnet : ''}
       ${isDev ? hmr : ''}
       ;
     frame-ancestors
-      ${isExtension ? dappFrameAncestors : `'none'`};
+      ${isExtension ? dappFrameAncestors : `'self'`};
     frame-src
+      'self'
       https://global.transak.com
       https://global-stg.transak.com;
     img-src 'self' data: https:;
